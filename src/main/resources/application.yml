@@ -1,0 +1,24 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: theater
+  liquibase:
+    enabled: true
+    change-log: db/changelog/main-changelog.xml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/eksperyment
+    username: postgres
+    password: root
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format-sql: true
+  session:
+    jdbc:
+      initialize-schema: always
