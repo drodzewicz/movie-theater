@@ -1,0 +1,25 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="v1-7" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ticket" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="ticket">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="blocked" type="BOOLEAN" />
+            <column name="reserved" type="BOOLEAN" />
+            <column name="purchased" type="BOOLEAN" />
+            <column name="seat_id" type="BIGINT" />
+            <column name="screening_order_id" type="BIGINT" />
+            <column name="screening_id" type="BIGINT" />
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

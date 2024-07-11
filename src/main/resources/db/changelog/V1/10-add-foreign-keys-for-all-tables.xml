@@ -1,0 +1,139 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="v1-10-0" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="hall" />
+                <tableExists tableName="location" />
+            </and>
+        </preConditions>
+        <addForeignKeyConstraint baseTableName="hall"
+            baseColumnNames="location_id"
+            referencedTableName="location"
+            referencedColumnNames="id"
+            constraintName="fk_hall_location" />
+    </changeSet>
+
+    <changeSet id="v1-10-1" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="screening" />
+                <tableExists tableName="movie" />
+            </and>
+        </preConditions>
+        <addForeignKeyConstraint baseTableName="screening"
+            baseColumnNames="movie_id"
+            referencedTableName="movie"
+            referencedColumnNames="id"
+            constraintName="fk_screening_movie" />
+    </changeSet>
+
+    <changeSet id="v1-10-2" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="screening_order" />
+                <tableExists tableName="app_user" />
+            </and>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="screening_order"
+            baseColumnNames="user_id"
+            referencedTableName="app_user"
+            referencedColumnNames="id"
+            constraintName="fk_screening_order_user" />
+    </changeSet>
+
+    <changeSet id="v1-10-3" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="seat" />
+                <tableExists tableName="hall" />
+            </and>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="seat"
+            baseColumnNames="hall_id"
+            referencedTableName="hall"
+            referencedColumnNames="id"
+            constraintName="fk_seat_hall" />
+    </changeSet>
+
+    <changeSet id="v1-10-4" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="ticket" />
+                <tableExists tableName="seat" />
+            </and>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="ticket"
+            baseColumnNames="seat_id"
+            referencedTableName="seat"
+            referencedColumnNames="id"
+            constraintName="fk_ticket_seat" />
+    </changeSet>
+
+    <changeSet id="v1-10-5" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="ticket" />
+                <tableExists tableName="screening_order" />
+            </and>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="ticket"
+            baseColumnNames="screening_order_id"
+            referencedTableName="screening_order"
+            referencedColumnNames="id"
+            constraintName="fk_ticket_screening_order" />
+    </changeSet>
+
+    <changeSet id="v1-10-6" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="ticket" />
+                <tableExists tableName="screening" />
+            </and>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="ticket"
+            baseColumnNames="screening_id"
+            referencedTableName="screening"
+            referencedColumnNames="id"
+            constraintName="fk_ticket_screening" />
+    </changeSet>
+
+    <changeSet id="v1-10-7" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="user_movie_rating" />
+                <tableExists tableName="app_user" />
+            </and>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="user_movie_rating"
+            baseColumnNames="user_id"
+            referencedTableName="app_user"
+            referencedColumnNames="id"
+            constraintName="fk_user_movie_rating_user" />
+    </changeSet>
+
+    <changeSet id="v1-10-8" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="user_movie_rating" />
+                <tableExists tableName="movie" />
+            </and>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="user_movie_rating"
+            baseColumnNames="movie_id"
+            referencedTableName="movie"
+            referencedColumnNames="id"
+            constraintName="fk_user_movie_rating_movie" />
+    </changeSet>
+
+</databaseChangeLog>

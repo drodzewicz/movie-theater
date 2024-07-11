@@ -1,0 +1,25 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="v1-1" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="hall" />
+            </not>
+        </preConditions>
+
+        <createTable tableName="hall">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="room" type="VARCHAR(255)" />
+            <column name="floor" type="VARCHAR(255)" />
+            <column name="location_id" type="BIGINT" />
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

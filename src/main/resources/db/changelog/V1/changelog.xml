@@ -1,0 +1,18 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <include file="1-create-hall-table.xml" relativeToChangelogFile="true" />
+    <include file="2-create-location-table.xml" relativeToChangelogFile="true" />
+    <include file="3-create-movie-table.xml" relativeToChangelogFile="true" />
+    <include file="4-create-order-table.xml" relativeToChangelogFile="true" />
+    <include file="5-create-screening-table.xml" relativeToChangelogFile="true" />
+    <include file="6-create-seat-table.xml" relativeToChangelogFile="true" />
+    <include file="7-create-ticket-table.xml" relativeToChangelogFile="true" />
+    <include file="8-create-user-movie-score-table.xml" relativeToChangelogFile="true" />
+    <include file="9-create-user-table.xml" relativeToChangelogFile="true" />
+    <include file="10-add-foreign-keys-for-all-tables.xml" relativeToChangelogFile="true" />
+</databaseChangeLog>
