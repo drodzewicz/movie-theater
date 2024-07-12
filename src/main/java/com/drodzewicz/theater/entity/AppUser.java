@@ -1,8 +1,9 @@
-package com.drodzewicz.theater.domain.entity;
+package com.drodzewicz.theater.entity;
 
 import java.util.*;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
@@ -20,7 +21,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Getter
 @Setter
 @NoArgsConstructor
@@ -60,7 +63,12 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.appUserRole.getGrantedAuthorities();
+        if (this.appUserRole != null) {
+            return this.appUserRole.getGrantedAuthorities();
+        } else {
+            log.warn("User {} has no authoriries", this.username);
+            return Collections.emptyList();
+        }
     }
 
     @Override

@@ -1,6 +1,5 @@
-package com.drodzewicz.theater.domain.entity;
+package com.drodzewicz.theater.entity;
 
-import java.util.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,26 +20,31 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "hall")
-public class Hall {
+@Table(name = "ticket")
+public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "blocked")
+    private Boolean blocked;
 
-    @Column(name = "room")
-    private String room;
+    @Column(name = "reserved")
+    private Boolean reserved;
 
-    @Column(name = "floor")
-    private String floor;
+    @Column(name = "purchased")
+    private Boolean purchased;
 
     @ManyToOne
-    @JoinColumn(name = "location_id")
-    private Location location;
+    @JoinColumn(name = "seat_id")
+    private Seat seat;
 
-    @OneToMany(mappedBy = "hall")
-    private List<Seat> seats;
+    @ManyToOne
+    @JoinColumn(name = "screening_order_id")
+    private ScreeningOrder order;
+
+    @ManyToOne
+    @JoinColumn(name = "screening_id")
+    private Screening screening;
 }

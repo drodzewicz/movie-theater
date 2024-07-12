@@ -1,4 +1,6 @@
-package com.drodzewicz.theater.domain.entity;
+package com.drodzewicz.theater.entity;
+
+import static com.drodzewicz.theater.entity.AppUserPermission.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -6,8 +8,6 @@ import java.util.stream.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.google.common.collect.Sets;
-
-import static com.drodzewicz.theater.domain.entity.AppUserPermission.*;
 
 public enum AppUserRole {
     SUPER_USER(Sets.newHashSet(CREATE_ORDER, UPDATE_ORDER, DELETE_ORDER, CREATE_MOVIE, UPDATE_MOVIE, DELETE_MOVIE)),

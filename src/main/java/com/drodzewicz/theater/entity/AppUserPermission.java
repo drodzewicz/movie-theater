@@ -1,4 +1,4 @@
-package com.drodzewicz.theater.domain.entity;
+package com.drodzewicz.theater.entity;
 
 public enum AppUserPermission {
     // ORDER

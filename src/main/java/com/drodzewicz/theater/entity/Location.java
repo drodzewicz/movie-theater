@@ -1,14 +1,11 @@
-package com.drodzewicz.theater.domain.entity;
+package com.drodzewicz.theater.entity;
 
 import java.util.*;
-import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,20 +20,28 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "screening")
-public class Screening {
+@Table(name = "location")
+public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date", nullable = false)
-    private LocalDateTime date;
+    @Column(name = "country", nullable = false)
+    private String country;
 
-    @OneToMany(mappedBy = "screening")
-    private List<Ticket> tickets;
+    @Column(name = "city", nullable = false)
+    private String city;
 
-    @ManyToOne
-    @JoinColumn(name = "movie_id")
-    private Movie movie;
+    @Column(name = "street_name", nullable = false)
+    private String streetName;
+
+    @Column(name = "building_number", nullable = false)
+    private String buildingNumber;
+
+    @Column(name = "zip_code", nullable = false)
+    private String zipCode;
+
+    @OneToMany(mappedBy = "location")
+    private List<Hall> halls;
 }

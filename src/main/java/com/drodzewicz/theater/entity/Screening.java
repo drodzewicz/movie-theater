@@ -1,8 +1,7 @@
-package com.drodzewicz.theater.domain.entity;
+package com.drodzewicz.theater.entity;
 
 import java.util.*;
-import java.math.BigDecimal;
-
+import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,21 +23,20 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "screening_order")
-public class ScreeningOrder {
+@Table(name = "screening")
+public class Screening {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "price", nullable = false)
-    private BigDecimal price;
+    @Column(name = "date", nullable = false)
+    private LocalDateTime date;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "screening")
     private List<Ticket> tickets;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private AppUser user;
-
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 }

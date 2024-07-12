@@ -1,4 +1,4 @@
-package com.drodzewicz.theater.domain.entity;
+package com.drodzewicz.theater.entity;
 
 import java.util.*;
 import java.math.BigDecimal;

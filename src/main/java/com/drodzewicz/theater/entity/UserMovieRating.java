@@ -1,4 +1,6 @@
-package com.drodzewicz.theater.domain.entity;
+package com.drodzewicz.theater.entity;
+
+import java.math.BigDecimal;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,31 +22,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ticket")
-public class Ticket {
+@Table(name = "user_movie_rating")
+public class UserMovieRating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "blocked")
-    private Boolean blocked;
-
-    @Column(name = "reserved")
-    private Boolean reserved;
-
-    @Column(name = "purchased")
-    private Boolean purchased;
+    @Column(name = "rating", precision = 3, scale = 1)
+    private BigDecimal rating;
 
     @ManyToOne
-    @JoinColumn(name = "seat_id")
-    private Seat seat;
+    @JoinColumn(name = "user_id")
+    private AppUser user;
 
     @ManyToOne
-    @JoinColumn(name = "screening_order_id")
-    private ScreeningOrder order;
-
-    @ManyToOne
-    @JoinColumn(name = "screening_id")
-    private Screening screening;
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 }

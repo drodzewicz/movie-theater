@@ -1,4 +1,4 @@
-package com.drodzewicz.theater.domain.entity;
+package com.drodzewicz.theater.entity;
 
 import java.util.*;
 import jakarta.persistence.Column;
@@ -22,26 +22,26 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "seat")
-public class Seat {
+@Table(name = "hall")
+public class Hall {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "row")
-    private Integer row;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "number", nullable = false)
-    private Integer number;
+    @Column(name = "room")
+    private String room;
 
-    @Column(name = "blocked")
-    private Boolean blocked;
+    @Column(name = "floor")
+    private String floor;
 
     @ManyToOne
-    @JoinColumn(name = "hall_id")
-    private Hall hall;
+    @JoinColumn(name = "location_id")
+    private Location location;
 
-    @OneToMany(mappedBy = "seat")
-    private List<Ticket> tickets;
+    @OneToMany(mappedBy = "hall")
+    private List<Seat> seats;
 }
