@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.drodzewicz.theater.entity.user.AppManagerUser;
-import com.drodzewicz.theater.entity.user.AppUser;
 
 @Repository
 public interface AppManagerUserRepository extends JpaRepository<AppManagerUser, Long> {

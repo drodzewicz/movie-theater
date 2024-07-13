@@ -17,4 +17,5 @@
     <include file="10-create-manager-user-table.xml" relativeToChangelogFile="true" />
     <include file="11-create-manager-user-location-join-table.xml" relativeToChangelogFile="true" />
     <include file="12-add-foreign-keys-for-all-tables.xml" relativeToChangelogFile="true" />
+    <include file="13-insert-default-super-user.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>

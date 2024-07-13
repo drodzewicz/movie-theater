@@ -5,12 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.drodzewicz.theater.dto.domain.*;
 import com.drodzewicz.theater.dto.request.*;
-import com.drodzewicz.theater.entity.user.AppBaseUser;
 import com.drodzewicz.theater.entity.user.AppManagerUser;
 import com.drodzewicz.theater.entity.user.AppManagerUserRole;
 import com.drodzewicz.theater.entity.user.AppUser;
 import com.drodzewicz.theater.exception.AppException;
-import com.drodzewicz.theater.exception.ResourceNotFoundException;
 import com.drodzewicz.theater.mapper.UserMangerMapper;
 import com.drodzewicz.theater.mapper.UserMapper;
 import com.drodzewicz.theater.repository.AppManagerUserRepository;
@@ -19,7 +17,6 @@ import com.drodzewicz.theater.service.AuthService;
 import com.drodzewicz.theater.service.UserService;
 
 import java.nio.CharBuffer;
-import java.util.Optional;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +45,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(signUpDTO.getPassword())));
 
         AppUser savedUser = appUserRepository.save(user);
+        log.info("Saving user {}", signUpDTO.getUsername());
 
         return userMapper.toDTO(savedUser);
     }
@@ -63,7 +61,9 @@ public class AuthServiceImpl implements AuthService {
         AppManagerUser user = userManagerMapper.fromSignUpDTO(signUpDTO);
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(signUpDTO.getPassword())));
         user.setAppUserRole(AppManagerUserRole.ADMIN);
+        
         AppManagerUser savedUser = appManagerUserRepository.save(user);
+        log.info("Saving user {}", signUpDTO.getUsername());
 
         return userManagerMapper.toDTO(savedUser);
     }

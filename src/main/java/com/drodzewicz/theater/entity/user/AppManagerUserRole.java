@@ -1,7 +1,5 @@
 package com.drodzewicz.theater.entity.user;
 
-import static com.drodzewicz.theater.entity.user.AppManagerUserPermission.*;
-
 import java.util.*;
 import java.util.stream.*;
 
@@ -10,8 +8,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.google.common.collect.Sets;
 
 public enum AppManagerUserRole {
-    SUPER_USER(Sets.newHashSet(CREATE_ORDER, UPDATE_ORDER, DELETE_ORDER, CREATE_MOVIE, UPDATE_MOVIE, DELETE_MOVIE)),
-    ADMIN(Sets.newHashSet(CREATE_ORDER, UPDATE_ORDER, DELETE_ORDER, CREATE_MOVIE, UPDATE_MOVIE, DELETE_MOVIE));
+    SUPER_USER(AppManagerUserPermission.getAllPermissions()),
+    ADMIN(Sets.union(
+            AppManagerUserPermission.getAllOrderPermissions(),
+            AppManagerUserPermission.getAllMoviesPermissions())),
+    MANAGER(AppManagerUserPermission.getAllOrderPermissions());
 
     private final Set<AppManagerUserPermission> permissions;
 

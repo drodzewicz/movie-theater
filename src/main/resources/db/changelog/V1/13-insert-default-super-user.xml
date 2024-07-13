@@ -1,0 +1,24 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <changeSet id="v1-13" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <sqlCheck expectedResult="0"> SELECT COUNT(*) FROM app_manager_user WHERE username =
+                    'super' </sqlCheck>
+                <sqlCheck expectedResult="0"> SELECT COUNT(*) FROM app_user WHERE username = 'super' </sqlCheck>
+            </and>
+        </preConditions>
+        <insert tableName="app_manager_user">
+            <column name="username" value="super" />
+            <column name="password"
+                value="$2a$12$w8vSo6y6dBH0UAcp1.9khuS73RdTntwOqHvsejRTMYXa3CynYp67a" />
+            <column name="first_name" value="super_name" />
+            <column name="last_name" value="super_lastname" />
+            <column name="app_user_role" value="SUPER_USER" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>
