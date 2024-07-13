@@ -14,5 +14,7 @@
     <include file="7-create-ticket-table.xml" relativeToChangelogFile="true" />
     <include file="8-create-user-movie-score-table.xml" relativeToChangelogFile="true" />
     <include file="9-create-user-table.xml" relativeToChangelogFile="true" />
-    <include file="10-add-foreign-keys-for-all-tables.xml" relativeToChangelogFile="true" />
+    <include file="10-create-manager-user-table.xml" relativeToChangelogFile="true" />
+    <include file="11-create-manager-user-location-join-table.xml" relativeToChangelogFile="true" />
+    <include file="12-add-foreign-keys-for-all-tables.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>

@@ -1,6 +1,9 @@
 package com.drodzewicz.theater.entity;
 
 import java.util.*;
+
+import com.drodzewicz.theater.entity.user.AppUser;
+
 import java.math.BigDecimal;
 
 import jakarta.persistence.Column;

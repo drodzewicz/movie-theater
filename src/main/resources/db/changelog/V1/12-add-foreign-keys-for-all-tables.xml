@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="v1-10-0" author="drodzewicz">
+    <changeSet id="v1-12-0" author="drodzewicz">
         <preConditions onFail="MARK_RAN">
             <and>
                 <tableExists tableName="hall" />
@@ -17,7 +17,7 @@
             constraintName="fk_hall_location" />
     </changeSet>
 
-    <changeSet id="v1-10-1" author="drodzewicz">
+    <changeSet id="v1-12-1" author="drodzewicz">
         <preConditions onFail="MARK_RAN">
             <and>
                 <tableExists tableName="screening" />
@@ -31,7 +31,7 @@
             constraintName="fk_screening_movie" />
     </changeSet>
 
-    <changeSet id="v1-10-2" author="drodzewicz">
+    <changeSet id="v1-12-2" author="drodzewicz">
         <preConditions onFail="MARK_RAN">
             <and>
                 <tableExists tableName="screening_order" />
@@ -46,7 +46,7 @@
             constraintName="fk_screening_order_user" />
     </changeSet>
 
-    <changeSet id="v1-10-3" author="drodzewicz">
+    <changeSet id="v1-12-3" author="drodzewicz">
         <preConditions onFail="MARK_RAN">
             <and>
                 <tableExists tableName="seat" />
@@ -61,7 +61,7 @@
             constraintName="fk_seat_hall" />
     </changeSet>
 
-    <changeSet id="v1-10-4" author="drodzewicz">
+    <changeSet id="v1-12-4" author="drodzewicz">
         <preConditions onFail="MARK_RAN">
             <and>
                 <tableExists tableName="ticket" />
@@ -76,7 +76,7 @@
             constraintName="fk_ticket_seat" />
     </changeSet>
 
-    <changeSet id="v1-10-5" author="drodzewicz">
+    <changeSet id="v1-12-5" author="drodzewicz">
         <preConditions onFail="MARK_RAN">
             <and>
                 <tableExists tableName="ticket" />
@@ -91,7 +91,7 @@
             constraintName="fk_ticket_screening_order" />
     </changeSet>
 
-    <changeSet id="v1-10-6" author="drodzewicz">
+    <changeSet id="v1-12-6" author="drodzewicz">
         <preConditions onFail="MARK_RAN">
             <and>
                 <tableExists tableName="ticket" />
@@ -106,7 +106,7 @@
             constraintName="fk_ticket_screening" />
     </changeSet>
 
-    <changeSet id="v1-10-7" author="drodzewicz">
+    <changeSet id="v1-12-7" author="drodzewicz">
         <preConditions onFail="MARK_RAN">
             <and>
                 <tableExists tableName="user_movie_rating" />
@@ -121,7 +121,7 @@
             constraintName="fk_user_movie_rating_user" />
     </changeSet>
 
-    <changeSet id="v1-10-8" author="drodzewicz">
+    <changeSet id="v1-12-8" author="drodzewicz">
         <preConditions onFail="MARK_RAN">
             <and>
                 <tableExists tableName="user_movie_rating" />
@@ -134,6 +134,27 @@
             referencedTableName="movie"
             referencedColumnNames="id"
             constraintName="fk_user_movie_rating_movie" />
+    </changeSet>
+
+    <changeSet id="v1-12-9" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="location" />
+                <tableExists tableName="app_manager_user" />
+                <tableExists tableName="manager_user_location" />
+            </and>
+        </preConditions>
+        <addPrimaryKey columnNames="manager_user_id, location_id"
+            constraintName="pk_manager_user_location" tableName="manager_user_location" />
+
+        <addForeignKeyConstraint baseColumnNames="manager_user_id"
+            baseTableName="manager_user_location"
+            constraintName="fk_manager_user_location_user"
+            referencedColumnNames="id" referencedTableName="app_manager_user" />
+
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="manager_user_location"
+            constraintName="fk_manager_user_location_location"
+            referencedColumnNames="id" referencedTableName="location" />
     </changeSet>
 
 </databaseChangeLog>

@@ -2,6 +2,8 @@ package com.drodzewicz.theater.entity;
 
 import java.math.BigDecimal;
 
+import com.drodzewicz.theater.entity.user.AppUser;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

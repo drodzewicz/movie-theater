@@ -4,8 +4,7 @@ import com.drodzewicz.theater.dto.domain.*;
 import com.drodzewicz.theater.dto.request.*;
 
 public interface AuthService {
+    AppUserDTO registerUser(SignUpDTO signUpDTO);
 
-    AppUserDTO login(CredentialsDTO credentialsDto);
-
-    AppUserDTO register(SignUpDTO signUpDTO);
+    AppManagerUserDTO registerManager(SignUpDTO signUpDTO);
 }

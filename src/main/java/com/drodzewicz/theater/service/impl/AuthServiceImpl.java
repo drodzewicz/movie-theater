@@ -5,12 +5,18 @@ import org.springframework.stereotype.Service;
 
 import com.drodzewicz.theater.dto.domain.*;
 import com.drodzewicz.theater.dto.request.*;
-import com.drodzewicz.theater.entity.*;
+import com.drodzewicz.theater.entity.user.AppBaseUser;
+import com.drodzewicz.theater.entity.user.AppManagerUser;
+import com.drodzewicz.theater.entity.user.AppManagerUserRole;
+import com.drodzewicz.theater.entity.user.AppUser;
 import com.drodzewicz.theater.exception.AppException;
 import com.drodzewicz.theater.exception.ResourceNotFoundException;
+import com.drodzewicz.theater.mapper.UserMangerMapper;
 import com.drodzewicz.theater.mapper.UserMapper;
+import com.drodzewicz.theater.repository.AppManagerUserRepository;
 import com.drodzewicz.theater.repository.AppUserRepository;
 import com.drodzewicz.theater.service.AuthService;
+import com.drodzewicz.theater.service.UserService;
 
 import java.nio.CharBuffer;
 import java.util.Optional;
@@ -23,28 +29,20 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AuthServiceImpl implements AuthService {
 
+    private final UserService userService;
     private final AppUserRepository appUserRepository;
+    private final AppManagerUserRepository appManagerUserRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
+    private final UserMangerMapper userManagerMapper;
 
-    public AppUserDTO login(CredentialsDTO credentialsDTO) {
-        log.info("Login in to user {}", credentialsDTO);
-        AppUser user = appUserRepository.findByUsername(credentialsDTO.getUsername())
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Bad login credentials"));
+    public AppUserDTO registerUser(SignUpDTO signUpDTO) {
+        log.info("Register user {}", signUpDTO);
 
-        if (passwordEncoder.matches(CharBuffer.wrap(credentialsDTO.getPassword()), user.getPassword())) {
-            return userMapper.toDTO(user);
-        }
-        throw new ResourceNotFoundException("Bad login credentials");
-    }
-
-    public AppUserDTO register(SignUpDTO signUpDTO) {
-        Optional<AppUser> optionalUser = appUserRepository.findByUsername(signUpDTO.getUsername());
-
-        if (optionalUser.isPresent()) {
-            throw new AppException("User with this username already exists");
-        }
+        userService.findUserByUsername(signUpDTO.getUsername())
+                .ifPresent(existingUser -> {
+                    throw new AppException("User with this username already exists");
+                });
 
         AppUser user = userMapper.fromSignUpDTO(signUpDTO);
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(signUpDTO.getPassword())));
@@ -52,5 +50,21 @@ public class AuthServiceImpl implements AuthService {
         AppUser savedUser = appUserRepository.save(user);
 
         return userMapper.toDTO(savedUser);
+    }
+
+    public AppManagerUserDTO registerManager(SignUpDTO signUpDTO) {
+        log.info("Register user {}", signUpDTO);
+
+        userService.findUserByUsername(signUpDTO.getUsername())
+                .ifPresent(existingUser -> {
+                    throw new AppException("User with this username already exists");
+                });
+
+        AppManagerUser user = userManagerMapper.fromSignUpDTO(signUpDTO);
+        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(signUpDTO.getPassword())));
+        user.setAppUserRole(AppManagerUserRole.ADMIN);
+        AppManagerUser savedUser = appManagerUserRepository.save(user);
+
+        return userManagerMapper.toDTO(savedUser);
     }
 }

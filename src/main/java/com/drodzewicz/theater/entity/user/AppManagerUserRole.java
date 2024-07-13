@@ -1,6 +1,6 @@
-package com.drodzewicz.theater.entity;
+package com.drodzewicz.theater.entity.user;
 
-import static com.drodzewicz.theater.entity.AppUserPermission.*;
+import static com.drodzewicz.theater.entity.user.AppManagerUserPermission.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -9,18 +9,17 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.google.common.collect.Sets;
 
-public enum AppUserRole {
+public enum AppManagerUserRole {
     SUPER_USER(Sets.newHashSet(CREATE_ORDER, UPDATE_ORDER, DELETE_ORDER, CREATE_MOVIE, UPDATE_MOVIE, DELETE_MOVIE)),
-    ADMIN(Sets.newHashSet(CREATE_ORDER, UPDATE_ORDER, DELETE_ORDER, CREATE_MOVIE, UPDATE_MOVIE, DELETE_MOVIE)),
-    USER(Sets.newHashSet(CREATE_ORDER, UPDATE_ORDER, CANCEL_ORDER, ADD_MOVIE_SCORE, REMOVE_MOVIE_SCORE));
+    ADMIN(Sets.newHashSet(CREATE_ORDER, UPDATE_ORDER, DELETE_ORDER, CREATE_MOVIE, UPDATE_MOVIE, DELETE_MOVIE));
 
-    private final Set<AppUserPermission> permissions;
+    private final Set<AppManagerUserPermission> permissions;
 
-    AppUserRole(Set<AppUserPermission> permissions) {
+    AppManagerUserRole(Set<AppManagerUserPermission> permissions) {
         this.permissions = permissions;
     }
 
-    Set<AppUserPermission> getPermissions() {
+    Set<AppManagerUserPermission> getPermissions() {
         return this.permissions;
     }
 

@@ -1,6 +1,6 @@
-package com.drodzewicz.theater.entity;
+package com.drodzewicz.theater.entity.user;
 
-public enum AppUserPermission {
+public enum AppManagerUserPermission {
     // ORDER
     CREATE_ORDER("order:create"),
     UPDATE_ORDER("order:update"),
@@ -10,13 +10,18 @@ public enum AppUserPermission {
     CREATE_MOVIE("movie:create"),
     UPDATE_MOVIE("movie:update"),
     DELETE_MOVIE("movie:delete"),
-    // SCORE
-    ADD_MOVIE_SCORE("movie-score:add"),
-    REMOVE_MOVIE_SCORE("movie-score:delete");
+    // LCOATIONS
+    CREATE_LOCATION("LOCATION:create"),
+    UPDATE_LOCATION("LOCATION:update"),
+    DELETE_LOCATION("LOCATION:delete"),
+    // USERS
+    CREATE_USER("USER:create"),
+    UPDATE_USER("USER:update"),
+    DELETE_USER("USER:delete");
 
     private final String permission;
 
-    AppUserPermission(String permission) {
+    AppManagerUserPermission(String permission) {
         this.permission = permission;
     }
 

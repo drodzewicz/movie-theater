@@ -17,13 +17,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.drodzewicz.theater.service.UserService;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     @Autowired
-    private UserDetailsService userService;
+    private UserService userService;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
