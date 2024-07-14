@@ -1,0 +1,112 @@
+package com.drodzewicz.theater.controller;
+
+import java.util.*;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.drodzewicz.theater.dto.domain.AppManagerUserDTO;
+import com.drodzewicz.theater.dto.domain.HallDTO;
+import com.drodzewicz.theater.dto.domain.LocationDTO;
+import com.drodzewicz.theater.dto.request.CreateLocationDTO;
+import com.drodzewicz.theater.dto.util.PaginatedResponse;
+import com.drodzewicz.theater.service.LocationService;
+
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+@AllArgsConstructor
+@RestController
+@ResponseBody
+@RequestMapping("/api/locations")
+public class LocationController {
+
+    private final LocationService locationService;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public LocationDTO createLocation(@Valid @RequestBody CreateLocationDTO locationDTO) {
+        LocationDTO location = locationService.createLocation(locationDTO);
+        return location;
+    }
+
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public LocationDTO getLocation(@PathVariable("id") Long locationId) {
+        LocationDTO location = locationService.getLocationById(locationId);
+
+        return location;
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public PaginatedResponse<LocationDTO> getlocations(@PageableDefault(size = 15) Pageable pageable) {
+        Page<LocationDTO> locations = locationService.getLocationList(pageable);
+
+        return new PaginatedResponse<LocationDTO>(locations);
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deletelocation(@PathVariable("id") Long locationId) {
+        locationService.deleteLocation(locationId);
+    }
+
+    @GetMapping("{id}/managers")
+    @ResponseStatus(HttpStatus.OK)
+    public List<AppManagerUserDTO> getlocationManagers(@PathVariable("id") Long locationId) {
+        return locationService.getLocationManagers(locationId);
+    }
+
+    @PatchMapping("{id}/managers/{managerId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void addManagerToLocation(
+            @PathVariable("id") Long locationId,
+            @PathVariable("managerId") Long managerId) {
+        locationService.addManagerToLocation(locationId, managerId);
+    }
+
+    @DeleteMapping("{id}/managers/{managerId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void removeManagerToLocation(
+            @PathVariable("id") Long locationId,
+            @PathVariable("managerId") Long managerId) {
+        locationService.removeManagerFromLocation(locationId, managerId);
+    }
+
+    @GetMapping("{id}/halls")
+    @ResponseStatus(HttpStatus.OK)
+    public List<HallDTO> getLocationHalls(@PathVariable("id") Long locationId) {
+        return locationService.getLocationHalls(locationId);
+    }
+
+    @PatchMapping("{id}/halls/{hallId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void addHallToLocation(
+            @PathVariable("id") Long locationId,
+            @PathVariable("hallId") Long hallId) {
+        locationService.addHallToLocation(locationId, hallId);
+    }
+
+    @DeleteMapping("{id}/halls/{hallId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void removeHallToLocation(
+            @PathVariable("id") Long locationId,
+            @PathVariable("hallId") Long hallId) {
+        locationService.removeHallFromLocation(locationId, hallId);
+    }
+
+}

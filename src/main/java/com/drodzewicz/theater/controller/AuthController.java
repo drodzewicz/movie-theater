@@ -55,7 +55,7 @@ public class AuthController {
         return createdUser;
     }
 
-    @PreAuthorize("hasPermission('user:create')")
+    @PreAuthorize("hasAuthority('user:create')")
     @PostMapping("/admin/register")
     @ResponseStatus(HttpStatus.CREATED)
     public AppManagerUserDTO registerManager(@RequestBody @Valid SignUpDTO signUpDTO) {
