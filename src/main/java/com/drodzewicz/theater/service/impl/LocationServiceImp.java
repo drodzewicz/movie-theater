@@ -58,6 +58,7 @@ public class LocationServiceImp implements LocationService {
 
     @Override
     public Page<LocationDTO> getLocationList(Pageable pageable) {
+        log.info("Getting locations");
         Page<Location> locations = locationRepository.findAll(pageable);
         return locations.map(locationMapper::toDTO);
     }
