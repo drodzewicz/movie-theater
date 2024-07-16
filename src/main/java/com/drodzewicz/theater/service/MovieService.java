@@ -1,5 +1,7 @@
 package com.drodzewicz.theater.service;
 
+import java.math.BigDecimal;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,4 +20,9 @@ public interface MovieService {
     MovieDetailedDTO createMovie(CreateMovieDTO movieDTO);
 
     void deleteMovie(Long movieId);
+
+    void addMovieUserRating(Long movieId, Long userId, BigDecimal rating);
+
+    void removeMovieUserRating(Long movieId, Long userId);
+
 }
