@@ -33,8 +33,9 @@ public class Seat {
     @Column(name = "number", nullable = false)
     private Integer number;
 
+    @Builder.Default
     @Column(name = "blocked")
-    private Boolean blocked;
+    private Boolean blocked = false;
 
     @ManyToOne
     @JoinColumn(name = "hall_id")

@@ -29,13 +29,6 @@ import lombok.AllArgsConstructor;
 public class HallController {
     private final HallService hallService;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public HallDTO createHall(@Valid @RequestBody CreateHallDTO hallDTO) {
-        HallDTO hall = hallService.createHall(hallDTO);
-        return hall;
-    }
-
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public HallDTO getHall(@PathVariable("id") Long hallId) {
@@ -44,6 +37,8 @@ public class HallController {
         return hall;
     }
 
+    // TODO probably not neccessary
+    // locations/id/halls should be enough
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public PaginatedResponse<HallDTO> getHalls(@PageableDefault(size = 15) Pageable pageable) {

@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.drodzewicz.theater.dto.domain.AppManagerUserDTO;
 import com.drodzewicz.theater.dto.domain.HallDTO;
 import com.drodzewicz.theater.dto.domain.LocationDTO;
+import com.drodzewicz.theater.dto.request.CreateHallDTO;
 import com.drodzewicz.theater.dto.request.CreateLocationDTO;
 import com.drodzewicz.theater.dto.util.PaginatedResponse;
+import com.drodzewicz.theater.service.HallService;
 import com.drodzewicz.theater.service.LocationService;
 
 import jakarta.validation.Valid;
@@ -35,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class LocationController {
 
     private final LocationService locationService;
+    private final HallService hallService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -91,6 +94,13 @@ public class LocationController {
     @ResponseStatus(HttpStatus.OK)
     public List<HallDTO> getLocationHalls(@PathVariable("id") Long locationId) {
         return locationService.getLocationHalls(locationId);
+    }
+
+    @PostMapping("{id}/halls")
+    @ResponseStatus(HttpStatus.CREATED)
+    public HallDTO createHall(@PathVariable("id") Long locationId, @Valid @RequestBody CreateHallDTO hallDTO) {
+        HallDTO hall = hallService.createHall(hallDTO, locationId);
+        return hall;
     }
 
     @PatchMapping("{id}/halls/{hallId}")

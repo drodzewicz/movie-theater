@@ -1,6 +1,8 @@
 package com.drodzewicz.theater.entity;
 
 import java.util.*;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +42,6 @@ public class Hall {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @OneToMany(mappedBy = "hall")
+    @OneToMany(mappedBy = "hall", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Seat> seats;
 }

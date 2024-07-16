@@ -2,6 +2,7 @@ package com.drodzewicz.theater.dto.request;
 
 import java.io.Serializable;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,4 +21,10 @@ public class CreateHallDTO implements Serializable {
     private String room;
 
     private String floor;
+
+    @Min(1)
+    private Integer rowCount;
+
+    @Min(1)
+    private Integer seatCountPerRow;
 }

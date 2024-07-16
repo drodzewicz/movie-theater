@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.drodzewicz.theater.entity.user.AppManagerUser;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,7 +45,7 @@ public class Location {
     @Column(name = "zip_code", nullable = false)
     private String zipCode;
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Hall> halls;
 
     @Builder.Default

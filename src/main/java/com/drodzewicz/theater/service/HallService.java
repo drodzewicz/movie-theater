@@ -14,7 +14,7 @@ public interface HallService {
 
     Page<HallDTO> getHallList(Pageable pageable);
 
-    HallDTO createHall(CreateHallDTO hallDTO);
+    HallDTO createHall(CreateHallDTO hallDTO, Long locationId);
 
     void deleteHall(Long hallId);
 }
