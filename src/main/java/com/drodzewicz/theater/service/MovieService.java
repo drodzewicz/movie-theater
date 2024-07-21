@@ -21,6 +21,8 @@ public interface MovieService {
 
     void deleteMovie(Long movieId);
 
+    BigDecimal getMovieUserRating(Long movieId, Long userId);
+
     void addMovieUserRating(Long movieId, Long userId, BigDecimal rating);
 
     void removeMovieUserRating(Long movieId, Long userId);

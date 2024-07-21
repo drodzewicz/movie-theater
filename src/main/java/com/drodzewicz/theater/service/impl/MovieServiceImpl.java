@@ -114,4 +114,15 @@ public class MovieServiceImpl implements MovieService {
         userMovieRatingRepository.delete(rating);
     }
 
+    @Override
+    public BigDecimal getMovieUserRating(Long movieId, Long userId) {
+        log.info("Getting movie {} rating from user {}", movieId, userId);
+
+        UserMovieRating userMovieRating = userMovieRatingRepository.findByUserIdAndMovieId(userId,
+                movieId).orElseThrow(
+                        () -> new ResourceNotFoundException(
+                                "Movie rating for this user and movie do not exists"));
+        return userMovieRating.getRating();
+    }
+
 }
