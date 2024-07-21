@@ -25,14 +25,17 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Builder.Default
     @Column(name = "blocked")
-    private Boolean blocked;
+    private Boolean blocked = false;
 
+    @Builder.Default
     @Column(name = "reserved")
-    private Boolean reserved;
+    private Boolean reserved = false;
 
+    @Builder.Default
     @Column(name = "purchased")
-    private Boolean purchased;
+    private Boolean purchased = false;
 
     @ManyToOne
     @JoinColumn(name = "seat_id")

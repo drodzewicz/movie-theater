@@ -37,4 +37,12 @@ public class Screening {
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Movie movie;
+
+    @ManyToOne
+    @JoinColumn(name = "hall_id")
+    private Hall hall;
+
+    @Builder.Default
+    @Column(name = "published")
+    private Boolean published = false;
 }

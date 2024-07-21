@@ -157,4 +157,18 @@
             referencedColumnNames="id" referencedTableName="location" />
     </changeSet>
 
+    <changeSet id="v1-12-10" author="drodzewicz">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="screening" />
+                <tableExists tableName="hall" />
+            </and>
+        </preConditions>
+        <addForeignKeyConstraint baseTableName="screening"
+            baseColumnNames="hall_id"
+            referencedTableName="hall"
+            referencedColumnNames="id"
+            constraintName="fk_screening_hall" />
+    </changeSet>
+
 </databaseChangeLog>

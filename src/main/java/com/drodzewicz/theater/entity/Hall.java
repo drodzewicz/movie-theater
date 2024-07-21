@@ -44,4 +44,7 @@ public class Hall {
 
     @OneToMany(mappedBy = "hall", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Seat> seats;
+
+    @OneToMany(mappedBy = "hall")
+    private List<Screening> screenings;
 }
