@@ -50,6 +50,8 @@ dependencies {
 	implementation 'org.springframework.session:spring-session-jdbc'
 	// liquibase
 	implementation 'org.liquibase:liquibase-core:4.28.0'
+	//swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
 }
 
 processResources {
