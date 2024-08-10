@@ -3,6 +3,7 @@ package com.drodzewicz.theater.controller;
 import java.util.*;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @ResponseBody
+@PreAuthorize("isAuthenticated()")
 @RequestMapping("/api/orders")
 public class OrderController {
 

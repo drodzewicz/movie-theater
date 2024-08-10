@@ -37,3 +37,9 @@ out/
 .vscode/
 
 application.properties
+
+npm/
+node_modules/
+**/static/
+dist/
+build/

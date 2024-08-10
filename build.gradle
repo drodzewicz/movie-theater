@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.1'
 	id 'io.spring.dependency-management' version '1.1.5'
+	id "com.github.node-gradle.node" version "7.0.2"
 }
 
 group = 'com.drodzewicz'
@@ -12,6 +13,42 @@ java {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
+
+node {
+	// specify the Node.js version
+	version = '20.12.2'  
+	// specify the npm version (optional)
+    npmVersion = '10.5.0'
+	// set to true to download the specified Node.js version
+	download = false
+	// identify working directory in project
+	workDir = file("${project.projectDir}/src/main/frontend-ui/javascript/nodejs")
+	// NPM work directory
+	// npmWorkDir = file("${project.projectDir}/src/main/frontend-ui/javascript/npm")
+}
+
+task appNpmInstall(type: NpmTask){
+	description = "Read packge.json and install all jars"
+	workingDir = file("${project.projectDir}/src/main/frontend-ui/javascript")
+	args =["install"]
+}
+
+task appNpmBuild(type: NpmTask){
+	description = "Builds applciation for your frontend "
+	args =["run", "build"]
+	workingDir = file("${project.projectDir}/src/main/frontend-ui/javascript")
+}
+
+task copyUIBuild(type: Copy){
+	from file("${project.projectDir}/src/main/frontend-ui/javascript/dist/")
+	into file("${project.projectDir}/src/main/resources/static")
+}
+
+// sequence of dependancies
+appNpmBuild.dependsOn appNpmInstall
+copyUIBuild.dependsOn appNpmBuild
+processResources.dependsOn copyUIBuild
+compileJava.dependsOn copyUIBuild
 
 configurations {
 	compileOnly {

@@ -27,12 +27,6 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((request) -> {
-                    request.requestMatchers("/api/auth/**").permitAll();
-                    request.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();
-                    request.anyRequest().authenticated();
-
-                })
                 .logout((logout) -> logout
                         .logoutUrl("/api/auth/logout")
                         .logoutSuccessHandler((request, response, authentication) -> {
