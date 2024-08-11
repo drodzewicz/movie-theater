@@ -22,31 +22,37 @@ node {
 	// set to true to download the specified Node.js version
 	download = false
 	// identify working directory in project
-	workDir = file("${project.projectDir}/src/main/frontend-ui/javascript/nodejs")
+	workDir = file("${project.projectDir}/frontend/nodejs")
 	// NPM work directory
-	// npmWorkDir = file("${project.projectDir}/src/main/frontend-ui/javascript/npm")
+	// npmWorkDir = file("${project.projectDir}/frontend/npm")
 }
 
 task appNpmInstall(type: NpmTask){
-	description = "Read packge.json and install all jars"
-	workingDir = file("${project.projectDir}/src/main/frontend-ui/javascript")
+	description = "Read package.json and install all jars"
+	workingDir = file("${project.projectDir}/frontend")
 	args =["install"]
 }
 
 task appNpmBuild(type: NpmTask){
 	description = "Builds applciation for your frontend "
 	args =["run", "build"]
-	workingDir = file("${project.projectDir}/src/main/frontend-ui/javascript")
+	workingDir = file("${project.projectDir}/frontend")
 }
 
 task copyUIBuild(type: Copy){
-	from file("${project.projectDir}/src/main/frontend-ui/javascript/dist/")
+	from file("${project.projectDir}/frontend/dist/")
+	into file("${project.projectDir}/src/main/resources/static")
+}
+
+task copyUIPublic(type: Copy){
+	from file("${project.projectDir}/frontend/public/")
 	into file("${project.projectDir}/src/main/resources/static")
 }
 
 // sequence of dependancies
 appNpmBuild.dependsOn appNpmInstall
-copyUIBuild.dependsOn appNpmBuild
+copyUIPublic.dependsOn appNpmBuild
+copyUIBuild.dependsOn copyUIPublic
 processResources.dependsOn copyUIBuild
 compileJava.dependsOn copyUIBuild
 

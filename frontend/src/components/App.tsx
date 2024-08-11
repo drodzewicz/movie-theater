@@ -3,7 +3,7 @@ import Counter from "@/components/Counter";
 const App = () => {
   return (
     <div>
-      Hello world
+      Hello worlda
       <Counter />
     </div>
   );
