@@ -2,6 +2,8 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import router from "@/pages/router";
 
+import "@/assets/styles/main.css";
+
 const root = document.getElementById("root");
 
 if (!root) {
