@@ -1,29 +1,10 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-
-import { Button } from "@/components/ui/button";
-
-import { Form } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
-import { Spinner } from "@/components/Icons";
-import InputField from "@/components/form/InputField";
-import loginFormSchema, { LoginSchemaType } from "@/pages/common/Login/loginFormSchema";
+import BasicAuthPage from "@/pages/common/Login/BasicAuthPage";
+import GithubAuthPage from "@/pages/common/Login/GithubAuthPage";
 
 const LoginPage = () => {
-    const form = useForm<LoginSchemaType>({
-        resolver: zodResolver(loginFormSchema),
-        defaultValues: {
-            username: "",
-            password: "",
-        },
-    });
-
-    function onSubmit(values: LoginSchemaType) {
-        console.log(values);
-    }
-
     return (
         <div className="container flex h-screen w-screen flex-col items-center justify-center">
             <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
@@ -34,25 +15,7 @@ const LoginPage = () => {
                     </p>
                 </div>
                 <div className={cn("grid gap-6")}>
-                    <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                            <div className="grid gap-2">
-                                <InputField
-                                    name="username"
-                                    control={form.control}
-                                    placeholder="Username"
-                                />
-                                <Button
-                                    variant="default"
-                                    className="rounded-sm shadow-sm"
-                                    type="submit"
-                                >
-                                    <Spinner className="mr-2 h-4 w-4 animate-spin" />
-                                    Sign In
-                                </Button>
-                            </div>
-                        </form>
-                    </Form>
+                    <BasicAuthPage />
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
                             <span className="w-full border-t" />
@@ -63,10 +26,7 @@ const LoginPage = () => {
                             </span>
                         </div>
                     </div>
-                    <Button variant="outline" className="rounded-sm shadow-sm" type="submit">
-                        <Spinner className="mr-2 h-4 w-4 animate-spin" />
-                        Github
-                    </Button>
+                    <GithubAuthPage />
                 </div>
                 <p className="px-8 text-center text-sm text-muted-foreground">
                     <Link to="/register" className="hover:text-brand underline underline-offset-4">

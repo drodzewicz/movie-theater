@@ -7,6 +7,7 @@ import MovieManager from "@/pages/admin/MovieManager";
 import UserManager from "@/pages/admin/UserManager";
 import LoginPage from "@/pages/common/Login/LoginPage";
 import RegisterPage from "@/pages/user/Register/RegisterPage";
+import ConfirmPassword from "./common/Login/ConfirmPassword";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <LoginPage />,
+            },
+            {
+                path: "/confrim-password",
+                element: <ConfirmPassword />,
             },
             {
                 path: "/register",
