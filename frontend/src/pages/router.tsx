@@ -5,7 +5,8 @@ import { createBrowserRouter } from "react-router-dom";
 import LocationManager from "@/pages/admin/LocationManager";
 import MovieManager from "@/pages/admin/MovieManager";
 import UserManager from "@/pages/admin/UserManager";
-import Login from "@/pages/common/Login";
+import LoginPage from "@/pages/common/Login/LoginPage";
+import RegisterPage from "@/pages/user/Register/RegisterPage";
 
 const router = createBrowserRouter([
     {
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/login",
-                element: <Login />,
+                element: <LoginPage />,
+            },
+            {
+                path: "/register",
+                element: <RegisterPage />,
             },
             {
                 path: "/locations",
