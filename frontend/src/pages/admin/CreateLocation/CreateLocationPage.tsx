@@ -1,0 +1,63 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import createLocationFormSchema, { CreateLocationSchemaType } from "./createLocationFormSchema";
+import InputField from "@/components/form/InputField";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+
+const CreateLocationPage = () => {
+    const form = useForm<CreateLocationSchemaType>({
+        resolver: zodResolver(createLocationFormSchema),
+        defaultValues: {
+            country: "",
+            city: "",
+            street: "",
+            buildingNumber: "",
+            zipCode: "",
+        },
+    });
+
+    function onSubmit(values: CreateLocationSchemaType) {
+        console.log(values);
+    }
+
+    return (
+        <div className="container grid h-screen w-screen flex-col items-center justify-center">
+            <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                        <div className="grid gap-2">
+                            <InputField
+                                name="country"
+                                control={form.control}
+                                placeholder="Country"
+                            />
+                            <InputField name="city" control={form.control} placeholder="City" />
+                            <InputField name="street" control={form.control} placeholder="Street" />
+                            <InputField
+                                name="buildingNumber"
+                                control={form.control}
+                                placeholder="Building Number"
+                            />
+                            <InputField
+                                name="zipCode"
+                                control={form.control}
+                                placeholder="Zip-Code"
+                            />
+
+                            <Button
+                                variant="default"
+                                className="rounded-sm shadow-sm"
+                                type="submit"
+                            >
+                                Create
+                            </Button>
+                        </div>
+                    </form>
+                </Form>
+            </div>
+        </div>
+    );
+};
+
+export default CreateLocationPage;

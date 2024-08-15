@@ -11,6 +11,9 @@ import {
     getCoreRowModel,
 } from "@tanstack/react-table";
 import LocationManagerTableFilters from "./LocationManagerTableFilters";
+import { Link } from "react-router-dom";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const data = [
     {
@@ -83,6 +86,12 @@ function LocationManagerPage() {
 
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
+            <Link
+                to="/locations/create"
+                className={cn(buttonVariants({ variant: "default" }), "ml-auto mr-0")}
+            >
+                Create new lcoation
+            </Link>
             <LocationManagerTableFilters table={table} />
             <Table table={table} />
             <DataTablePagination table={table} />

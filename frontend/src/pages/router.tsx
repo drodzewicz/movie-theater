@@ -1,13 +1,14 @@
 import App from "@/main/App";
 import RouterErrorPage from "@/pages/common/RouterErrorPage";
 
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import LocationManagerPage from "@/pages/admin/LocationManager/LocationManagerPage";
 import MovieManager from "@/pages/admin/MovieManager";
 import UserManager from "@/pages/admin/UserManager";
 import LoginPage from "@/pages/common/Login/LoginPage";
 import RegisterPage from "@/pages/user/Register/RegisterPage";
 import ConfirmPassword from "./common/Login/ConfirmPassword";
+import CreateLocationPage from "@/pages/admin/CreateLocation/CreateLocationPage";
 
 const router = createBrowserRouter([
     {
@@ -32,7 +33,17 @@ const router = createBrowserRouter([
             },
             {
                 path: "/locations",
-                element: <LocationManagerPage />,
+                element: <Outlet />,
+                children: [
+                    {
+                        path: "",
+                        element: <LocationManagerPage />,
+                    },
+                    {
+                        path: "/locations/create",
+                        element: <CreateLocationPage />,
+                    },
+                ],
             },
             {
                 path: "/movies",
