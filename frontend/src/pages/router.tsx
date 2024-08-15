@@ -2,7 +2,7 @@ import App from "@/main/App";
 import RouterErrorPage from "@/pages/common/RouterErrorPage";
 
 import { createBrowserRouter } from "react-router-dom";
-import LocationManager from "@/pages/admin/LocationManager";
+import LocationManagerPage from "@/pages/admin/LocationManager/LocationManagerPage";
 import MovieManager from "@/pages/admin/MovieManager";
 import UserManager from "@/pages/admin/UserManager";
 import LoginPage from "@/pages/common/Login/LoginPage";
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <LocationManager />,
+                element: <LocationManagerPage />,
             },
             {
                 path: "/login",
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/locations",
-                element: <LocationManager />,
+                element: <LocationManagerPage />,
             },
             {
                 path: "/movies",

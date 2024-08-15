@@ -56,7 +56,7 @@ const data: Task[] = [
 
 const MovieManager = () => {
     return (
-        <div>
+        <div className="container">
             <DataTable data={data} columns={columns} />
         </div>
     );
