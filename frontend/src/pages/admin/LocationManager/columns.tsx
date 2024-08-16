@@ -1,8 +1,12 @@
 import { DataTableColumnHeader } from "@/components/Table/CustomCells";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
+import { Link } from "react-router-dom";
 
 type Locations = {
     id: string;
+    indentifier: string;
     country: string;
     city: string;
     streetName: string;
@@ -12,8 +16,16 @@ type Locations = {
 
 export const columns: ColumnDef<Locations>[] = [
     {
-        accessorKey: "id",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Id" />,
+        accessorKey: "indentifier",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Identifier" />,
+        cell: ({ row }) => (
+            <Link
+                className={cn(buttonVariants({ variant: "link" }), "p-0")}
+                to={`/locations/${row.original.id}`}
+            >
+                {row.original.indentifier}
+            </Link>
+        ),
         enableSorting: false,
         enableHiding: false,
     },

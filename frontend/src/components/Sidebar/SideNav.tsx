@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { ChevronDownIcon } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { NavItem } from "./types";
+import { Separator } from "../ui/separator";
 
 interface SideNavProps {
     items: NavItem[];
@@ -96,6 +97,7 @@ function SideNav({ items, isOpen, setOpen, className }: SideNavProps) {
                                         </div>
                                     </Link>
                                 ))}
+                                <Separator />
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Table, { DataTablePagination } from "@/components/Table";
 
-import { columns } from "@/pages/admin/LocationManager/columns";
+import { columns } from "@/pages/admin/MovieManager/columns";
 import {
     ColumnFiltersState,
     SortingState,
@@ -10,7 +10,7 @@ import {
     useReactTable,
     getCoreRowModel,
 } from "@tanstack/react-table";
-import LocationManagerTableFilters from "./LocationManagerTableFilters";
+import MovieManagerTableFilters from "./MovieManagerTableFilters";
 import { Link } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -18,52 +18,27 @@ import { cn } from "@/lib/utils";
 const data = [
     {
         id: "1",
-        indentifier: "LT-VNO-AR",
-        country: "Lithuania",
-        city: "Vilnius",
-        streetName: "Architektu",
-        buildingNumber: "4",
-        zipCode: "23",
+        title: "Avengers",
+        rating: 3,
     },
     {
-        id: "1",
-        indentifier: "LT-KAU-AR",
-        country: "Lithuania",
-        city: "Kaunas",
-        streetName: "Kudirkos",
-        buildingNumber: "5",
-        zipCode: "2323",
+        id: "2",
+        title: "Avengers 2",
+        rating: 4,
     },
     {
-        id: "1",
-        indentifier: "PL-WRO-JAK",
-        country: "Poland",
-        city: "Wrocalw",
-        streetName: "Jakastam",
-        buildingNumber: "12",
-        zipCode: "43423",
+        id: "3",
+        title: "The breaker",
+        rating: 4,
     },
     {
-        id: "1",
-        indentifier: "PL-WAR-SW",
-        country: "Poland",
-        city: "Warsaw",
-        streetName: "swietkoszyska",
-        buildingNumber: "23",
-        zipCode: "1235",
-    },
-    {
-        id: "1",
-        indentifier: "PL-GD-KOL",
-        country: "Poland",
-        city: "Gdansk",
-        streetName: "Kolobrzeska",
-        buildingNumber: "11",
-        zipCode: "6542",
+        id: "4",
+        title: "Some movie",
+        rating: 4,
     },
 ];
 
-function LocationManagerPage() {
+function MovieManagerPage() {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [sorting, setSorting] = useState<SortingState>([]);
     const [pagination, setPagination] = useState<PaginationState>({
@@ -92,16 +67,16 @@ function LocationManagerPage() {
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
             <Link
-                to="/locations/create"
+                to="/movies/add"
                 className={cn(buttonVariants({ variant: "default" }), "ml-auto mr-0")}
             >
-                Create new lcoation
+                Add new movie
             </Link>
-            <LocationManagerTableFilters table={table} />
+            <MovieManagerTableFilters table={table} />
             <Table table={table} />
             <DataTablePagination table={table} />
         </div>
     );
 }
 
-export default LocationManagerPage;
+export default MovieManagerPage;

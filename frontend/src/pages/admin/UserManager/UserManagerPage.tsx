@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Table, { DataTablePagination } from "@/components/Table";
 
-import { columns } from "@/pages/admin/LocationManager/columns";
+import { columns } from "@/pages/admin/UserManager/columns";
 import {
     ColumnFiltersState,
     SortingState,
@@ -10,7 +10,7 @@ import {
     useReactTable,
     getCoreRowModel,
 } from "@tanstack/react-table";
-import LocationManagerTableFilters from "./LocationManagerTableFilters";
+import UserManagerTableFilters from "./UserManagerTableFilters";
 import { Link } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -18,52 +18,35 @@ import { cn } from "@/lib/utils";
 const data = [
     {
         id: "1",
-        indentifier: "LT-VNO-AR",
-        country: "Lithuania",
-        city: "Vilnius",
-        streetName: "Architektu",
-        buildingNumber: "4",
-        zipCode: "23",
+        username: "Avengers",
+        firstName: "First",
+        lastName: "Last",
+        active: true,
     },
     {
-        id: "1",
-        indentifier: "LT-KAU-AR",
-        country: "Lithuania",
-        city: "Kaunas",
-        streetName: "Kudirkos",
-        buildingNumber: "5",
-        zipCode: "2323",
+        id: "2",
+        username: "Sasor",
+        firstName: "First",
+        lastName: "Last",
+        active: true,
     },
     {
-        id: "1",
-        indentifier: "PL-WRO-JAK",
-        country: "Poland",
-        city: "Wrocalw",
-        streetName: "Jakastam",
-        buildingNumber: "12",
-        zipCode: "43423",
+        id: "3",
+        username: "Daro",
+        firstName: "First",
+        lastName: "Last",
+        active: true,
     },
     {
-        id: "1",
-        indentifier: "PL-WAR-SW",
-        country: "Poland",
-        city: "Warsaw",
-        streetName: "swietkoszyska",
-        buildingNumber: "23",
-        zipCode: "1235",
-    },
-    {
-        id: "1",
-        indentifier: "PL-GD-KOL",
-        country: "Poland",
-        city: "Gdansk",
-        streetName: "Kolobrzeska",
-        buildingNumber: "11",
-        zipCode: "6542",
+        id: "4",
+        username: "Marunx",
+        firstName: "First",
+        lastName: "Last",
+        active: false,
     },
 ];
 
-function LocationManagerPage() {
+function UserManagerPage() {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [sorting, setSorting] = useState<SortingState>([]);
     const [pagination, setPagination] = useState<PaginationState>({
@@ -92,16 +75,16 @@ function LocationManagerPage() {
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
             <Link
-                to="/locations/create"
+                to="/manager/register"
                 className={cn(buttonVariants({ variant: "default" }), "ml-auto mr-0")}
             >
-                Create new lcoation
+                Register new manager
             </Link>
-            <LocationManagerTableFilters table={table} />
+            <UserManagerTableFilters table={table} />
             <Table table={table} />
             <DataTablePagination table={table} />
         </div>
     );
 }
 
-export default LocationManagerPage;
+export default UserManagerPage;

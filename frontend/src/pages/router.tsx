@@ -3,12 +3,15 @@ import RouterErrorPage from "@/pages/common/RouterErrorPage";
 
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import LocationManagerPage from "@/pages/admin/LocationManager/LocationManagerPage";
-import MovieManager from "@/pages/admin/MovieManager";
-import UserManager from "@/pages/admin/UserManager";
 import LoginPage from "@/pages/common/Login/LoginPage";
 import RegisterPage from "@/pages/user/Register/RegisterPage";
 import ConfirmPassword from "./common/Login/ConfirmPassword";
 import CreateLocationPage from "@/pages/admin/CreateLocation/CreateLocationPage";
+import MovieManagerPage from "./admin/MovieManager/MovieManagerPage";
+import UserManagerPage from "./admin/UserManager/UserManagerPage";
+import ManagerManagerPage from "./admin/ManagerManager/ManagerManagerPage";
+import OrderManagerPage from "./admin/OrderManager/OrderManagerPage";
+import LocationShowPage from "./admin/LocationShow/LocationShowPage";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +43,10 @@ const router = createBrowserRouter([
                         element: <LocationManagerPage />,
                     },
                     {
+                        path: "/locations/:locationId",
+                        element: <LocationShowPage />,
+                    },
+                    {
                         path: "/locations/create",
                         element: <CreateLocationPage />,
                     },
@@ -47,11 +54,59 @@ const router = createBrowserRouter([
             },
             {
                 path: "/movies",
-                element: <MovieManager />,
+                element: <Outlet />,
+                children: [
+                    {
+                        path: "",
+                        element: <MovieManagerPage />,
+                    },
+                    {
+                        path: "/movies/create",
+                        element: <CreateLocationPage />,
+                    },
+                ],
             },
             {
                 path: "/users",
-                element: <UserManager />,
+                element: <Outlet />,
+                children: [
+                    {
+                        path: "",
+                        element: <UserManagerPage />,
+                    },
+                    {
+                        path: "/users/create",
+                        element: <UserManagerPage />,
+                    },
+                ],
+            },
+            {
+                path: "/users/managers",
+                element: <Outlet />,
+                children: [
+                    {
+                        path: "",
+                        element: <ManagerManagerPage />,
+                    },
+                    {
+                        path: "/users/managers/create",
+                        element: <UserManagerPage />,
+                    },
+                ],
+            },
+            {
+                path: "/orders",
+                element: <Outlet />,
+                children: [
+                    {
+                        path: "",
+                        element: <OrderManagerPage />,
+                    },
+                    {
+                        path: "/orders/create",
+                        element: <UserManagerPage />,
+                    },
+                ],
             },
         ],
     },
