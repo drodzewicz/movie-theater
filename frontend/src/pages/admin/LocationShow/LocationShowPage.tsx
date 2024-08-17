@@ -1,9 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import HallCard from "@/components/HallCard/HallCard";
 import CalendarTimeline from "@/components/CalendarTimeline/CalendarTimeline";
+import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 const LocationShowPage = () => {
     return (
@@ -55,9 +57,12 @@ const LocationShowPage = () => {
             <div className="mt-2">
                 <div className="flex justify-between">
                     <h2 className="text-3xl font-bold">Halls</h2>
-                    <Button size="sm" variant="default">
+                    <Link
+                        to="/halls/create"
+                        className={cn(buttonVariants({ variant: "default", size: "sm" }))}
+                    >
                         Create new Hall
-                    </Button>
+                    </Link>
                 </div>
                 <div className="flex mt-2 gap-2 flex-wrap">
                     <HallCard />

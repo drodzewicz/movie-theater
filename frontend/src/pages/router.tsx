@@ -14,6 +14,7 @@ import OrderManagerPage from "./admin/OrderManager/OrderManagerPage";
 import LocationShowPage from "./admin/LocationShow/LocationShowPage";
 import HallManagerPage from "./admin/HallManager/HallManagerPage";
 import ScreeningManagerPage from "./admin/ScreeningManager/ScreeningManagerPage";
+import CreateHallPage from "./admin/CreateHall/CreateHallPage";
 
 const router = createBrowserRouter([
     {
@@ -120,7 +121,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "/halls/create",
-                        element: <UserManagerPage />,
+                        element: <CreateHallPage />,
                     },
                 ],
             },
