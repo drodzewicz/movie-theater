@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Table, { DataTablePagination } from "@/components/Table";
 
-import { columns } from "@/pages/admin/LocationManager/columns";
+import { columns } from "@/pages/admin/HallManager/columns";
 import {
     ColumnFiltersState,
     SortingState,
@@ -10,65 +10,45 @@ import {
     useReactTable,
     getCoreRowModel,
 } from "@tanstack/react-table";
-import LocationManagerTableFilters from "./LocationManagerTableFilters";
+import HallManagerTableFilters from "./HallManagerTableFilters";
 import { Link } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const data = [
     {
-        id: "1aa",
-        active: true,
-        indentifier: "LT-VNO-AR",
-        country: "Lithuania",
-        city: "Vilnius",
-        streetName: "Architektu",
-        buildingNumber: "4",
-        zipCode: "23",
-    },
-    {
-        id: "123",
-        active: true,
-        indentifier: "LT-KAU-AR",
-        country: "Lithuania",
-        city: "Kaunas",
-        streetName: "Kudirkos",
-        buildingNumber: "5",
-        zipCode: "2323",
-    },
-    {
-        id: "1afda",
-        active: true,
-        indentifier: "PL-WRO-JAK",
-        country: "Poland",
-        city: "Wrocalw",
-        streetName: "Jakastam",
-        buildingNumber: "12",
-        zipCode: "43423",
+        id: "1",
+        location: {
+            id: "1",
+            indentifier: "LT-VNO-AR",
+        },
+        name: "Hall-H",
+        floor: "2",
+        number: "11",
     },
     {
         id: "1",
-        active: false,
-        indentifier: "PL-WAR-SW",
-        country: "Poland",
-        city: "Warsaw",
-        streetName: "swietkoszyska",
-        buildingNumber: "23",
-        zipCode: "1235",
+        location: {
+            id: "1",
+            indentifier: "LT-VNO-AR",
+        },
+        name: "Hall-H",
+        floor: "2",
+        number: "11",
     },
     {
         id: "1",
-        active: true,
-        indentifier: "PL-GD-KOL",
-        country: "Poland",
-        city: "Gdansk",
-        streetName: "Kolobrzeska",
-        buildingNumber: "11",
-        zipCode: "6542",
+        location: {
+            id: "1",
+            indentifier: "LT-VNO-AR",
+        },
+        name: "Hall-H",
+        floor: "2",
+        number: "11",
     },
 ];
 
-function LocationManagerPage() {
+function HallManagerPage() {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [sorting, setSorting] = useState<SortingState>([]);
     const [pagination, setPagination] = useState<PaginationState>({
@@ -102,11 +82,11 @@ function LocationManagerPage() {
             >
                 Create new lcoation
             </Link>
-            <LocationManagerTableFilters table={table} />
+            <HallManagerTableFilters table={table} />
             <Table table={table} />
             <DataTablePagination table={table} />
         </div>
     );
 }
 
-export default LocationManagerPage;
+export default HallManagerPage;

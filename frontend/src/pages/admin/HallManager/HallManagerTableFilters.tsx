@@ -6,11 +6,11 @@ import {
     DropdownSelectFilter,
 } from "@/components/Table/Filters";
 
-export interface LocationManagerTableFiltersProps<TData> {
+export interface HallManagerTableFiltersProps<TData> {
     table: Table<TData>;
 }
 
-function LocationManagerTableFilters<TData>({ table }: LocationManagerTableFiltersProps<TData>) {
+function HallManagerTableFilters<TData>({ table }: HallManagerTableFiltersProps<TData>) {
     return (
         <DataTableToolbar table={table}>
             <DropdownSelectFilter
@@ -31,25 +31,9 @@ function LocationManagerTableFilters<TData>({ table }: LocationManagerTableFilte
                     { label: "Germany", value: "Germany" },
                 ]}
             />
-            <DropdownSelectFilter
-                column={table.getColumn("active")}
-                title="Status"
-                options={[
-                    {
-                        label: "Active",
-                        value: "active",
-                        icon: () => <span className="h-3 w-3 rounded-full bg-green-600 mr-2" />,
-                    },
-                    {
-                        label: "Disabled",
-                        value: "disabled",
-                        icon: () => <span className="h-3 w-3 rounded-full bg-gray-400 mr-2" />,
-                    },
-                ]}
-            />
             <SearchBarFilter column={table.getColumn("id")} placeholder="Search by location..." />
         </DataTableToolbar>
     );
 }
 
-export default LocationManagerTableFilters;
+export default HallManagerTableFilters;

@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import HallCard from "@/components/HallCard/HallCard";
+import CalendarTimeline from "@/components/CalendarTimeline/CalendarTimeline";
 
 const LocationShowPage = () => {
     return (
@@ -40,6 +41,17 @@ const LocationShowPage = () => {
                     </CardContent>
                 </Card>
             </div>
+            <div className="flex gap-3 bg-slate-100 p-2 mt-2 rounded-md">
+                <Button variant="outline" size="sm">
+                    Edit
+                </Button>
+                <Button variant="outline" size="sm">
+                    Delete
+                </Button>
+                <Button variant="outline" size="sm">
+                    Deactivate
+                </Button>
+            </div>
             <div className="mt-2">
                 <div className="flex justify-between">
                     <h2 className="text-3xl font-bold">Halls</h2>
@@ -52,6 +64,12 @@ const LocationShowPage = () => {
                     <HallCard />
                     <HallCard />
                 </div>
+            </div>
+            <div className="mt-2">
+                <div className="flex justify-between">
+                    <h2 className="text-3xl font-bold">Screenings</h2>
+                </div>
+                <CalendarTimeline />
             </div>
         </div>
     );

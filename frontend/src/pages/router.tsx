@@ -12,6 +12,8 @@ import UserManagerPage from "./admin/UserManager/UserManagerPage";
 import ManagerManagerPage from "./admin/ManagerManager/ManagerManagerPage";
 import OrderManagerPage from "./admin/OrderManager/OrderManagerPage";
 import LocationShowPage from "./admin/LocationShow/LocationShowPage";
+import HallManagerPage from "./admin/HallManager/HallManagerPage";
+import ScreeningManagerPage from "./admin/ScreeningManager/ScreeningManagerPage";
 
 const router = createBrowserRouter([
     {
@@ -104,6 +106,34 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "/orders/create",
+                        element: <UserManagerPage />,
+                    },
+                ],
+            },
+            {
+                path: "/halls",
+                element: <Outlet />,
+                children: [
+                    {
+                        path: "",
+                        element: <HallManagerPage />,
+                    },
+                    {
+                        path: "/halls/create",
+                        element: <UserManagerPage />,
+                    },
+                ],
+            },
+            {
+                path: "/screenings",
+                element: <Outlet />,
+                children: [
+                    {
+                        path: "",
+                        element: <ScreeningManagerPage />,
+                    },
+                    {
+                        path: "/screenings/create",
                         element: <UserManagerPage />,
                     },
                 ],

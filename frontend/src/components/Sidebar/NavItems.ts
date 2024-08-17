@@ -11,6 +11,7 @@ import {
     ListCheck,
     SquareActivity,
     ShieldCheck,
+    VideoIcon,
 } from "lucide-react";
 
 const navItems: NavItem[] = [
@@ -128,6 +129,27 @@ const navItems: NavItem[] = [
                 icon: PlusCircleIcon,
                 color: "text-red-500",
                 href: "/orders/create",
+            },
+        ],
+    },
+    {
+        title: "Screening",
+        icon: VideoIcon,
+        href: "/screenings",
+        color: "text-orange-500",
+        isChidren: true,
+        children: [
+            {
+                title: "Order list",
+                icon: List,
+                color: "text-red-500",
+                href: "/screenings",
+            },
+            {
+                title: "Create New Order",
+                icon: PlusCircleIcon,
+                color: "text-red-500",
+                href: "/screenings/create",
             },
         ],
     },

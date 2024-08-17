@@ -1,11 +1,14 @@
 import { DataTableColumnHeader } from "@/components/Table/CustomCells";
+import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
+import LocationTableRowActions from "./LocationTableRowActions";
 
-type Locations = {
+export type Locations = {
     id: string;
+    active: boolean;
     indentifier: string;
     country: string;
     city: string;
@@ -30,6 +33,23 @@ export const columns: ColumnDef<Locations>[] = [
         enableHiding: false,
     },
     {
+        accessorKey: "active",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Active" />,
+        cell: ({ row }) => (
+            <Badge variant="outline" className="gap-1">
+                <span
+                    className={cn(
+                        "rounded-full h-3 w-3 ",
+                        row.original.active ? "bg-green-600" : "bg-gray-500"
+                    )}
+                ></span>
+                {row.original.active ? "Active" : "Disabled"}
+            </Badge>
+        ),
+        enableSorting: false,
+        enableHiding: false,
+    },
+    {
         accessorKey: "country",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Country" />,
         enableSorting: true,
@@ -42,21 +62,16 @@ export const columns: ColumnDef<Locations>[] = [
         enableHiding: true,
     },
     {
-        accessorKey: "streetName",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Street" />,
+        id: "address",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Address" />,
+        cell: ({ row }) => (
+            <p>{`${row.original.streetName}, ${row.original.buildingNumber}, ${row.original.zipCode}`}</p>
+        ),
         enableSorting: false,
         enableHiding: false,
     },
     {
-        accessorKey: "buildingNumber",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Building number" />,
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
-        accessorKey: "zipCode",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Zip-Code" />,
-        enableSorting: false,
-        enableHiding: false,
+        id: "actions",
+        cell: ({ row }) => <LocationTableRowActions row={row} />,
     },
 ];
