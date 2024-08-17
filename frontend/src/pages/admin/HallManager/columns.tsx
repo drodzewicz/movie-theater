@@ -33,6 +33,14 @@ export const columns: ColumnDef<Hall>[] = [
     {
         accessorKey: "name",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
+        cell: ({ row }) => (
+            <Link
+                className={cn(buttonVariants({ variant: "link" }), "p-0")}
+                to={`/halls/${row.original.id}`}
+            >
+                {row.original.name}
+            </Link>
+        ),
         enableSorting: true,
         enableHiding: true,
     },

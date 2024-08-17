@@ -47,21 +47,6 @@ const navItems: NavItem[] = [
         icon: SquareActivity,
         href: "/halls",
         color: "text-orange-500",
-        isChidren: true,
-        children: [
-            {
-                title: "Hall list",
-                icon: List,
-                color: "text-red-500",
-                href: "/halls",
-            },
-            {
-                title: "Create new Hall",
-                icon: MapPinPlusIcon,
-                color: "text-red-500",
-                href: "/halls/create",
-            },
-        ],
     },
     {
         title: "Users",
@@ -86,7 +71,7 @@ const navItems: NavItem[] = [
                 title: "Register new manager",
                 icon: UserPlus,
                 color: "text-red-500",
-                href: "/users/manager/create",
+                href: "/users/create",
             },
         ],
     },
@@ -116,21 +101,6 @@ const navItems: NavItem[] = [
         icon: ListCheck,
         href: "/orders",
         color: "text-orange-500",
-        isChidren: true,
-        children: [
-            {
-                title: "Order list",
-                icon: List,
-                color: "text-red-500",
-                href: "/orders",
-            },
-            {
-                title: "Create New Order",
-                icon: PlusCircleIcon,
-                color: "text-red-500",
-                href: "/orders/create",
-            },
-        ],
     },
     {
         title: "Screening",
