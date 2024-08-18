@@ -5,7 +5,6 @@ import {
     MapPinIcon,
     MapPinPlusIcon,
     List,
-    UserPlus,
     PopcornIcon,
     PlusCircleIcon,
     ListCheck,
@@ -67,12 +66,6 @@ const navItems: NavItem[] = [
                 color: "text-red-500",
                 href: "/users/managers",
             },
-            {
-                title: "Register new manager",
-                icon: UserPlus,
-                color: "text-red-500",
-                href: "/users/create",
-            },
         ],
     },
     {
@@ -92,7 +85,7 @@ const navItems: NavItem[] = [
                 title: "Add New Movie",
                 icon: PlusCircleIcon,
                 color: "text-red-500",
-                href: "/movies/add",
+                href: "/movies/create",
             },
         ],
     },
@@ -110,13 +103,13 @@ const navItems: NavItem[] = [
         isChidren: true,
         children: [
             {
-                title: "Order list",
+                title: "Screening list",
                 icon: List,
                 color: "text-red-500",
                 href: "/screenings",
             },
             {
-                title: "Create New Order",
+                title: "Create Screening",
                 icon: PlusCircleIcon,
                 color: "text-red-500",
                 href: "/screenings/create",

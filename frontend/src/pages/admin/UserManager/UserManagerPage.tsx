@@ -11,9 +11,7 @@ import {
     getCoreRowModel,
 } from "@tanstack/react-table";
 import UserManagerTableFilters from "./UserManagerTableFilters";
-import { Link } from "react-router-dom";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import CreateUserDialog from "../CreateUser/CreateUserDialog";
 
 const data = [
     {
@@ -74,12 +72,10 @@ function UserManagerPage() {
 
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
-            <Link
-                to="/manager/register"
-                className={cn(buttonVariants({ variant: "default" }), "ml-auto mr-0")}
-            >
-                Register new manager
-            </Link>
+            <div className="flex justify-between">
+                <h2 className="text-2xl font-bold">Users</h2>
+                <CreateUserDialog />
+            </div>
             <UserManagerTableFilters table={table} />
             <Table table={table} />
             <DataTablePagination table={table} />

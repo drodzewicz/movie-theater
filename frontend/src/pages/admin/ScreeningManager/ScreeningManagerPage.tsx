@@ -11,13 +11,12 @@ import {
     getCoreRowModel,
 } from "@tanstack/react-table";
 import ScreeningManagerTableFilters from "./ScreeningManagerTableFilters";
-import { Link } from "react-router-dom";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import CreateScreeningDialog from "../CreateScreening/CreateScreeningDialog";
 
 const data = [
     {
         id: "1",
+        availableTickets: 4,
         movie: {
             id: "1",
             title: "Avengers",
@@ -35,6 +34,7 @@ const data = [
     },
     {
         id: "1",
+        availableTickets: 4,
         movie: {
             id: "1",
             title: "Something else",
@@ -80,12 +80,10 @@ function ScreeningManagerPage() {
 
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
-            <Link
-                to="/movies/add"
-                className={cn(buttonVariants({ variant: "default" }), "ml-auto mr-0")}
-            >
-                Add new movie
-            </Link>
+            <div className="flex justify-between">
+                <h2 className="text-2xl font-bold">Screenings</h2>
+                <CreateScreeningDialog />
+            </div>
             <ScreeningManagerTableFilters table={table} />
             <Table table={table} />
             <DataTablePagination table={table} />

@@ -1,20 +1,23 @@
 import DatePicker from "../DatePicker/DatePicker";
-import { Link } from "react-router-dom";
-import { buttonVariants } from "../ui/button";
-import { cn } from "@/lib/utils";
+import CreateScreeningDialog from "@/pages/admin/CreateScreening/CreateScreeningDialog";
+import { Button } from "../ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function CalendarTimelineHeader() {
     return (
         <div className="bg-slate-50 flex justify-between p-4">
-            <div>Today: July 4, 2024</div>
+            <Button variant="ghost" size="sm">
+                Today: July 4, 2024
+            </Button>
             <div className="flex gap-2">
+                <Button variant="outline" size="icon">
+                    <ChevronLeft />
+                </Button>
                 <DatePicker />
-                <Link
-                    to="/screenings/create"
-                    className={cn(buttonVariants({ variant: "default", size: "sm" }))}
-                >
-                    Add screening
-                </Link>
+                <Button variant="outline" size="icon">
+                    <ChevronRight />
+                </Button>
+                <CreateScreeningDialog />
             </div>
         </div>
     );

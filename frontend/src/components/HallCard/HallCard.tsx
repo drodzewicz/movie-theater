@@ -23,7 +23,7 @@ const HallCard = () => {
                 <p className="text-xs text-muted-foreground">floor: 2, room: 11</p>
                 <Link
                     className={cn(buttonVariants({ variant: "link" }), "p-0 h-5 mr-2")}
-                    to="/locations/32434/halls/23"
+                    to="/halls/23"
                 >
                     more <ChevronRight className="h-4 w-4" />
                 </Link>

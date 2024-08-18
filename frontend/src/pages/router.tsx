@@ -15,7 +15,8 @@ import LocationShowPage from "./admin/LocationShow/LocationShowPage";
 import HallManagerPage from "./admin/HallManager/HallManagerPage";
 import ScreeningManagerPage from "./admin/ScreeningManager/ScreeningManagerPage";
 import CreateHallPage from "./admin/CreateHall/CreateHallPage";
-import CreateUser from "./admin/CreateUser/CreateUserPage";
+import CreateMoviePage from "./admin/CreateMovie/CreateMoviePage";
+import HallShowPage from "./admin/HallShow/HallShowPage";
 
 const router = createBrowserRouter([
     {
@@ -66,7 +67,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "/movies/create",
-                        element: <CreateLocationPage />,
+                        element: <CreateMoviePage />,
                     },
                 ],
             },
@@ -81,10 +82,6 @@ const router = createBrowserRouter([
                     {
                         path: "/users/managers",
                         element: <ManagerManagerPage />,
-                    },
-                    {
-                        path: "/users/create",
-                        element: <CreateUser />,
                     },
                 ],
             },
@@ -110,6 +107,10 @@ const router = createBrowserRouter([
                     {
                         path: "",
                         element: <HallManagerPage />,
+                    },
+                    {
+                        path: "/halls/:hallId",
+                        element: <HallShowPage />,
                     },
                     {
                         path: "/halls/create",

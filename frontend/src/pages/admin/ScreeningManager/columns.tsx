@@ -1,4 +1,6 @@
 import { DataTableColumnHeader } from "@/components/Table/CustomCells";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 
 type Screening = {
@@ -17,12 +19,30 @@ type Screening = {
         identifier: string;
     };
     published: boolean;
+    availableTickets: number;
 };
 
 export const columns: ColumnDef<Screening>[] = [
     {
         accessorKey: "id",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Id" />,
+        enableSorting: false,
+        enableHiding: false,
+    },
+    {
+        accessorKey: "active",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Active" />,
+        cell: ({ row }) => (
+            <Badge variant="outline" className="gap-1">
+                <span
+                    className={cn(
+                        "rounded-full h-3 w-3 ",
+                        row.original.published ? "bg-green-600" : "bg-gray-500"
+                    )}
+                ></span>
+                {row.original.published ? "Published" : "Drafted"}
+            </Badge>
+        ),
         enableSorting: false,
         enableHiding: false,
     },
@@ -47,6 +67,12 @@ export const columns: ColumnDef<Screening>[] = [
     {
         accessorKey: "hall.identifier",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Hall" />,
+        enableSorting: true,
+        enableHiding: true,
+    },
+    {
+        accessorKey: "availableTickets",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Available Tickets" />,
         enableSorting: true,
         enableHiding: true,
     },

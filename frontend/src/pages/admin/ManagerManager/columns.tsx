@@ -1,4 +1,6 @@
 import { DataTableColumnHeader } from "@/components/Table/CustomCells";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 
 type AppUser = {
@@ -43,7 +45,18 @@ export const columns: ColumnDef<AppUser>[] = [
     {
         accessorKey: "active",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Active" />,
-        enableSorting: true,
-        enableHiding: true,
+        cell: ({ row }) => (
+            <Badge variant="outline" className="gap-1">
+                <span
+                    className={cn(
+                        "rounded-full h-3 w-3 ",
+                        row.original.active ? "bg-green-600" : "bg-gray-500"
+                    )}
+                ></span>
+                {row.original.active ? "Active" : "Disabled"}
+            </Badge>
+        ),
+        enableSorting: false,
+        enableHiding: false,
     },
 ];
