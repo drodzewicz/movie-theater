@@ -100,21 +100,6 @@ const navItems: NavItem[] = [
         icon: VideoIcon,
         href: "/screenings",
         color: "text-orange-500",
-        isChidren: true,
-        children: [
-            {
-                title: "Screening list",
-                icon: List,
-                color: "text-red-500",
-                href: "/screenings",
-            },
-            {
-                title: "Create Screening",
-                icon: PlusCircleIcon,
-                color: "text-red-500",
-                href: "/screenings/create",
-            },
-        ],
     },
 ];
 

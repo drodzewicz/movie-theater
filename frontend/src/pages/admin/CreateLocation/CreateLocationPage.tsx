@@ -14,6 +14,7 @@ const CreateLocationPage = () => {
             street: "",
             buildingNumber: "",
             zipCode: "",
+            logoUrl: "",
         },
     });
 
@@ -43,6 +44,11 @@ const CreateLocationPage = () => {
                                 name="zipCode"
                                 control={form.control}
                                 placeholder="Zip-Code"
+                            />
+                            <InputField
+                                name="logoUrl"
+                                control={form.control}
+                                placeholder="Logo"
                             />
 
                             <Button

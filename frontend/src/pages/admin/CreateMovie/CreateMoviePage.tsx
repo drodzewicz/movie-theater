@@ -62,6 +62,12 @@ const CreateMoviePage = () => {
                                 control={form.control}
                                 placeholder="Trailer Url"
                             />
+                            <iframe
+                                className="video"
+                                title="Youtube player"
+                                sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-presentation"
+                                src="https://youtube.com/embed/TNgK88CeZsk?autoplay=0"
+                            ></iframe>
                             <Button
                                 variant="default"
                                 className="rounded-sm shadow-sm"

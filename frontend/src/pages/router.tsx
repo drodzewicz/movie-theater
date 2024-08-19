@@ -120,17 +120,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/screenings",
-                element: <Outlet />,
-                children: [
-                    {
-                        path: "",
-                        element: <ScreeningManagerPage />,
-                    },
-                    {
-                        path: "/screenings/create",
-                        element: <UserManagerPage />,
-                    },
-                ],
+                element: <ScreeningManagerPage />,
             },
         ],
     },

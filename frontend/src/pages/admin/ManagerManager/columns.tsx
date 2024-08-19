@@ -14,12 +14,6 @@ type AppUser = {
 
 export const columns: ColumnDef<AppUser>[] = [
     {
-        accessorKey: "id",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Id" />,
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
         accessorKey: "username",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Username" />,
         enableSorting: true,

@@ -77,10 +77,10 @@ function HallManagerPage() {
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
             <Link
-                to="/locations/create"
+                to="/halls/create"
                 className={cn(buttonVariants({ variant: "default" }), "ml-auto mr-0")}
             >
-                Create new lcoation
+                Create Hall
             </Link>
             <HallManagerTableFilters table={table} />
             <Table table={table} />
