@@ -1,4 +1,4 @@
-import LocationSelector from "../LocationSelector/LocationSelector";
+import LocationSelector from "@/components/common/LocationSelector";
 import AuthenticatedUserControlls from "./AuthenticatedUserControlls";
 import UnauthenticatedUserControlls from "./UnauthenticatedUserControlls";
 

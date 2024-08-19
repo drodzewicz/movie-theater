@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Table, { DataTablePagination } from "@/components/Table";
+import Table, { DataTablePagination } from "@/components/common/Table";
 
 import { columns } from "@/pages/admin/ManagerManager/columns";
 import {

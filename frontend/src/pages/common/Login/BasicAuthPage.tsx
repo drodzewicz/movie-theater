@@ -1,6 +1,5 @@
 import { loginFormSchema, LoginSchemaType } from "@/pages/common/Login/loginFormSchema";
 import InputField from "@/components/form/InputField";
-import { Spinner } from "@/components/Icons";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -28,7 +27,6 @@ const BasicAuthPage = () => {
                     <div className="grid gap-2">
                         <InputField name="username" control={form.control} placeholder="Username" />
                         <Button variant="default" className="rounded-sm shadow-sm" type="submit">
-                            <Spinner className="mr-2 h-4 w-4 animate-spin" />
                             Sign In
                         </Button>
                     </div>

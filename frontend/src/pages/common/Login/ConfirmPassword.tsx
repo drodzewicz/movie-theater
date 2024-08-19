@@ -3,7 +3,7 @@ import {
     loginPasswordFormSchema,
 } from "@/pages/common/Login/loginFormSchema";
 import InputField from "@/components/form/InputField";
-import { ArrowLeft, Spinner } from "@/components/Icons";
+import { ChevronLeft, Loader2 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -33,7 +33,7 @@ const ConfirmPassword = () => {
         <div>
             <Link to="/login" className={cn(buttonVariants({ variant: "ghost" }))}>
                 <>
-                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    <ChevronLeft className="mr-2 h-4 w-4" />
                     Back
                 </>
             </Link>
@@ -53,7 +53,7 @@ const ConfirmPassword = () => {
                                     className="rounded-sm shadow-sm"
                                     type="submit"
                                 >
-                                    <Spinner className="mr-2 h-4 w-4 animate-spin" />
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                     Sign In
                                 </Button>
                             </div>

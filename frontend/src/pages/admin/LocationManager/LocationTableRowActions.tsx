@@ -1,4 +1,4 @@
-import DataTableRowActions from "@/components/Table/CustomCells/DataTableRowActions";
+import DataTableRowActions from "@/components/common/Table/CustomCells/DataTableRowActions";
 import { DropdownMenuItem, DropdownMenuShortcut } from "@/components/ui/dropdown-menu";
 import { Row } from "@tanstack/react-table";
 import { Locations } from "./columns";

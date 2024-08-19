@@ -1,4 +1,4 @@
-import { DataTableColumnHeader } from "@/components/Table/CustomCells";
+import { DataTableColumnHeader } from "@/components/common/Table/CustomCells";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";

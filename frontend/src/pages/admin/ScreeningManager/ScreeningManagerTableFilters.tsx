@@ -4,7 +4,7 @@ import {
     DataTableToolbar,
     SearchBarFilter,
     DropdownSelectFilter,
-} from "@/components/Table/Filters";
+} from "@/components/common/Table/Filters";
 
 export interface ScreeningManagerTableFiltersProps<TData> {
     table: Table<TData>;

@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import CalendarTimeline from "@/components/CalendarTimeline/CalendarTimeline";
+import CalendarTimeline from "@/components/common/CalendarTimeline";
 import { Separator } from "@/components/ui/separator";
 
 const HallShowPage = () => {

@@ -4,7 +4,8 @@ import registerFormSchema, {
 } from "@/pages/user/Register/registerFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Spinner } from "@/components/Icons";
+import { Loader2 } from "lucide-react";
+
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
@@ -69,7 +70,7 @@ const RegisterPage = () => {
                                     className="rounded-sm shadow-sm"
                                     type="submit"
                                 >
-                                    <Spinner className="mr-2 h-4 w-4 animate-spin" />
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                     Sign Up
                                 </Button>
                             </div>

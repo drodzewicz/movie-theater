@@ -1,4 +1,4 @@
-import UserAvatar from "@/components/UserAvatar/UserAvatar";
+import UserAvatar from "@/components/common/UserAvatar";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 

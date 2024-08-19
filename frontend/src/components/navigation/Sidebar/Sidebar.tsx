@@ -1,9 +1,9 @@
 import { useState } from "react";
-import SideNav from "@/components/Sidebar/SideNav";
+import SideNav from "@/components/navigation/Sidebar/SideNav";
 
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";
-import navItems from "./NavItems";
+import navItems from "@/pages/ManagerNavItems";
 
 interface SidebarProps {
     className?: string;

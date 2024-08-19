@@ -7,7 +7,7 @@ import { Form } from "@/components/ui/form";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
-import HallSeatsEditor from "@/components/HallSeatsEditor/HallSeatsEditor";
+import HallSeatsEditor from "@/components/common/HallSeatsEditor";
 
 const CreateHallPage = () => {
     const form = useForm<CreateHallSchemaType>({

@@ -6,12 +6,11 @@ import {
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-} from "@/components/Sidebar/Accordeon";
+} from "@/components/ui/accordion";
 import { useEffect, useState } from "react";
 import { ChevronDownIcon } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { NavItem } from "./types";
-import { Separator } from "../ui/separator";
+import { Separator } from "@/components/ui/separator";
 
 interface SideNavProps {
     items: NavItem[];

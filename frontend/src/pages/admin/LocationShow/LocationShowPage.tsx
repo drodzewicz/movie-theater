@@ -2,8 +2,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Button, buttonVariants } from "@/components/ui/button";
-import HallCard from "@/components/HallCard/HallCard";
-import CalendarTimeline from "@/components/CalendarTimeline/CalendarTimeline";
+import HallCard from "@/components/common/HallCard";
+import CalendarTimeline from "@/components/common/CalendarTimeline";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
