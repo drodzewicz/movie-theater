@@ -1,30 +1,21 @@
-import { useState } from "react";
 import SideNav from "@/components/navigation/Sidebar/SideNav";
 
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";
 import navItems from "@/pages/ManagerNavItems";
+import useToggle from "@/hooks/useToggle";
 
 interface SidebarProps {
     className?: string;
 }
 
 export default function Sidebar({ className }: SidebarProps) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [status, setStatus] = useState(false);
+    const { value: isOpen, toggle } = useToggle();
 
-    const toggle = () => setIsOpen((state) => !state);
-
-    const handleToggle = () => {
-        setStatus(true);
-        toggle();
-        setTimeout(() => setStatus(false), 500);
-    };
     return (
         <nav
             className={cn(
-                "relative hidden h-screen border-r pt-5 md:block",
-                status && "duration-500",
+                "relative hidden h-screen border-r pt-5 md:block duration-500",
                 isOpen ? "w-72" : "w-[78px]",
                 className
             )}
@@ -34,7 +25,7 @@ export default function Sidebar({ className }: SidebarProps) {
                     "absolute -right-3 top-3 cursor-pointer rounded-full border bg-background text-3xl text-foreground",
                     !isOpen && "rotate-180"
                 )}
-                onClick={handleToggle}
+                onClick={toggle}
             />
             <div className="space-y-4 py-4">
                 <div className="px-3 py-2">
