@@ -1,19 +1,17 @@
-import { cn } from "@/lib/utils";
 import { LogIn, ListCheck } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import LinkButton from "@/components/common/LinkButton";
 
 const UnauthenticatedUserControlls = () => {
     return (
         <div className="flex gap-2">
-            <Link to="/register" className={cn(buttonVariants({ variant: "ghost" }))}>
+            <LinkButton to="/register" variant="ghost">
                 <ListCheck className="mr-2 h-4 w-4" />
                 Register
-            </Link>
-            <Link to="/login" className={cn(buttonVariants({ variant: "default" }))}>
+            </LinkButton>
+            <LinkButton to="/login" variant="ghost">
                 <LogIn className="mr-2 h-4 w-4" />
                 Login
-            </Link>
+            </LinkButton>
         </div>
     );
 };

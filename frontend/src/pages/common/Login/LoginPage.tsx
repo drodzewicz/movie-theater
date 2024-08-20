@@ -1,8 +1,6 @@
-import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
-
 import BasicAuthPage from "@/pages/common/Login/BasicAuthPage";
 import GithubAuthPage from "@/pages/common/Login/GithubAuthPage";
+import LinkButton from "@/components/common/LinkButton";
 
 const LoginPage = () => {
     return (
@@ -14,7 +12,7 @@ const LoginPage = () => {
                         Enter your email to sign in to your account
                     </p>
                 </div>
-                <div className={cn("grid gap-6")}>
+                <div className="grid gap-6">
                     <BasicAuthPage />
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
@@ -29,9 +27,13 @@ const LoginPage = () => {
                     <GithubAuthPage />
                 </div>
                 <p className="px-8 text-center text-sm text-muted-foreground">
-                    <Link to="/register" className="hover:text-brand underline underline-offset-4">
+                    <LinkButton
+                        to="/register"
+                        variant="link"
+                        className="hover:text-brand underline underline-offset-4"
+                    >
                         Don&apos;t have an account? Sign Up
-                    </Link>
+                    </LinkButton>
                 </p>
             </div>
         </div>

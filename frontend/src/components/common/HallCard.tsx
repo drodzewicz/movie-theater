@@ -1,9 +1,7 @@
-import { buttonVariants } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import LinkButton from "@/components/common/LinkButton";
 
 const HallCard = () => {
     return (
@@ -21,12 +19,9 @@ const HallCard = () => {
             </CardHeader>
             <CardContent className="flex items-center justify-between">
                 <p className="text-xs text-muted-foreground">floor: 2, room: 11</p>
-                <Link
-                    className={cn(buttonVariants({ variant: "link" }), "p-0 h-5 mr-2")}
-                    to="/halls/23"
-                >
+                <LinkButton to="/halls/23" variant="link" className="p-0 h-5 mr-2">
                     more <ChevronRight className="h-4 w-4" />
-                </Link>
+                </LinkButton>
             </CardContent>
         </Card>
     );

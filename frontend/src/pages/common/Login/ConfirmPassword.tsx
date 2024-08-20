@@ -4,12 +4,12 @@ import {
 } from "@/pages/common/Login/loginFormSchema";
 import InputField from "@/components/form/InputField";
 import { ChevronLeft, Loader2 } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, useLocation } from "react-router-dom";
-import { cn } from "@/lib/utils";
 import FormWrapper from "@/components/form/FormWrapper";
+import LinkButton from "@/components/common/LinkButton";
 
 const ConfirmPassword = () => {
     const { state } = useLocation();
@@ -31,12 +31,10 @@ const ConfirmPassword = () => {
     }
     return (
         <div>
-            <Link to="/login" className={cn(buttonVariants({ variant: "ghost" }))}>
-                <>
-                    <ChevronLeft className="mr-2 h-4 w-4" />
-                    Back
-                </>
-            </Link>
+            <LinkButton to="/login" variant="ghost">
+                <ChevronLeft className="mr-2 h-4 w-4" />
+                Back
+            </LinkButton>
             <div className="container flex h-screen w-screen flex-col items-center justify-center">
                 <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
                     <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
