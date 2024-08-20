@@ -3,12 +3,11 @@ import registerFormSchema, {
 } from "@/pages/user/Register/registerFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Loader2 } from "lucide-react";
 
 import InputField from "@/components/form/InputField";
-import { Button } from "@/components/ui/button";
 import FormWrapper from "@/components/form/FormWrapper";
 import LinkButton from "@/components/common/LinkButton";
+import LoadingButton from "@/components/form/LoadingButton";
 
 const RegisterPage = () => {
     const form = useForm<RegisterUserSchemaType>({
@@ -64,14 +63,9 @@ const RegisterPage = () => {
                                 control={form.control}
                                 placeholder="Confirm Password"
                             />
-                            <Button
-                                variant="default"
-                                className="rounded-sm shadow-sm"
-                                type="submit"
-                            >
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            <LoadingButton className="rounded-sm shadow-sm" type="submit">
                                 Sign Up
-                            </Button>
+                            </LoadingButton>
                         </div>
                     </FormWrapper>
                     <p className="px-8 text-center text-sm text-muted-foreground">
