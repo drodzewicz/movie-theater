@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { LogIn, ListCheck } from "lucide-react";
-import { buttonVariants } from "../../ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const UnauthenticatedUserControlls = () => {

@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { CommonFilter } from "./types";
+import { CommonFilter } from "@/components/common/Table/Filters/types";
 
 export interface SearchBarFilterProps<TData, TValue> extends CommonFilter<TData, TValue> {
     placeholder?: string;

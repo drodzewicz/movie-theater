@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/table";
 
 import { ClockIcon } from "lucide-react";
-import CalendarScreeningCard from "./CalendarScreeningCard";
-import CalendarTimelineHeader from "./CalendarTimelineHeader";
+import CalendarScreeningCard from "@/components/common/CalendarTimeline/CalendarScreeningCard";
+import CalendarTimelineHeader from "@/components/common/CalendarTimeline/CalendarTimelineHeader";
 
 const WEEK_DAYS = ["Mon 10", "Tue 11", "Wed 12", "Thu 13", "Fri 14", "Sat 15", "Sun 16"];
 const TIME = [

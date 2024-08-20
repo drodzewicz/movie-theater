@@ -1,6 +1,6 @@
 import LocationSelector from "@/components/common/LocationSelector";
-import AuthenticatedUserControlls from "./AuthenticatedUserControlls";
-import UnauthenticatedUserControlls from "./UnauthenticatedUserControlls";
+import AuthenticatedUserControlls from "@/components/navigation/Navbar/AuthenticatedUserControlls";
+import UnauthenticatedUserControlls from "@/components/navigation/Navbar/UnauthenticatedUserControlls";
 
 export function Navbar() {
     return (

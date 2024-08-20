@@ -2,21 +2,22 @@ import App from "@/main/App";
 import RouterErrorPage from "@/pages/common/RouterErrorPage";
 
 import { createBrowserRouter, Outlet } from "react-router-dom";
-import LocationManagerPage from "@/pages/admin/LocationManager/LocationManagerPage";
+
+import LocationListPage from "@/pages/admin/location/LocationList";
+import CreateHallPage from "@/pages/admin/hall/CreateHall";
+import HallListPage from "@/pages/admin/hall/HallList";
+import HallShowPage from "@/pages/admin/hall/HallShow";
+import CreateLocationPage from "@/pages/admin/location/CreateLocation";
+import LocationShowPage from "@/pages/admin/location/LocationShow";
+import ManagerListPage from "@/pages/admin/manager/ManagerList";
+import CreateMoviePage from "@/pages/admin/movie/CreateMovie";
+import MovieListPage from "@/pages/admin/movie/MovieList";
+import OrderListPage from "@/pages/admin/order/OrderList";
+import ScreeningListPage from "@/pages/admin/screening/ScreeningList";
+import UserListPage from "@/pages/admin/user/UserList";
+import ConfirmPassword from "@/pages/common/Login/ConfirmPassword";
 import LoginPage from "@/pages/common/Login/LoginPage";
 import RegisterPage from "@/pages/user/Register/RegisterPage";
-import ConfirmPassword from "./common/Login/ConfirmPassword";
-import CreateLocationPage from "@/pages/admin/CreateLocation/CreateLocationPage";
-import MovieManagerPage from "./admin/MovieManager/MovieManagerPage";
-import UserManagerPage from "./admin/UserManager/UserManagerPage";
-import ManagerManagerPage from "./admin/ManagerManager/ManagerManagerPage";
-import OrderManagerPage from "./admin/OrderManager/OrderManagerPage";
-import LocationShowPage from "./admin/LocationShow/LocationShowPage";
-import HallManagerPage from "./admin/HallManager/HallManagerPage";
-import ScreeningManagerPage from "./admin/ScreeningManager/ScreeningManagerPage";
-import CreateHallPage from "./admin/CreateHall/CreateHallPage";
-import CreateMoviePage from "./admin/CreateMovie/CreateMoviePage";
-import HallShowPage from "./admin/HallShow/HallShowPage";
 
 const router = createBrowserRouter([
     {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <LocationManagerPage />,
+                element: <LocationListPage />,
             },
             {
                 path: "/login",
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "",
-                        element: <LocationManagerPage />,
+                        element: <LocationListPage />,
                     },
                     {
                         path: "/locations/:locationId",
@@ -63,7 +64,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "",
-                        element: <MovieManagerPage />,
+                        element: <MovieListPage />,
                     },
                     {
                         path: "/movies/create",
@@ -77,11 +78,11 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "",
-                        element: <UserManagerPage />,
+                        element: <UserListPage />,
                     },
                     {
                         path: "/users/managers",
-                        element: <ManagerManagerPage />,
+                        element: <ManagerListPage />,
                     },
                 ],
             },
@@ -92,11 +93,11 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "",
-                        element: <OrderManagerPage />,
+                        element: <OrderListPage />,
                     },
                     {
                         path: "/orders/create",
-                        element: <UserManagerPage />,
+                        element: <UserListPage />,
                     },
                 ],
             },
@@ -106,7 +107,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "",
-                        element: <HallManagerPage />,
+                        element: <HallListPage />,
                     },
                     {
                         path: "/halls/:hallId",
@@ -120,7 +121,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/screenings",
-                element: <ScreeningManagerPage />,
+                element: <ScreeningListPage />,
             },
         ],
     },

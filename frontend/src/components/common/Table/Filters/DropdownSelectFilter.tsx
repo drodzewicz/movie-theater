@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
-import { CommonFilter } from "./types";
+import { CommonFilter } from "@/components/common/Table/Filters/types";
 
 export type DropdownSelectFilterOption = {
     label: string;

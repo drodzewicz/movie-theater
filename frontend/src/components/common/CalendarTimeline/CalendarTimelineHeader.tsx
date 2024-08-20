@@ -1,6 +1,6 @@
 import DatePicker from "@/components/input/DatePicker";
-import CreateScreeningDialog from "@/pages/admin/CreateScreening/CreateScreeningDialog";
-import { Button } from "../../ui/button";
+import CreateScreeningDialog from "@/pages/admin/screening/CreateScreening/CreateScreeningDialog";
+import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function CalendarTimelineHeader() {
