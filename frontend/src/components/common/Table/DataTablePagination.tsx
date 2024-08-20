@@ -1,5 +1,4 @@
 import { ChevronLeftIcon, ChevronRightIcon, ArrowLeft, ArrowRight } from "lucide-react";
-import { Table } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
 
@@ -10,12 +9,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { PropsWithTable } from "./types";
 
-export interface DataTablePaginationProps<TData> {
-    table: Table<TData>;
-}
-
-function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) {
+function DataTablePagination<TData>({ table }: PropsWithTable<TData>) {
     return (
         <div className="flex items-center justify-between px-2">
             <div className="flex-1 text-sm text-muted-foreground">

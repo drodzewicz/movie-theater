@@ -1,16 +1,11 @@
-import { Table } from "@tanstack/react-table";
-
 import {
     DataTableToolbar,
     SearchBarFilter,
     DropdownSelectFilter,
 } from "@/components/common/Table/Filters";
+import { PropsWithTable } from "@/components/common/Table/types";
 
-export interface UserManagerTableFiltersProps<TData> {
-    table: Table<TData>;
-}
-
-function UserTableFilters<TData>({ table }: UserManagerTableFiltersProps<TData>) {
+function UserTableFilters<TData>({ table }: PropsWithTable<TData>) {
     return (
         <DataTableToolbar table={table}>
             <DropdownSelectFilter

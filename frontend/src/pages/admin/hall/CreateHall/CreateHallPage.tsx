@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import schema, { CreateHallSchemaType } from "@/pages/admin/hall/CreateHall/schema";
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import HallSeatsEditor from "@/components/common/HallSeatsEditor";
+import FormWrapper from "@/components/form/FormWrapper";
 
 const CreateHallPage = () => {
     const form = useForm<CreateHallSchemaType>({
@@ -58,19 +58,17 @@ const CreateHallPage = () => {
                     </CardContent>
                 </Card>
             </div>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                    <div className="grid grid-cols-4 gap-2">
-                        <InputField name="name" control={form.control} placeholder="Hall Name" />
-                        <InputField name="floor" control={form.control} placeholder="Floor" />
-                        <InputField name="room" control={form.control} placeholder="Room" />
+            <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
+                <div className="grid grid-cols-4 gap-2">
+                    <InputField name="name" control={form.control} placeholder="Hall Name" />
+                    <InputField name="floor" control={form.control} placeholder="Floor" />
+                    <InputField name="room" control={form.control} placeholder="Room" />
 
-                        <Button variant="default" className="rounded-sm shadow-sm" type="submit">
-                            Create
-                        </Button>
-                    </div>
-                </form>
-            </Form>
+                    <Button variant="default" className="rounded-sm shadow-sm" type="submit">
+                        Create
+                    </Button>
+                </div>
+            </FormWrapper>
             <HallSeatsEditor />
         </div>
     );

@@ -14,7 +14,7 @@ import schema, {
     CreateScreeningSchemaType,
 } from "@/pages/admin/screening/CreateScreening/createScreeningFormSchema";
 import InputField from "@/components/form/InputField";
-import { Form } from "@/components/ui/form";
+import FormWrapper from "@/components/form/FormWrapper";
 
 const CreateScreeningDialog = () => {
     const form = useForm<CreateScreeningSchemaType>({
@@ -40,39 +40,29 @@ const CreateScreeningDialog = () => {
                 <DialogHeader>
                     <DialogTitle>Create new screening</DialogTitle>
                     <DialogDescription>
-                        <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                                <div className="grid gap-2">
-                                    <InputField
-                                        name="movie"
-                                        control={form.control}
-                                        placeholder="Movie"
-                                    />
-                                    <InputField
-                                        name="location"
-                                        control={form.control}
-                                        placeholder="Location"
-                                    />
-                                    <InputField
-                                        name="hall"
-                                        control={form.control}
-                                        placeholder="Hall"
-                                    />
-                                    <InputField
-                                        name="date"
-                                        control={form.control}
-                                        placeholder="Date"
-                                    />
-                                    <Button
-                                        variant="default"
-                                        className="rounded-sm shadow-sm"
-                                        type="submit"
-                                    >
-                                        Create
-                                    </Button>
-                                </div>
-                            </form>
-                        </Form>
+                        <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
+                            <div className="grid gap-2">
+                                <InputField
+                                    name="movie"
+                                    control={form.control}
+                                    placeholder="Movie"
+                                />
+                                <InputField
+                                    name="location"
+                                    control={form.control}
+                                    placeholder="Location"
+                                />
+                                <InputField name="hall" control={form.control} placeholder="Hall" />
+                                <InputField name="date" control={form.control} placeholder="Date" />
+                                <Button
+                                    variant="default"
+                                    className="rounded-sm shadow-sm"
+                                    type="submit"
+                                >
+                                    Create
+                                </Button>
+                            </div>
+                        </FormWrapper>
                     </DialogDescription>
                 </DialogHeader>
             </DialogContent>

@@ -1,16 +1,12 @@
 import { CrossIcon } from "lucide-react";
-import { Table } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
-
-export interface DataTableToolbarProps<TData> {
-    table: Table<TData>;
-}
+import { PropsWithTable } from "@/components/common/Table/types";
 
 function DataTableToolbar<TData>({
     table,
     children,
-}: React.PropsWithChildren<DataTableToolbarProps<TData>>) {
+}: React.PropsWithChildren<PropsWithTable<TData>>) {
     const isFiltered = table.getState().columnFilters.length > 0;
 
     return (

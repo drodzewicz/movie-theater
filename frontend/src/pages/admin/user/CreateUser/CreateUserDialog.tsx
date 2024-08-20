@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/form/InputField";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
 
 import {
     DialogHeader,
@@ -14,6 +13,7 @@ import {
     DialogDescription,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import FormWrapper from "@/components/form/FormWrapper";
 
 const CreateUserDialog = () => {
     const form = useForm<CreateUserSchemaType>({
@@ -38,34 +38,32 @@ const CreateUserDialog = () => {
                 <DialogHeader>
                     <DialogTitle>Register New User</DialogTitle>
                     <DialogDescription>
-                        <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                                <div className="grid gap-2">
-                                    <InputField
-                                        name="username"
-                                        control={form.control}
-                                        placeholder="Username"
-                                    />
-                                    <InputField
-                                        name="firstName"
-                                        control={form.control}
-                                        placeholder="First Name"
-                                    />
-                                    <InputField
-                                        name="lastName"
-                                        control={form.control}
-                                        placeholder="Last Name"
-                                    />
-                                    <Button
-                                        variant="default"
-                                        className="rounded-sm shadow-sm"
-                                        type="submit"
-                                    >
-                                        Register
-                                    </Button>
-                                </div>
-                            </form>
-                        </Form>
+                        <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
+                            <div className="grid gap-2">
+                                <InputField
+                                    name="username"
+                                    control={form.control}
+                                    placeholder="Username"
+                                />
+                                <InputField
+                                    name="firstName"
+                                    control={form.control}
+                                    placeholder="First Name"
+                                />
+                                <InputField
+                                    name="lastName"
+                                    control={form.control}
+                                    placeholder="Last Name"
+                                />
+                                <Button
+                                    variant="default"
+                                    className="rounded-sm shadow-sm"
+                                    type="submit"
+                                >
+                                    Register
+                                </Button>
+                            </div>
+                        </FormWrapper>
                     </DialogDescription>
                 </DialogHeader>
             </DialogContent>

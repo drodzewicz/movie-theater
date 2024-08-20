@@ -8,7 +8,7 @@ import { Loader2 } from "lucide-react";
 
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
+import FormWrapper from "@/components/form/FormWrapper";
 
 const RegisterPage = () => {
     const form = useForm<RegisterUserSchemaType>({
@@ -37,45 +37,43 @@ const RegisterPage = () => {
                             Enter your email below to create your account
                         </p>
                     </div>
-                    <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                            <div className="grid gap-2">
-                                <InputField
-                                    name="username"
-                                    control={form.control}
-                                    placeholder="Username"
-                                />
-                                <InputField
-                                    name="firstName"
-                                    control={form.control}
-                                    placeholder="First Name"
-                                />
-                                <InputField
-                                    name="lastName"
-                                    control={form.control}
-                                    placeholder="Last Name"
-                                />
-                                <InputField
-                                    name="password"
-                                    control={form.control}
-                                    placeholder="Password"
-                                />
-                                <InputField
-                                    name="confirmPassword"
-                                    control={form.control}
-                                    placeholder="Confirm Password"
-                                />
-                                <Button
-                                    variant="default"
-                                    className="rounded-sm shadow-sm"
-                                    type="submit"
-                                >
-                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                    Sign Up
-                                </Button>
-                            </div>
-                        </form>
-                    </Form>
+                    <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
+                        <div className="grid gap-2">
+                            <InputField
+                                name="username"
+                                control={form.control}
+                                placeholder="Username"
+                            />
+                            <InputField
+                                name="firstName"
+                                control={form.control}
+                                placeholder="First Name"
+                            />
+                            <InputField
+                                name="lastName"
+                                control={form.control}
+                                placeholder="Last Name"
+                            />
+                            <InputField
+                                name="password"
+                                control={form.control}
+                                placeholder="Password"
+                            />
+                            <InputField
+                                name="confirmPassword"
+                                control={form.control}
+                                placeholder="Confirm Password"
+                            />
+                            <Button
+                                variant="default"
+                                className="rounded-sm shadow-sm"
+                                type="submit"
+                            >
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                Sign Up
+                            </Button>
+                        </div>
+                    </FormWrapper>
                     <p className="px-8 text-center text-sm text-muted-foreground">
                         By clicking continue, you agree to our{" "}
                         <Link to="/terms" className="hover:text-brand underline underline-offset-4">

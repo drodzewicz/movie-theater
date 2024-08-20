@@ -3,8 +3,8 @@ import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Form } from "@/components/ui/form";
 import { useNavigate } from "react-router-dom";
+import FormWrapper from "@/components/form/FormWrapper";
 
 const BasicAuthPage = () => {
     const form = useForm<LoginSchemaType>({
@@ -22,16 +22,14 @@ const BasicAuthPage = () => {
     }
     return (
         <div>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                    <div className="grid gap-2">
-                        <InputField name="username" control={form.control} placeholder="Username" />
-                        <Button variant="default" className="rounded-sm shadow-sm" type="submit">
-                            Sign In
-                        </Button>
-                    </div>
-                </form>
-            </Form>
+            <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
+                <div className="grid gap-2">
+                    <InputField name="username" control={form.control} placeholder="Username" />
+                    <Button variant="default" className="rounded-sm shadow-sm" type="submit">
+                        Sign In
+                    </Button>
+                </div>
+            </FormWrapper>
         </div>
     );
 };
