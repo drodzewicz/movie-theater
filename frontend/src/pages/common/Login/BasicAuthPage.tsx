@@ -25,6 +25,12 @@ const BasicAuthPage = () => {
             <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
                 <div className="grid gap-2">
                     <InputField name="username" control={form.control} placeholder="Username" />
+                    <InputField
+                        name="password"
+                        control={form.control}
+                        placeholder="Password"
+                        type="password"
+                    />
                     <Button variant="default" className="rounded-sm shadow-sm" type="submit">
                         Sign In
                     </Button>

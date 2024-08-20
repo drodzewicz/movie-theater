@@ -15,7 +15,6 @@ import MovieListPage from "@/pages/admin/movie/MovieList";
 import OrderListPage from "@/pages/admin/order/OrderList";
 import ScreeningListPage from "@/pages/admin/screening/ScreeningList";
 import UserListPage from "@/pages/admin/user/UserList";
-import ConfirmPassword from "@/pages/common/Login/ConfirmPassword";
 import LoginPage from "@/pages/common/Login/LoginPage";
 import RegisterPage from "@/pages/user/Register/RegisterPage";
 
@@ -31,10 +30,6 @@ const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <LoginPage />,
-            },
-            {
-                path: "/confrim-password",
-                element: <ConfirmPassword />,
             },
             {
                 path: "/register",
