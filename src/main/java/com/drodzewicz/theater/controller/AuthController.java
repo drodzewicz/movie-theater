@@ -15,16 +15,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.drodzewicz.theater.dto.domain.AppBaseUserDTO;
 import com.drodzewicz.theater.dto.domain.AppManagerUserDTO;
 import com.drodzewicz.theater.dto.domain.AppUserDTO;
 import com.drodzewicz.theater.dto.domain.CredentialsDTO;
 import com.drodzewicz.theater.dto.request.SignUpDTO;
 import com.drodzewicz.theater.service.AuthService;
+import com.drodzewicz.theater.service.CurrentUserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @AllArgsConstructor
 @RestController
@@ -34,6 +39,8 @@ public class AuthController {
 
     private final AuthService authService;
     private final AuthenticationManager authenticationManager;
+    private final CurrentUserService currentUserService;
+
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
@@ -61,6 +68,15 @@ public class AuthController {
     public AppManagerUserDTO registerManager(@RequestBody @Valid SignUpDTO signUpDTO) {
         AppManagerUserDTO createdUser = authService.registerManager(signUpDTO);
         return createdUser;
+    }
+
+
+    @GetMapping("/current-user")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("isAuthenticated()")
+    public AppBaseUserDTO getCurrentLoggedInUser() {
+        AppBaseUserDTO currentUser = currentUserService.getUser();
+        return currentUser;
     }
 
 }

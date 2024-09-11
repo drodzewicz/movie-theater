@@ -2,10 +2,11 @@ import axios, { AxiosError } from "axios";
 import { MutationFunction, UseMutationOptions, useMutation, useQueryClient } from "react-query";
 
 import authURL from "@/service/auth/url";
+import querykeys from "./queryKeys";
 
 type OptionsType = Omit<UseMutationOptions<unknown, AxiosError>, "mutationFn">;
 
-const useLogout = (options: OptionsType) => {
+const useLogout = (options?: OptionsType) => {
     const queryClient = useQueryClient();
 
     const mutationFn: MutationFunction = async () => {
@@ -17,7 +18,7 @@ const useLogout = (options: OptionsType) => {
         ...options,
         mutationFn,
         onSuccess: (_data, _var, _context) => {
-            queryClient.removeQueries();
+            queryClient.invalidateQueries(querykeys.all);
             options?.onSuccess?.(_data, _var as void, _context);
         },
     });

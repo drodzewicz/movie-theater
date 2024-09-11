@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { MutationFunction, UseMutationOptions, useMutation } from "react-query";
+import { MutationFunction, UseMutationOptions, useMutation, useQueryClient } from "react-query";
+import querykeys from "./queryKeys";
 
 import authURL from "@/service/auth/url";
 
@@ -8,15 +9,12 @@ type LoginPayload = {
     password: string;
 };
 
-type LoginResponse = {
-    user: any;
-    accessToken: string;
-};
+type OptionsType = Omit<UseMutationOptions<unknown, AxiosError, LoginPayload>, "mutationFn">;
 
-type OptionsType = Omit<UseMutationOptions<LoginResponse, AxiosError, LoginPayload>, "mutationFn">;
+const useLogin = (options?: OptionsType) => {
+    const queryClient = useQueryClient();
 
-const useLogin = (options: OptionsType) => {
-    const mutationFn: MutationFunction<LoginResponse, LoginPayload> = async (data) => {
+    const mutationFn: MutationFunction<unknown, LoginPayload> = async (data) => {
         const response = await axios.post(authURL.login, data, { withCredentials: true });
         return response.data;
     };
@@ -24,6 +22,10 @@ const useLogin = (options: OptionsType) => {
     return useMutation({
         ...options,
         mutationFn,
+        onSuccess: (_data, _var, _context) => {
+            queryClient.invalidateQueries(querykeys.all);
+            options?.onSuccess?.(_data, _var, _context);
+        },
     });
 };
 

@@ -3,23 +3,35 @@ import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import FormWrapper from "@/components/form/FormWrapper";
+import useLogin from "@/service/auth/useLogin";
 
 const BasicAuthPage = () => {
     const form = useForm<LoginSchemaType>({
         resolver: zodResolver(loginFormSchema),
         defaultValues: {
             username: "",
+            password: "",
         },
     });
 
-    const navigate = useNavigate();
+    const { mutate: login } = useLogin({
+        onError() {
+            form.setError("username", {
+                type: "manual",
+                message: "Bad login",
+            });
+            form.setError("password", {
+                type: "manual",
+                message: "Bad login",
+            });
+        },
+    });
 
     function onSubmit(values: LoginSchemaType) {
-        console.log(values);
-        navigate("/confrim-password", { state: { ...values } });
+        login({ username: values.username, password: values.password });
     }
+
     return (
         <div>
             <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">

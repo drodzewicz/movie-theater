@@ -1,8 +1,9 @@
 const authURL = {
-    index: "/auth" as const,
-    logout: "/auth/logout" as const,
-    login: "/auth/login" as const,
-    register: "/auth/register" as const,
+    index: "/api/auth" as const,
+    logout: "/api/auth/logout" as const,
+    login: "/api/auth/login" as const,
+    register: "/api/auth/register" as const,
+    currentUser: "/api/auth/current-user" as const,
 };
 
 export default authURL;

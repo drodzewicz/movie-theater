@@ -1,8 +1,10 @@
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import router from "@/pages/router";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import "@/assets/styles/main.css";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const root = document.getElementById("root");
 
@@ -12,4 +14,18 @@ if (!root) {
 
 const container = createRoot(root);
 
-container.render(<RouterProvider router={router} />);
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+            retry: false,
+        },
+    },
+});
+
+container.render(
+    <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
+);
