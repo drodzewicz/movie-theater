@@ -6,3 +6,10 @@ type NavItem = {
     isChidren?: boolean;
     children?: NavItem[];
 };
+
+type ApiDataValidationError = {
+    errors: unknown[];
+    message: string;
+    statusCode: number;
+    timeStamp: string;
+};

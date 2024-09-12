@@ -18,7 +18,7 @@ type RegisterResponse = {
 };
 
 type OptionsType = Omit<
-    UseMutationOptions<RegisterResponse, AxiosError, RegisterPayload>,
+    UseMutationOptions<RegisterResponse, AxiosError<ApiDataValidationError>, RegisterPayload>,
     "mutationFn"
 >;
 

@@ -30,7 +30,7 @@ public class CurrentUserServiceImpl implements CurrentUserService {
         String username = authentication.getName();
         log.info("Retrieving current user {}", username);
         AppBaseUser currentUser = userService.findUserByUsername(username)
-                .orElseThrow(() -> new AppException("User with this username already exists"));
+                .orElseThrow(() -> new AppException("User with this username doesn't exists"));
 
         return userMapper.toBaseUserDTO(currentUser);
     }

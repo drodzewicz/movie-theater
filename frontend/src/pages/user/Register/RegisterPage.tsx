@@ -26,8 +26,7 @@ const RegisterPage = () => {
     });
 
     const { mutate: register } = useRegister({
-        onSuccess: (resp) => {
-            console.log(resp);
+        onSuccess: () => {
             navigate("/login", {
                 state: {
                     username: form.getValues("username"),
@@ -35,8 +34,12 @@ const RegisterPage = () => {
                 },
             });
         },
-        onError: (err) => {
-            console.log(err);
+        onError: ({ response }) => {
+            // form.setError("password", {
+            //     type: "manual",
+            //     message: "Bad login",
+            // });
+            console.log("AA: ", response.data);
         },
     });
 
