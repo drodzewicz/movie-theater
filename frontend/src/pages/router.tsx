@@ -17,6 +17,7 @@ import ScreeningListPage from "@/pages/admin/screening/ScreeningList";
 import UserListPage from "@/pages/admin/user/UserList";
 import LoginPage from "@/pages/common/Login/LoginPage";
 import RegisterPage from "@/pages/user/Register/RegisterPage";
+import RouteGuard from "@/components/navigation/RouterGuard";
 
 const router = createBrowserRouter([
     {
@@ -24,99 +25,109 @@ const router = createBrowserRouter([
         errorElement: <RouterErrorPage />,
         children: [
             {
-                path: "/",
-                element: <LocationListPage />,
-            },
-            {
-                path: "/login",
-                element: <LoginPage />,
-            },
-            {
-                path: "/register",
-                element: <RegisterPage />,
-            },
-            {
-                path: "/locations",
-                element: <Outlet />,
+                element: <RouteGuard access="ANONYMOUS" redirectTo="/" />,
                 children: [
                     {
-                        path: "",
+                        path: "/login",
+                        element: <LoginPage />,
+                    },
+                    {
+                        path: "/register",
+                        element: <RegisterPage />,
+                    },
+                ],
+            },
+            {
+                element: <RouteGuard access="AUTH" redirectTo="/login" />,
+                children: [
+                    {
+                        path: "/",
                         element: <LocationListPage />,
                     },
                     {
-                        path: "/locations/:locationId",
-                        element: <LocationShowPage />,
+                        path: "/locations",
+                        element: <Outlet />,
+                        children: [
+                            {
+                                path: "",
+                                element: <LocationListPage />,
+                            },
+                            {
+                                path: "/locations/:locationId",
+                                element: <LocationShowPage />,
+                            },
+                            {
+                                path: "/locations/create",
+                                element: <CreateLocationPage />,
+                            },
+                        ],
                     },
                     {
-                        path: "/locations/create",
-                        element: <CreateLocationPage />,
-                    },
-                ],
-            },
-            {
-                path: "/movies",
-                element: <Outlet />,
-                children: [
-                    {
-                        path: "",
-                        element: <MovieListPage />,
-                    },
-                    {
-                        path: "/movies/create",
-                        element: <CreateMoviePage />,
-                    },
-                ],
-            },
-            {
-                path: "/users",
-                element: <Outlet />,
-                children: [
-                    {
-                        path: "",
-                        element: <UserListPage />,
+                        path: "/movies",
+                        element: <Outlet />,
+                        children: [
+                            {
+                                path: "",
+                                element: <MovieListPage />,
+                            },
+                            {
+                                path: "/movies/create",
+                                element: <CreateMoviePage />,
+                            },
+                        ],
                     },
                     {
-                        path: "/users/managers",
-                        element: <ManagerListPage />,
+                        path: "/users",
+                        element: <Outlet />,
+                        children: [
+                            {
+                                path: "",
+                                element: <UserListPage />,
+                            },
+                            {
+                                path: "/users/managers",
+                                element: <ManagerListPage />,
+                            },
+                        ],
                     },
-                ],
-            },
 
-            {
-                path: "/orders",
-                element: <Outlet />,
-                children: [
                     {
-                        path: "",
-                        element: <OrderListPage />,
+                        path: "/orders",
+                        element: <Outlet />,
+                        children: [
+                            {
+                                path: "",
+                                element: <OrderListPage />,
+                            },
+                            {
+                                path: "/orders/create",
+                                element: <UserListPage />,
+                            },
+                        ],
                     },
                     {
-                        path: "/orders/create",
-                        element: <UserListPage />,
+                        path: "/halls",
+                        element: <Outlet />,
+                        children: [
+                            {
+                                path: "",
+                                element: <HallListPage />,
+                            },
+                            {
+                                path: "/halls/:hallId",
+                                element: <HallShowPage />,
+                            },
+                            {
+                                path: "/halls/create",
+                                element: <CreateHallPage />,
+                            },
+                        ],
+                    },
+                    {
+                        path: "/screenings",
+                        element: <ScreeningListPage />,
                     },
                 ],
-            },
-            {
-                path: "/halls",
-                element: <Outlet />,
-                children: [
-                    {
-                        path: "",
-                        element: <HallListPage />,
-                    },
-                    {
-                        path: "/halls/:hallId",
-                        element: <HallShowPage />,
-                    },
-                    {
-                        path: "/halls/create",
-                        element: <CreateHallPage />,
-                    },
-                ],
-            },
-            {
-                path: "/screenings",
-                element: <ScreeningListPage />,
             },
         ],
     },

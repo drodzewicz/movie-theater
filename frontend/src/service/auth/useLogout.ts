@@ -1,5 +1,10 @@
 import axios, { AxiosError } from "axios";
-import { MutationFunction, UseMutationOptions, useMutation, useQueryClient } from "react-query";
+import {
+    MutationFunction,
+    UseMutationOptions,
+    useMutation,
+    useQueryClient,
+} from "@tanstack/react-query";
 
 import authURL from "@/service/auth/url";
 import querykeys from "./queryKeys";
@@ -18,7 +23,7 @@ const useLogout = (options?: OptionsType) => {
         ...options,
         mutationFn,
         onSuccess: (_data, _var, _context) => {
-            queryClient.invalidateQueries(querykeys.all);
+            queryClient.invalidateQueries({ queryKey: querykeys.all });
             options?.onSuccess?.(_data, _var as void, _context);
         },
     });

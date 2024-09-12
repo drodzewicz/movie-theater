@@ -1,5 +1,10 @@
 import axios, { AxiosError } from "axios";
-import { MutationFunction, UseMutationOptions, useMutation, useQueryClient } from "react-query";
+import {
+    MutationFunction,
+    UseMutationOptions,
+    useMutation,
+    useQueryClient,
+} from "@tanstack/react-query";
 import querykeys from "./queryKeys";
 
 import authURL from "@/service/auth/url";
@@ -23,7 +28,7 @@ const useLogin = (options?: OptionsType) => {
         ...options,
         mutationFn,
         onSuccess: (_data, _var, _context) => {
-            queryClient.invalidateQueries(querykeys.all);
+            queryClient.invalidateQueries({ queryKey: querykeys.all });
             options?.onSuccess?.(_data, _var, _context);
         },
     });
