@@ -6,29 +6,23 @@ import authURL from "@/service/auth/url";
 type RegisterPayload = {
     username: string;
     password: string;
-    name: string;
-    surname: string;
-    email: string;
+    firstName: string;
+    lastName: string;
 };
 
 type RegisterResponse = {
-    _id: string;
+    id: string;
     username: string;
-    name: string;
-    surname: string;
-    email: string;
+    firstName: string;
+    lastName: string;
 };
 
 type OptionsType = Omit<
-    UseMutationOptions<
-        RegisterResponse,
-        AxiosError<{ messages: Record<string, string> }>,
-        RegisterPayload
-    >,
+    UseMutationOptions<RegisterResponse, AxiosError, RegisterPayload>,
     "mutationFn"
 >;
 
-const useRegister = (options: OptionsType) => {
+const useRegister = (options?: OptionsType) => {
     const mutationFn: MutationFunction<RegisterResponse, RegisterPayload> = async (data) => {
         const response = await axios.post(authURL.register, data);
         return response.data;

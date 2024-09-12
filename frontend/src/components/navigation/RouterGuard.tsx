@@ -9,7 +9,7 @@ export type RouteGuardProps = {
 
 function RouteGuard({ redirectTo, access = "ALL" }: RouteGuardProps) {
     const location = useLocation();
-   
+
     const isAuth = useIsAuthenticated();
 
     const globalAccess = access === "ALL";
@@ -20,7 +20,7 @@ function RouteGuard({ redirectTo, access = "ALL" }: RouteGuardProps) {
         return <Outlet />;
     }
 
-    return <Navigate to={redirectTo}  state={{ from: location }} />;
+    return <Navigate to={redirectTo} state={{ from: location }} />;
 }
 
 export default RouteGuard;

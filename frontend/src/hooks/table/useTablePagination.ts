@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { PaginationState } from "@tanstack/react-table";
 
 type TablePaginationProps = {

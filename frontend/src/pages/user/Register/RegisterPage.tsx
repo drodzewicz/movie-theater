@@ -8,8 +8,12 @@ import InputField from "@/components/form/InputField";
 import FormWrapper from "@/components/form/FormWrapper";
 import LinkButton from "@/components/common/LinkButton";
 import LoadingButton from "@/components/form/LoadingButton";
+import useRegister from "@/service/auth/useRegisterUser";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+    const navigate = useNavigate();
+
     const form = useForm<RegisterUserSchemaType>({
         resolver: zodResolver(registerFormSchema),
         defaultValues: {
@@ -21,8 +25,28 @@ const RegisterPage = () => {
         },
     });
 
+    const { mutate: register } = useRegister({
+        onSuccess: (resp) => {
+            console.log(resp);
+            navigate("/login", {
+                state: {
+                    username: form.getValues("username"),
+                    password: form.getValues("password"),
+                },
+            });
+        },
+        onError: (err) => {
+            console.log(err);
+        },
+    });
+
     function onSubmit(values: RegisterUserSchemaType) {
-        console.log(values);
+        register({
+            username: values.username,
+            password: values.password,
+            firstName: values.firstName,
+            lastName: values.lastName,
+        });
     }
 
     return (

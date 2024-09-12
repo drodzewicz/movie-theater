@@ -6,7 +6,7 @@ import { useHandleCachedAuthentication } from "@/service/auth/useHandleCachedAut
 
 const App = () => {
     useHandleCachedAuthentication();
-    
+
     const isAuth = useIsAuthenticated();
 
     return (

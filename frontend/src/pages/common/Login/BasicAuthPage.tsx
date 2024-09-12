@@ -5,13 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormWrapper from "@/components/form/FormWrapper";
 import useLogin from "@/service/auth/useLogin";
+import { useLocation } from "react-router-dom";
 
 const BasicAuthPage = () => {
+    const location = useLocation();
+
     const form = useForm<LoginSchemaType>({
         resolver: zodResolver(loginFormSchema),
         defaultValues: {
-            username: "",
-            password: "",
+            username: location.state?.username || "",
+            password: location.state?.password || "",
         },
     });
 
