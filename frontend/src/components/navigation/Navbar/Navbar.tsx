@@ -2,7 +2,7 @@ import LocationSelector from "@/components/common/LocationSelector";
 import AuthenticatedUserControlls from "@/components/navigation/Navbar/AuthenticatedUserControlls";
 import UnauthenticatedUserControlls from "@/components/navigation/Navbar/UnauthenticatedUserControlls";
 import useCurrentUser from "@/service/auth/useCurrentUser";
-import { useIsAuthenticated } from "@/service/auth/useIsAuthenticated";
+import { useIsAuthenticated } from "@/hooks/useIsAuthenticated";
 
 export function Navbar() {
     const isAuth = useIsAuthenticated();

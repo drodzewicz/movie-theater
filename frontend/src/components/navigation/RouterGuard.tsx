@@ -1,4 +1,4 @@
-import { useIsAuthenticated } from "@/service/auth/useIsAuthenticated";
+import { useIsAuthenticated } from "@/hooks/useIsAuthenticated";
 
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 

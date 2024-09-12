@@ -6,8 +6,12 @@ import createLocationFormSchema, {
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import FormWrapper from "@/components/form/FormWrapper";
+import useCreateLocation from "@/service/locations/useCreateLocation";
+import { useNavigate } from "react-router-dom";
 
 const CreateLocationPage = () => {
+    const navigate = useNavigate();
+
     const form = useForm<CreateLocationSchemaType>({
         resolver: zodResolver(createLocationFormSchema),
         defaultValues: {
@@ -20,8 +24,20 @@ const CreateLocationPage = () => {
         },
     });
 
+    const { mutate: createLocation } = useCreateLocation({
+        onSuccess() {
+            navigate("/locations");
+        },
+    });
+
     function onSubmit(values: CreateLocationSchemaType) {
-        console.log(values);
+        createLocation({
+            country: values.country,
+            city: values.city,
+            streetName: values.street,
+            buildingNumber: values.buildingNumber,
+            zipCode: values.zipCode,
+        });
     }
 
     return (

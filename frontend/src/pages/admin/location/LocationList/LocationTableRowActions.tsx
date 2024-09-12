@@ -1,11 +1,10 @@
 import DataTableRowActions from "@/components/common/Table/CustomCells/DataTableRowActions";
 import { DropdownMenuItem, DropdownMenuShortcut } from "@/components/ui/dropdown-menu";
 import { Row } from "@tanstack/react-table";
-import { Locations } from "@/pages/admin/location/LocationList/columns";
 import { useNavigate } from "react-router-dom";
 
 interface LocationTableRowActionsProps {
-    row: Row<Locations>;
+    row: Row<LocationResponse>;
 }
 
 function LocationTableRowActions({ row }: LocationTableRowActionsProps) {

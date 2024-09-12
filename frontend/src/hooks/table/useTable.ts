@@ -1,38 +1,48 @@
-import { useTableFilters } from "@/hooks/table/useTableFilters";
-import { useTablePagination } from "@/hooks/table/useTablePagination";
-import { useTableSorting } from "@/hooks/table/useTableSorting";
-import { useReactTable, getCoreRowModel } from "@tanstack/react-table";
+import {
+    useReactTable,
+    getCoreRowModel,
+    OnChangeFn,
+    PaginationState,
+    TableState,
+    ColumnFiltersState,
+    SortingState,
+} from "@tanstack/react-table";
 import { ColumnDef } from "@tanstack/react-table";
 
 type TableProps<TData> = {
     data: TData[];
     columns: ColumnDef<TData>[];
+    itemsCount: number;
+    stateProperties?: Partial<TableState>;
+    onPaginationChange?: OnChangeFn<PaginationState>;
+    onColumnFiltersChange?: OnChangeFn<ColumnFiltersState>;
+    onSortingChange?: OnChangeFn<SortingState>;
 };
 
-function useTable<TData>({ data, columns }: TableProps<TData>) {
-    const { columnFilters, onColumnFiltersChange } = useTableFilters();
-    const { sorting, onSortingChange } = useTableSorting();
-    const { pagination, onPaginationChange } = useTablePagination();
-
+function useTable<TData>({
+    data,
+    columns,
+    itemsCount,
+    stateProperties,
+    onPaginationChange,
+    onSortingChange,
+    onColumnFiltersChange,
+}: TableProps<TData>) {
     const table = useReactTable({
         data,
         columns,
-        state: {
-            pagination,
-            sorting,
-            columnFilters,
-        },
+        state: stateProperties,
         manualPagination: true,
         manualFiltering: true,
         manualSorting: true,
-        rowCount: 30,
+        rowCount: itemsCount,
         onPaginationChange,
         onSortingChange,
         onColumnFiltersChange,
         getCoreRowModel: getCoreRowModel(),
     });
 
-    return { table, columnFilters, sorting, pagination };
+    return { table };
 }
 
 export { useTable };

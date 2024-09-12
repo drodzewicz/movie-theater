@@ -6,18 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
 import LocationTableRowActions from "@/pages/admin/location/LocationList/LocationTableRowActions";
 
-export type Locations = {
-    id: string;
-    active: boolean;
-    indentifier: string;
-    country: string;
-    city: string;
-    streetName: string;
-    buildingNumber: string;
-    zipCode: string;
-};
-
-export const columns: ColumnDef<Locations>[] = [
+export const columns: ColumnDef<LocationResponse>[] = [
     {
         accessorKey: "indentifier",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Identifier" />,

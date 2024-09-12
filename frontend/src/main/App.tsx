@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "@/components/navigation/Navbar";
 import Sidebar from "@/components/navigation/Sidebar";
-import { useIsAuthenticated } from "@/service/auth/useIsAuthenticated";
-import { useHandleCachedAuthentication } from "@/service/auth/useHandleCachedAuthentication";
+import { useIsAuthenticated } from "@/hooks/useIsAuthenticated";
+import { useHandleCachedAuthentication } from "@/hooks/useHandleCachedAuthentication";
 
 const App = () => {
     useHandleCachedAuthentication();

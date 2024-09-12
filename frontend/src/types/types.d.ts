@@ -13,3 +13,20 @@ type ApiDataValidationError = {
     statusCode: number;
     timeStamp: string;
 };
+
+type PaginatedResponse<T> = {
+    data: T[];
+    itemsCount: number;
+    pageCount: number;
+};
+
+type LocationResponse = {
+    id: string;
+    indentifier: string;
+    active: boolean;
+    country: string;
+    city: string;
+    streetName: string;
+    buildingNumber: string;
+    zipCode: string;
+};
