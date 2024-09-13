@@ -22,7 +22,7 @@ type PaginatedResponse<T> = {
 
 type LocationResponse = {
     id: string;
-    indentifier: string;
+    identifier: string;
     active: boolean;
     country: string;
     city: string;

@@ -17,6 +17,9 @@ public class LocationDTO implements Serializable {
     private Long id;
 
     @NotEmpty
+    private String identifier;
+
+    @NotEmpty
     private String country;
 
     @NotEmpty
@@ -30,4 +33,7 @@ public class LocationDTO implements Serializable {
 
     @NotEmpty
     private String zipCode;
+
+    @NotEmpty
+    private Boolean active;
 }

@@ -4,6 +4,7 @@ import { MutationFunction, UseMutationOptions, useMutation } from "@tanstack/rea
 import ServiceClient from "@/service/service-client";
 
 type CreateLocationPayload = {
+    identifier: string;
     country: string;
     city: string;
     streetName: string;

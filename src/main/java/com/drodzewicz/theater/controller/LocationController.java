@@ -72,7 +72,7 @@ public class LocationController {
 
     @GetMapping("{id}/managers")
     @ResponseStatus(HttpStatus.OK)
-    public List<AppManagerUserDTO> getlocationManagers(@PathVariable("id") Long locationId) {
+    public List<AppManagerUserDTO> getLocationManagers(@PathVariable("id") Long locationId) {
         return locationService.getLocationManagers(locationId);
     }
 

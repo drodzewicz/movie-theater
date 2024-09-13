@@ -10,7 +10,7 @@ const data = [
         id: "1",
         location: {
             id: "1",
-            indentifier: "LT-VNO-AR",
+            identifier: "LT-VNO-AR",
         },
         name: "Hall-H",
         floor: "2",
@@ -20,7 +20,7 @@ const data = [
         id: "1",
         location: {
             id: "1",
-            indentifier: "LT-VNO-AR",
+            identifier: "LT-VNO-AR",
         },
         name: "Hall-H",
         floor: "2",
@@ -30,7 +30,7 @@ const data = [
         id: "1",
         location: {
             id: "1",
-            indentifier: "LT-VNO-AR",
+            identifier: "LT-VNO-AR",
         },
         name: "Hall-H",
         floor: "2",

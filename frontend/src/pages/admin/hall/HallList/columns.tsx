@@ -8,7 +8,7 @@ type Hall = {
     id: string;
     location: {
         id: string;
-        indentifier: string;
+        identifier: string;
     };
     name: string;
     floor: string;
@@ -17,14 +17,14 @@ type Hall = {
 
 export const columns: ColumnDef<Hall>[] = [
     {
-        accessorKey: "locationIndentifier",
+        accessorKey: "locationIdentifier",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Location" />,
         cell: ({ row }) => (
             <Link
                 className={cn(buttonVariants({ variant: "link" }), "p-0")}
                 to={`/locations/${row.original.location.id}`}
             >
-                {row.original.location.indentifier}
+                {row.original.location.identifier}
             </Link>
         ),
         enableSorting: false,

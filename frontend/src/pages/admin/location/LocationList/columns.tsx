@@ -8,14 +8,14 @@ import LocationTableRowActions from "@/pages/admin/location/LocationList/Locatio
 
 export const columns: ColumnDef<LocationResponse>[] = [
     {
-        accessorKey: "indentifier",
+        accessorKey: "identifier",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Identifier" />,
         cell: ({ row }) => (
             <Link
                 className={cn(buttonVariants({ variant: "link" }), "p-0")}
                 to={`/locations/${row.original.id}`}
             >
-                {row.original.indentifier}
+                {row.original.identifier}
             </Link>
         ),
         enableSorting: false,

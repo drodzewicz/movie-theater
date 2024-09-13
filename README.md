@@ -74,3 +74,8 @@ This will generate a build inside the `dist/` folder and copy the static files t
 - Build production frontend: `npm run build`
 - Lint the code: `npm run lint`
 - Format code using Prettier: `npm run format`
+
+
+## Demo user
+**username:** super
+**password:** Password123

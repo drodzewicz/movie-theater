@@ -15,6 +15,9 @@ import lombok.NoArgsConstructor;
 public class CreateLocationDTO implements Serializable {
 
     @NotEmpty
+    private String identifier;
+
+    @NotEmpty
     private String country;
 
     @NotEmpty

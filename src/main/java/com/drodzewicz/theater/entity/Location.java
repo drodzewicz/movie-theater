@@ -30,6 +30,9 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "identifier", nullable = false, unique = true)
+    private String identifier;
+
     @Column(name = "country", nullable = false)
     private String country;
 
@@ -44,6 +47,10 @@ public class Location {
 
     @Column(name = "zip_code", nullable = false)
     private String zipCode;
+
+    @Builder.Default
+    @Column(name = "active", nullable = false)
+    private Boolean active = false;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Hall> halls;

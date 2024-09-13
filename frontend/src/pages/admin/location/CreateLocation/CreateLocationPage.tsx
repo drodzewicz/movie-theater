@@ -15,6 +15,7 @@ const CreateLocationPage = () => {
     const form = useForm<CreateLocationSchemaType>({
         resolver: zodResolver(createLocationFormSchema),
         defaultValues: {
+            identifier: "",
             country: "",
             city: "",
             street: "",
@@ -32,6 +33,7 @@ const CreateLocationPage = () => {
 
     function onSubmit(values: CreateLocationSchemaType) {
         createLocation({
+            identifier: values.identifier,
             country: values.country,
             city: values.city,
             streetName: values.street,
@@ -45,6 +47,11 @@ const CreateLocationPage = () => {
             <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
                 <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
                     <div className="grid gap-2">
+                        <InputField
+                            name="identifier"
+                            control={form.control}
+                            placeholder="Identifer"
+                        />
                         <InputField name="country" control={form.control} placeholder="Country" />
                         <InputField name="city" control={form.control} placeholder="City" />
                         <InputField name="street" control={form.control} placeholder="Street" />
