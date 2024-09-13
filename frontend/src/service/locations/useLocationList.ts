@@ -1,11 +1,9 @@
 import { AxiosError } from "axios";
 import { QueryFunction, UseQueryOptions, useQuery } from "@tanstack/react-query";
 
-import querykeys from "./queryKeys";
 import { PaginationState } from "@tanstack/react-table";
 import ServiceClient from "../service-client";
-
-type LocationListQueryKey = ReturnType<(typeof querykeys)["list"]>;
+import { locationKeys, LocationListQueryKey } from "@/service/query-keys";
 
 type OptionsType = Omit<
     UseQueryOptions<
@@ -40,7 +38,7 @@ const useLocationList = (props?: locationListProps, options?: OptionsType) => {
 
     return useQuery({
         ...options,
-        queryKey: querykeys.list({ pagination }),
+        queryKey: locationKeys.list({ pagination }),
         placeholderData: (prev) => prev || { data: [], itemsCount: 0, pageCount: 0 },
         queryFn: fetchLocationList,
         staleTime: 1 * 60 * 1000,

@@ -1,13 +1,11 @@
 import { AxiosError } from "axios";
 import { QueryFunction, UseQueryOptions, useQuery } from "@tanstack/react-query";
 
-import querykeys from "./queryKeys";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import ServiceClient from "../service-client";
+import ServiceClient from "@/service/service-client";
+import { CurrentUserQueryKey, authKeys } from "@/service/query-keys";
 
 export const LOCAL_STORAGE_KEY = "currentUserData"; // Key to save and retrieve from localStorage
-
-type CurrentUserQueryKey = ReturnType<(typeof querykeys)["currrentUser"]>;
 
 type CurrentUserResponse = {
     id: string;
@@ -30,7 +28,7 @@ const useCurrentUser = (options?: OptionsType) => {
 
     return useQuery({
         ...options,
-        queryKey: querykeys.currrentUser(),
+        queryKey: authKeys.currrentUser(),
         queryFn: fetchCurrentUser,
         staleTime: Infinity,
         placeholderData: () => cachedUser,

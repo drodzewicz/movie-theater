@@ -6,8 +6,8 @@ import {
     useQueryClient,
 } from "@tanstack/react-query";
 
-import querykeys from "./queryKeys";
-import ServiceClient from "../service-client";
+import ServiceClient from "@/service/service-client";
+import { authKeys } from "@/service/query-keys";
 
 type OptionsType = Omit<UseMutationOptions<unknown, AxiosError>, "mutationFn">;
 
@@ -27,7 +27,7 @@ const useLogout = (options?: OptionsType) => {
         ...options,
         mutationFn,
         onSuccess: (_data, _var, _context) => {
-            queryClient.invalidateQueries({ queryKey: querykeys.all });
+            queryClient.invalidateQueries({ queryKey: authKeys.all });
             options?.onSuccess?.(_data, _var as void, _context);
         },
     });

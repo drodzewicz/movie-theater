@@ -33,10 +33,6 @@ class ServiceClient {
 
         return this.client({ url: newUrl, ...options });
     }
-
-    something() {
-        this.fetch({ url: "/api/auth/current-user" });
-    }
 }
 
 export default ServiceClient;

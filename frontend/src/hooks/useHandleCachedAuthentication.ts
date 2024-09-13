@@ -1,6 +1,6 @@
 import useCurrentUser from "@/service/auth/useCurrentUser";
 import { useQueryClient } from "@tanstack/react-query";
-import querykeys from "@/service/auth/queryKeys";
+import { authKeys } from "@/service/query-keys";
 import { useEffectAfterMount } from "@/hooks/useEffectAfterMount";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
@@ -20,7 +20,7 @@ function useHandleCachedAuthentication() {
 
     useEffectAfterMount(() => {
         clearCachedUser();
-        queryClient.setQueryData(querykeys.currrentUser(), null);
+        queryClient.setQueryData(authKeys.currrentUser(), null);
     }, [isError, queryClient]);
 }
 

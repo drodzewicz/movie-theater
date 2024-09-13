@@ -4,11 +4,15 @@ import { Label } from "@/components/ui/label";
 import { Button, buttonVariants } from "@/components/ui/button";
 import HallCard from "@/components/common/HallCard";
 import CalendarTimeline from "@/components/common/CalendarTimeline";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
+import useGetLocation from "@/service/locations/useGetLocation";
 
 const LocationShowPage = () => {
+    const { locationId = "" } = useParams<{ locationId: string }>();
+
+    const { data } = useGetLocation(locationId);
     return (
         <div className="container flex-col">
             <div className="flex items-start mt-4 w-full gap-4">

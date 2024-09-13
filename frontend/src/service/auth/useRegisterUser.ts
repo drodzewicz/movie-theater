@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { MutationFunction, UseMutationOptions, useMutation } from "@tanstack/react-query";
 
-import ServiceClient from "../service-client";
+import ServiceClient from "@/service/service-client";
 
 type RegisterPayload = {
     username: string;
