@@ -1,9 +1,9 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { QueryFunction, UseQueryOptions, useQuery } from "@tanstack/react-query";
 
-import URL from "@/service/locations/url";
 import querykeys from "./queryKeys";
 import { PaginationState } from "@tanstack/react-table";
+import ServiceClient from "../service-client";
 
 type LocationListQueryKey = ReturnType<(typeof querykeys)["list"]>;
 
@@ -28,8 +28,8 @@ const useLocationList = (props?: locationListProps, options?: OptionsType) => {
         PaginatedResponse<LocationResponse>,
         LocationListQueryKey
     > = async () => {
-        const response = await axios.get(URL.list(), {
-            withCredentials: true,
+        const response = await ServiceClient.instance.fetch({
+            url: "/api/locations",
             params: {
                 size: pagination?.pageSize,
                 page: pagination?.pageIndex,

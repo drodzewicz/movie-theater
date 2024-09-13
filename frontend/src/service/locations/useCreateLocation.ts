@@ -1,7 +1,7 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { MutationFunction, UseMutationOptions, useMutation } from "@tanstack/react-query";
 
-import URL from "@/service/locations/url";
+import ServiceClient from "../service-client";
 
 type CreateLocationPayload = {
     country: string;
@@ -11,7 +11,6 @@ type CreateLocationPayload = {
     zipCode: string;
 };
 
-
 type OptionsType = Omit<
     UseMutationOptions<LocationResponse, AxiosError<ApiDataValidationError>, CreateLocationPayload>,
     "mutationFn"
@@ -19,7 +18,11 @@ type OptionsType = Omit<
 
 const useCreateLocation = (options?: OptionsType) => {
     const mutationFn: MutationFunction<LocationResponse, CreateLocationPayload> = async (data) => {
-        const response = await axios.post(URL.index, data);
+        const response = await ServiceClient.instance.fetch({
+            url: "/api/locations",
+            method: "POST",
+            data,
+        });
         return response.data;
     };
 

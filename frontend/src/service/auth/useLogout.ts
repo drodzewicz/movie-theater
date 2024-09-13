@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import {
     MutationFunction,
     UseMutationOptions,
@@ -6,8 +6,8 @@ import {
     useQueryClient,
 } from "@tanstack/react-query";
 
-import authURL from "@/service/auth/url";
 import querykeys from "./queryKeys";
+import ServiceClient from "../service-client";
 
 type OptionsType = Omit<UseMutationOptions<unknown, AxiosError>, "mutationFn">;
 
@@ -15,7 +15,11 @@ const useLogout = (options?: OptionsType) => {
     const queryClient = useQueryClient();
 
     const mutationFn: MutationFunction = async () => {
-        const response = await axios.post(authURL.logout, {}, { withCredentials: true });
+        const response = await ServiceClient.instance.fetch({
+            url: "/api/auth/logout",
+            method: "POST",
+        });
+
         return response.data;
     };
 

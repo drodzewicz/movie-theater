@@ -1,7 +1,7 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { MutationFunction, UseMutationOptions, useMutation } from "@tanstack/react-query";
 
-import authURL from "@/service/auth/url";
+import ServiceClient from "../service-client";
 
 type RegisterPayload = {
     username: string;
@@ -24,7 +24,11 @@ type OptionsType = Omit<
 
 const useRegister = (options?: OptionsType) => {
     const mutationFn: MutationFunction<RegisterResponse, RegisterPayload> = async (data) => {
-        const response = await axios.post(authURL.register, data);
+        const response = await ServiceClient.instance.fetch({
+            url: "/api/auth/register",
+            method: "POST",
+            data,
+        });
         return response.data;
     };
 

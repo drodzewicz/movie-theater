@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import {
     MutationFunction,
     UseMutationOptions,
@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-query";
 import querykeys from "./queryKeys";
 
-import authURL from "@/service/auth/url";
+import ServiceClient from "@/service/service-client";
 
 type LoginPayload = {
     username: string;
@@ -20,7 +20,11 @@ const useLogin = (options?: OptionsType) => {
     const queryClient = useQueryClient();
 
     const mutationFn: MutationFunction<unknown, LoginPayload> = async (data) => {
-        const response = await axios.post(authURL.login, data, { withCredentials: true });
+        const response = await ServiceClient.instance.fetch({
+            method: "POST",
+            url: "/api/auth/login",
+            data,
+        });
         return response.data;
     };
 

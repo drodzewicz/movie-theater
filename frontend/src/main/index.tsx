@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import "@/assets/styles/main.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ServiceClient from "@/service/service-client";
 
 const root = document.getElementById("root");
 
@@ -22,6 +23,8 @@ const queryClient = new QueryClient({
         },
     },
 });
+
+ServiceClient.instance.initialize();
 
 container.render(
     <QueryClientProvider client={queryClient}>
