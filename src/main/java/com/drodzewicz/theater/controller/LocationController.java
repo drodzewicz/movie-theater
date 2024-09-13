@@ -3,6 +3,7 @@ package com.drodzewicz.theater.controller;
 import java.util.*;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -74,6 +75,13 @@ public class LocationController {
     @ResponseStatus(HttpStatus.OK)
     public List<AppManagerUserDTO> getLocationManagers(@PathVariable("id") Long locationId) {
         return locationService.getLocationManagers(locationId);
+    }
+
+    @PatchMapping("{id}/status")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateLocationStatus(@PathVariable("id") Long locationId,
+            @RequestParam(required = true) Boolean active) {
+        locationService.updateLocationStatus(locationId, active);
     }
 
     @PatchMapping("{id}/managers/{managerId}")

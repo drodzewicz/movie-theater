@@ -6,4 +6,5 @@ export const URLS = [
     "/api/auth/current-user",
     "/api/locations",
     "/api/locations/$id",
+    "/api/locations/$id/status",
 ] as const;

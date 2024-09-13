@@ -20,6 +20,8 @@ public interface LocationService {
     LocationDTO createLocation(CreateLocationDTO locationDTO);
 
     void deleteLocation(Long locationId);
+    
+    void updateLocationStatus(Long locationId, Boolean active);
 
     List<AppManagerUserDTO> getLocationManagers(Long locationId);
 

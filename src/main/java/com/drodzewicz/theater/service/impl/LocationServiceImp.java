@@ -157,4 +157,14 @@ public class LocationServiceImp implements LocationService {
         hallRepository.save(hall);
     }
 
+    @Override
+    public void updateLocationStatus(Long locationId, Boolean active) {
+        log.info("Update location {} status to {}", locationId, active);
+
+        Location location = getLocationEntityById(locationId);
+        location.setActive(active);
+
+        locationRepository.save(location);
+    }
+
 }
