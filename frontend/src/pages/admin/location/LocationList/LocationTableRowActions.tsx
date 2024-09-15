@@ -2,6 +2,7 @@ import DataTableRowActions from "@/components/common/Table/CustomCells/DataTable
 import { DropdownMenuItem, DropdownMenuShortcut } from "@/components/ui/dropdown-menu";
 import { useGoTo } from "@/hooks/useGoTo";
 import useUpdateLocationStatus from "@/service/locations/useUpdateLocationStatus";
+import { LocationResponse } from "@/types/types";
 import { Row } from "@tanstack/react-table";
 
 interface LocationTableRowActionsProps {

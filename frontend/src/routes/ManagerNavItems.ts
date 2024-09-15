@@ -1,3 +1,4 @@
+import { NavItem } from "@/types/types";
 import {
     UsersIcon,
     LayoutDashboard,

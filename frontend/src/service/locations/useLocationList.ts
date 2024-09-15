@@ -1,25 +1,18 @@
-import { AxiosError } from "axios";
-import { QueryFunction, UseQueryOptions, useQuery } from "@tanstack/react-query";
+import { QueryFunction, useQuery } from "@tanstack/react-query";
 
 import { PaginationState } from "@tanstack/react-table";
 import ServiceClient from "../service-client";
 import { locationKeys, LocationListQueryKey } from "@/service/query-keys";
-
-type OptionsType = Omit<
-    UseQueryOptions<
-        PaginatedResponse<LocationResponse>,
-        AxiosError,
-        PaginatedResponse<LocationResponse>,
-        LocationListQueryKey
-    >,
-    "queryKey" | "queryFn"
->;
+import { PaginatedResponse, LocationResponse, QueryOptionsProps } from "@/types/types";
 
 type locationListProps = {
     pagination: PaginationState;
 };
 
-const useLocationList = (props?: locationListProps, options?: OptionsType) => {
+const useLocationList = (
+    props?: locationListProps,
+    options?: QueryOptionsProps<PaginatedResponse<LocationResponse>, LocationListQueryKey>
+) => {
     const { pagination } = props || {};
 
     const fetchLocationList: QueryFunction<

@@ -1,14 +1,13 @@
 import { AxiosError } from "axios";
-import { MutationFunction, UseMutationOptions, useMutation } from "@tanstack/react-query";
+import { MutationFunction, useMutation } from "@tanstack/react-query";
 
 import ServiceClient from "@/service/service-client";
+import { ApiDataValidationError, LocationResponse, MutationOptionsProps } from "@/types/types";
 
-type OptionsType = Omit<
-    UseMutationOptions<LocationResponse, AxiosError<ApiDataValidationError>>,
-    "mutationFn"
->;
-
-const useUpdateLocationStatus = (id: string, options?: OptionsType) => {
+const useUpdateLocationStatus = (
+    id: string,
+    options?: MutationOptionsProps<LocationResponse, boolean, AxiosError<ApiDataValidationError>>
+) => {
     const mutationFn: MutationFunction<LocationResponse> = async (active: boolean) => {
         const response = await ServiceClient.instance.fetch({
             url: "/api/locations/$id/status",

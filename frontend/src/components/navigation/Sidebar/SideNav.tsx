@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { ChevronDownIcon } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
+import { NavItem } from "@/types/types";
 
 interface SideNavProps {
     items: NavItem[];

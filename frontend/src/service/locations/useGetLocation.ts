@@ -1,15 +1,13 @@
-import { AxiosError } from "axios";
-import { QueryFunction, UseQueryOptions, useQuery } from "@tanstack/react-query";
+import { QueryFunction, useQuery } from "@tanstack/react-query";
 
 import { GetLocationQueryKey, locationKeys } from "@/service/query-keys";
 import ServiceClient from "@/service/service-client";
+import { LocationResponse, QueryOptionsProps } from "@/types/types";
 
-type OptionsType = Omit<
-    UseQueryOptions<LocationResponse, AxiosError, LocationResponse, GetLocationQueryKey>,
-    "queryKey" | "queryFn"
->;
-
-const useGetLocation = (locationId: string, options?: OptionsType) => {
+const useGetLocation = (
+    locationId: string,
+    options?: QueryOptionsProps<LocationResponse, GetLocationQueryKey>
+) => {
     const fetchLocationList: QueryFunction<LocationResponse, GetLocationQueryKey> = async ({
         queryKey: [, id],
     }) => {

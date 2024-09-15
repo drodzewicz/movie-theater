@@ -1,17 +1,10 @@
-import { AxiosError } from "axios";
-import {
-    MutationFunction,
-    UseMutationOptions,
-    useMutation,
-    useQueryClient,
-} from "@tanstack/react-query";
+import { MutationFunction, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import ServiceClient from "@/service/service-client";
 import { authKeys } from "@/service/query-keys";
+import { MutationOptionsProps } from "@/types/types";
 
-type OptionsType = Omit<UseMutationOptions<unknown, AxiosError>, "mutationFn">;
-
-const useLogout = (options?: OptionsType) => {
+const useLogout = (options?: MutationOptionsProps) => {
     const queryClient = useQueryClient();
 
     const mutationFn: MutationFunction = async () => {
