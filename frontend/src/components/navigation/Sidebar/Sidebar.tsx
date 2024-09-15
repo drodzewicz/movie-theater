@@ -2,7 +2,7 @@ import SideNav from "@/components/navigation/Sidebar/SideNav";
 
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";
-import navItems from "@/pages/ManagerNavItems";
+import navItems from "@/routes/ManagerNavItems";
 import useToggle from "@/hooks/useToggle";
 
 interface SidebarProps {

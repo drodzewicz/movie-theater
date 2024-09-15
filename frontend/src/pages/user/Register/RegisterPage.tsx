@@ -9,10 +9,10 @@ import FormWrapper from "@/components/form/FormWrapper";
 import LinkButton from "@/components/common/LinkButton";
 import LoadingButton from "@/components/form/LoadingButton";
 import useRegister from "@/service/auth/useRegisterUser";
-import { useNavigate } from "react-router-dom";
+import { useGoTo } from "@/hooks/useGoTo";
 
 const RegisterPage = () => {
-    const navigate = useNavigate();
+    const goTo = useGoTo();
 
     const form = useForm<RegisterUserSchemaType>({
         resolver: zodResolver(registerFormSchema),
@@ -27,7 +27,7 @@ const RegisterPage = () => {
 
     const { mutate: register } = useRegister({
         onSuccess: () => {
-            navigate("/login", {
+            goTo("/login", {
                 state: {
                     username: form.getValues("username"),
                     password: form.getValues("password"),

@@ -18,9 +18,14 @@ export function cn(...inputs: ClassValue[]) {
  * @example
  * interpolateUrl('/users/$userId', { userId: '123' }); // '/users/123'
  */
-export function interpolateUrl(url: string, parameters: Record<string, string>) {
+export function interpolateUrl(
+    url: string,
+    parameters: Record<string, string>,
+    options?: { prefix?: string }
+) {
+    const prefix = options?.prefix || "$";
     return url
         .split("/")
-        .map((str) => (str.includes("$") ? parameters[str.substring(1)] : str))
+        .map((str) => (str.includes(prefix) ? parameters[str.substring(1)] : str))
         .join("/");
 }

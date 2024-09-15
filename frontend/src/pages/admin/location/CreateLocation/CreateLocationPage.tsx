@@ -7,10 +7,10 @@ import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import FormWrapper from "@/components/form/FormWrapper";
 import useCreateLocation from "@/service/locations/useCreateLocation";
-import { useNavigate } from "react-router-dom";
+import { useGoTo } from "@/hooks/useGoTo";
 
 const CreateLocationPage = () => {
-    const navigate = useNavigate();
+    const goTo = useGoTo();
 
     const form = useForm<CreateLocationSchemaType>({
         resolver: zodResolver(createLocationFormSchema),
@@ -27,7 +27,7 @@ const CreateLocationPage = () => {
 
     const { mutate: createLocation } = useCreateLocation({
         onSuccess() {
-            navigate("/locations");
+            goTo("/locations");
         },
     });
 

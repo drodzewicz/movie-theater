@@ -1,9 +1,10 @@
 import { useIsAuthenticated } from "@/hooks/useIsAuthenticated";
+import { AppRoutes } from "@/routes/routes";
 
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 export type RouteGuardProps = {
-    redirectTo: string;
+    redirectTo: AppRoutes;
     access?: "ALL" | "AUTH" | "ANONYMOUS";
 };
 

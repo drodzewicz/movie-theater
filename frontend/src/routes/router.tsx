@@ -18,8 +18,16 @@ import UserListPage from "@/pages/admin/user/UserList";
 import LoginPage from "@/pages/common/Login/LoginPage";
 import RegisterPage from "@/pages/user/Register/RegisterPage";
 import RouteGuard from "@/components/navigation/RouterGuard";
+import { AppRoutes } from "@/routes/routes";
 
-const router = createBrowserRouter([
+export type RoutesObject = {
+    element?: React.ReactNode | null;
+    errorElement?: React.ReactNode;
+    path?: AppRoutes | "";
+    children?: RoutesObject[];
+};
+
+const routesObject: RoutesObject[] = [
     {
         element: <App />,
         errorElement: <RouterErrorPage />,
@@ -131,6 +139,8 @@ const router = createBrowserRouter([
             },
         ],
     },
-]);
+];
+
+const router = createBrowserRouter(routesObject);
 
 export default router;

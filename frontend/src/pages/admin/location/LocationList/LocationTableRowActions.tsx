@@ -1,20 +1,22 @@
 import DataTableRowActions from "@/components/common/Table/CustomCells/DataTableRowActions";
 import { DropdownMenuItem, DropdownMenuShortcut } from "@/components/ui/dropdown-menu";
+import { useGoTo } from "@/hooks/useGoTo";
 import useUpdateLocationStatus from "@/service/locations/useUpdateLocationStatus";
 import { Row } from "@tanstack/react-table";
-import { useNavigate } from "react-router-dom";
 
 interface LocationTableRowActionsProps {
     row: Row<LocationResponse>;
 }
 
 function LocationTableRowActions({ row }: LocationTableRowActionsProps) {
-    const navigate = useNavigate();
+    const goTo = useGoTo();
 
     const { mutate: updateStatus } = useUpdateLocationStatus(row.original.id);
 
-    const goToViewPage = () => navigate(`/locations/${row.original.id}`);
-    const goToEditPage = () => navigate(`/locations/${row.original.id}/edit`);
+    const goToViewPage = () =>
+        goTo("/locations/:locationId", { variables: { locationId: row.original.id } });
+    const goToEditPage = () =>
+        goTo("/locations/:locationId", { variables: { locationId: row.original.id } });
 
     const toggleLocationStatus = () => updateStatus(!row.original.active);
 

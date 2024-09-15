@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
-import router from "@/pages/router";
+import router from "@/routes/router";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import "@/assets/styles/main.css";

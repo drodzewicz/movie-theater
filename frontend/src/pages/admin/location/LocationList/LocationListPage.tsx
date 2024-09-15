@@ -13,9 +13,7 @@ import { useTablePagination } from "@/hooks/table/useTablePagination";
 function LocationListPage() {
     const { pagination, onPaginationChange } = useTablePagination();
 
-    const {
-        data: { data: locations, itemsCount },
-    } = useLocationList({ pagination });
+    const { data: { data: locations, itemsCount } = {} } = useLocationList({ pagination });
 
     const { table } = useTable({
         data: locations,
