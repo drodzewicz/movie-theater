@@ -19,7 +19,12 @@ const HallCard = () => {
             </CardHeader>
             <CardContent className="flex items-center justify-between">
                 <p className="text-xs text-muted-foreground">floor: 2, room: 11</p>
-                <LinkButton to="/halls/23" variant="link" className="p-0 h-5 mr-2">
+                <LinkButton
+                    to="/halls/:hallId"
+                    variables={{ hallId: "22" }}
+                    variant="link"
+                    className="p-0 h-5 mr-2"
+                >
                     more <ChevronRight className="h-4 w-4" />
                 </LinkButton>
             </CardContent>

@@ -42,7 +42,7 @@ function LocationTableFilters<TData>({ table }: PropsWithTable<TData>) {
                     },
                 ]}
             />
-            <SearchBarFilter column={table.getColumn("id")} placeholder="Search by location..." />
+            <SearchBarFilter column={table.getColumn("identifier")} placeholder="Search by location..." />
         </DataTableToolbar>
     );
 }

@@ -1,22 +1,23 @@
 import { DataTableColumnHeader } from "@/components/common/Table/CustomCells";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import { Link } from "react-router-dom";
 import LocationTableRowActions from "@/pages/admin/location/LocationList/LocationTableRowActions";
+import LinkButton from "@/components/common/LinkButton";
 
 export const columns: ColumnDef<LocationResponse>[] = [
     {
         accessorKey: "identifier",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Identifier" />,
         cell: ({ row }) => (
-            <Link
-                className={cn(buttonVariants({ variant: "link" }), "p-0")}
-                to={`/locations/${row.original.id}`}
+            <LinkButton
+                variant="link"
+                className={"p-0"}
+                to="/locations/:locationId"
+                variables={{ locationId: row.original.id }}
             >
                 {row.original.identifier}
-            </Link>
+            </LinkButton>
         ),
         enableSorting: false,
         enableHiding: false,

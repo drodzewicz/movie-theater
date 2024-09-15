@@ -1,13 +1,13 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import HallCard from "@/components/common/HallCard";
 import CalendarTimeline from "@/components/common/CalendarTimeline";
-import { Link, useParams } from "react-router-dom";
-import { cn } from "@/lib/utils";
+import { useParams } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import useGetLocation from "@/service/locations/useGetLocation";
+import LinkButton from "@/components/common/LinkButton";
 
 const LocationShowPage = () => {
     const { locationId = "" } = useParams<{ locationId: string }>();
@@ -67,12 +67,9 @@ const LocationShowPage = () => {
             <div className="mt-2">
                 <div className="flex justify-between">
                     <h2 className="text-3xl font-bold">Halls</h2>
-                    <Link
-                        to="/halls/create"
-                        className={cn(buttonVariants({ variant: "default", size: "sm" }))}
-                    >
+                    <LinkButton to="/halls/create" variant="default" size="sm">
                         Create new Hall
-                    </Link>
+                    </LinkButton>
                 </div>
                 <div className="flex mt-2 gap-2 flex-wrap">
                     <HallCard />

@@ -3,10 +3,8 @@ import Table, { DataTablePagination } from "@/components/common/Table";
 import { columns } from "@/pages/admin/movie/MovieList/columns";
 
 import MovieTableFilters from "@/pages/admin/movie/MovieList/MovieTableFilters";
-import { Link } from "react-router-dom";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { useTable } from "@/hooks/table/useTable";
+import LinkButton from "@/components/common/LinkButton";
 
 const data = [
     {
@@ -36,12 +34,9 @@ function MovieListPage() {
 
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
-            <Link
-                to="/movies/create"
-                className={cn(buttonVariants({ variant: "default" }), "ml-auto mr-0")}
-            >
+            <LinkButton to="/movies/create" className="ml-auto mr-0" variant="default">
                 Add new movie
-            </Link>
+            </LinkButton>
             <MovieTableFilters table={table} />
             <Table table={table} />
             <DataTablePagination table={table} />

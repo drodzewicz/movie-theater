@@ -1,8 +1,6 @@
+import LinkButton from "@/components/common/LinkButton";
 import { DataTableColumnHeader } from "@/components/common/Table/CustomCells";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import { Link } from "react-router-dom";
 
 type Hall = {
     id: string;
@@ -20,12 +18,14 @@ export const columns: ColumnDef<Hall>[] = [
         accessorKey: "locationIdentifier",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Location" />,
         cell: ({ row }) => (
-            <Link
-                className={cn(buttonVariants({ variant: "link" }), "p-0")}
-                to={`/locations/${row.original.location.id}`}
+            <LinkButton
+                className="p-0"
+                variant="link"
+                to="/locations/:locationId"
+                variables={{ locationId: row.original.location.id }}
             >
                 {row.original.location.identifier}
-            </Link>
+            </LinkButton>
         ),
         enableSorting: false,
         enableHiding: false,
@@ -34,12 +34,14 @@ export const columns: ColumnDef<Hall>[] = [
         accessorKey: "name",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
         cell: ({ row }) => (
-            <Link
-                className={cn(buttonVariants({ variant: "link" }), "p-0")}
-                to={`/halls/${row.original.id}`}
+            <LinkButton
+                className="p-0"
+                variant="link"
+                to="/halls/:hallId"
+                variables={{ hallId: row.original.id }}
             >
                 {row.original.name}
-            </Link>
+            </LinkButton>
         ),
         enableSorting: true,
         enableHiding: true,

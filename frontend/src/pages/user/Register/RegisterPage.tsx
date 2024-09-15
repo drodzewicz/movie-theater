@@ -6,10 +6,10 @@ import { useForm } from "react-hook-form";
 
 import InputField from "@/components/form/InputField";
 import FormWrapper from "@/components/form/FormWrapper";
-import LinkButton from "@/components/common/LinkButton";
 import LoadingButton from "@/components/form/LoadingButton";
 import useRegister from "@/service/auth/useRegisterUser";
 import { useGoTo } from "@/hooks/useGoTo";
+import { Button } from "@/components/ui/button";
 
 const RegisterPage = () => {
     const goTo = useGoTo();
@@ -97,20 +97,18 @@ const RegisterPage = () => {
                     </FormWrapper>
                     <p className="px-8 text-center text-sm text-muted-foreground">
                         By clicking continue, you agree to our{" "}
-                        <LinkButton
-                            to="/terms"
+                        <Button
                             variant="link"
                             className="hover:text-brand underline underline-offset-4"
                         >
                             Terms of Service
-                        </LinkButton>
-                        <LinkButton
-                            to="/privacy"
+                        </Button>
+                        <Button
                             variant="link"
                             className="hover:text-brand underline underline-offset-4"
                         >
                             Privacy Policy
-                        </LinkButton>
+                        </Button>
                         .
                     </p>
                 </div>
