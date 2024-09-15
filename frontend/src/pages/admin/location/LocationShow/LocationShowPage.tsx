@@ -6,7 +6,7 @@ import HallCard from "@/components/common/HallCard";
 import CalendarTimeline from "@/components/common/CalendarTimeline";
 import { useParams } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
-import useGetLocation from "@/service/locations/useGetLocation";
+import { useGetLocation } from "@/service/locations/useGetLocation";
 import LinkButton from "@/components/common/LinkButton";
 
 const LocationShowPage = () => {

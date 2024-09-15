@@ -1,4 +1,4 @@
-import { QueryFunction, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { PaginationState } from "@tanstack/react-table";
 import ServiceClient from "../service-client";
@@ -9,33 +9,26 @@ type locationListProps = {
     pagination: PaginationState;
 };
 
-const useLocationList = (
+export function useLocationList(
     props?: locationListProps,
     options?: QueryOptionsProps<PaginatedResponse<LocationResponse>, LocationListQueryKey>
-) => {
+) {
     const { pagination } = props || {};
-
-    const fetchLocationList: QueryFunction<
-        PaginatedResponse<LocationResponse>,
-        LocationListQueryKey
-    > = async () => {
-        const response = await ServiceClient.instance.fetch({
-            url: "/api/locations",
-            params: {
-                size: pagination?.pageSize,
-                page: pagination?.pageIndex,
-            },
-        });
-        return response.data;
-    };
 
     return useQuery({
         ...options,
+        queryFn: async () => {
+            const response = await ServiceClient.instance.fetch({
+                url: "/api/locations",
+                params: {
+                    size: pagination?.pageSize,
+                    page: pagination?.pageIndex,
+                },
+            });
+            return response.data;
+        },
         queryKey: locationKeys.list({ pagination }),
         placeholderData: (prev) => prev || { data: [], itemsCount: 0, pageCount: 0 },
-        queryFn: fetchLocationList,
         staleTime: 1 * 60 * 1000,
     });
-};
-
-export default useLocationList;
+}

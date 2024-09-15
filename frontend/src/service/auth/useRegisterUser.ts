@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { MutationFunction, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import ServiceClient from "@/service/service-client";
 import { ApiDataValidationError, MutationOptionsProps } from "@/types/types";
@@ -18,26 +18,22 @@ type RegisterResponse = {
     lastName: string;
 };
 
-const useRegister = (
+export function useRegister(
     options?: MutationOptionsProps<
         RegisterResponse,
         RegisterPayload,
         AxiosError<ApiDataValidationError>
     >
-) => {
-    const mutationFn: MutationFunction<RegisterResponse, RegisterPayload> = async (data) => {
-        const response = await ServiceClient.instance.fetch({
-            url: "/api/auth/register",
-            method: "POST",
-            data,
-        });
-        return response.data;
-    };
-
+) {
     return useMutation({
         ...options,
-        mutationFn,
+        mutationFn: async (data) => {
+            const response = await ServiceClient.instance.fetch({
+                url: "/api/auth/register",
+                method: "POST",
+                data,
+            });
+            return response.data;
+        },
     });
-};
-
-export default useRegister;
+}

@@ -6,7 +6,7 @@ import createLocationFormSchema, {
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import FormWrapper from "@/components/form/FormWrapper";
-import useCreateLocation from "@/service/locations/useCreateLocation";
+import { useCreateLocation } from "@/service/locations/useCreateLocation";
 import { useGoTo } from "@/hooks/useGoTo";
 
 const CreateLocationPage = () => {

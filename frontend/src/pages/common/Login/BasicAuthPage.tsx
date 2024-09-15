@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormWrapper from "@/components/form/FormWrapper";
-import useLogin from "@/service/auth/useLogin";
+import { useLogin } from "@/service/auth/useLogin";
 import { useLocation } from "react-router-dom";
 
 const BasicAuthPage = () => {

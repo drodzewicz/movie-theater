@@ -1,4 +1,4 @@
-import useCurrentUser from "@/service/auth/useCurrentUser";
+import { useCurrentUser } from "@/service/auth/useCurrentUser";
 
 export const LOCAL_STORAGE_KEY = "currentUserData"; // Key to save and retrieve from localStorage
 

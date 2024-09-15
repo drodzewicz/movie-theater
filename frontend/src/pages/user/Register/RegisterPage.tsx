@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import InputField from "@/components/form/InputField";
 import FormWrapper from "@/components/form/FormWrapper";
 import LoadingButton from "@/components/form/LoadingButton";
-import useRegister from "@/service/auth/useRegisterUser";
+import { useRegister } from "@/service/auth/useRegisterUser";
 import { useGoTo } from "@/hooks/useGoTo";
 import { Button } from "@/components/ui/button";
 

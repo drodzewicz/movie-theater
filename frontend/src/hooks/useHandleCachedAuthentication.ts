@@ -1,4 +1,4 @@
-import useCurrentUser from "@/service/auth/useCurrentUser";
+import { useCurrentUser } from "@/service/auth/useCurrentUser";
 import { useQueryClient } from "@tanstack/react-query";
 import { authKeys } from "@/service/query-keys";
 import { useEffectAfterMount } from "@/hooks/useEffectAfterMount";

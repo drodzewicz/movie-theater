@@ -4,7 +4,7 @@ import { columns } from "@/pages/admin/location/LocationList/columns";
 
 import LocationTableFilters from "@/pages/admin/location/LocationList/LocationTableFilters";
 import { useTable } from "@/hooks/table/useTable";
-import useLocationList from "@/service/locations/useLocationList";
+import { useLocationList } from "@/service/locations/useLocationList";
 import { useTablePagination } from "@/hooks/table/useTablePagination";
 import { useTableFilters } from "@/hooks/table/useTableFilters";
 import { useTableSorting } from "@/hooks/table/useTableSorting";

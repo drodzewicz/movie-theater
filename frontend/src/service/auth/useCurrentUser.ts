@@ -1,4 +1,4 @@
-import { QueryFunction, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import ServiceClient from "@/service/service-client";
@@ -14,22 +14,20 @@ type CurrentUserResponse = {
     lastName: string;
 };
 
-const useCurrentUser = (options?: QueryOptionsProps<CurrentUserResponse, CurrentUserQueryKey>) => {
+export function useCurrentUser(
+    options?: QueryOptionsProps<CurrentUserResponse, CurrentUserQueryKey>
+) {
     const [cachedUser] = useLocalStorage(LOCAL_STORAGE_KEY);
-
-    const fetchCurrentUser: QueryFunction<CurrentUserResponse, CurrentUserQueryKey> = async () => {
-        const response = await ServiceClient.instance.fetch({ url: "/api/auth/current-user" });
-        return response.data;
-    };
 
     return useQuery({
         ...options,
         queryKey: authKeys.currrentUser(),
-        queryFn: fetchCurrentUser,
+        queryFn: async () => {
+            const response = await ServiceClient.instance.fetch({ url: "/api/auth/current-user" });
+            return response.data;
+        },
         staleTime: Infinity,
-        placeholderData: () => cachedUser,
+        placeholderData: cachedUser,
         refetchOnMount: true,
     });
-};
-
-export default useCurrentUser;
+}
