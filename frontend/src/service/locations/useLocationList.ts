@@ -1,19 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { PaginationState } from "@tanstack/react-table";
+import { PaginationState, ColumnFiltersState, SortingState } from "@tanstack/react-table";
 import ServiceClient from "../service-client";
 import { locationKeys, LocationListQueryKey } from "@/service/query-keys";
 import { PaginatedResponse, LocationResponse, QueryOptionsProps } from "@/types/types";
+import { getFilterParams, getPaginationParams, getSortingParams } from "@/lib/utils";
 
-type locationListProps = {
-    pagination: PaginationState;
+type LocationListProps = {
+    pagination?: PaginationState;
+    columnFilters?: ColumnFiltersState;
+    sorting?: SortingState;
 };
 
 export function useLocationList(
-    props?: locationListProps,
+    props?: LocationListProps,
     options?: QueryOptionsProps<PaginatedResponse<LocationResponse>, LocationListQueryKey>
 ) {
-    const { pagination } = props || {};
+    const pagination = getPaginationParams(props);
+    const filters = getFilterParams(props);
+    const sorting = getSortingParams(props);
 
     return useQuery({
         ...options,
@@ -21,13 +26,14 @@ export function useLocationList(
             const response = await ServiceClient.instance.fetch({
                 url: "/api/locations",
                 params: {
-                    size: pagination?.pageSize,
-                    page: pagination?.pageIndex,
+                    ...pagination,
+                    ...filters,
+                    ...sorting,
                 },
             });
             return response.data;
         },
-        queryKey: locationKeys.list({ pagination }),
+        queryKey: locationKeys.list({ pagination, filters, sorting }),
         placeholderData: (prev) => prev || { data: [], itemsCount: 0, pageCount: 0 },
         staleTime: 1 * 60 * 1000,
     });

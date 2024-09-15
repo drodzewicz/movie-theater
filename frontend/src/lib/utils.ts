@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import _ from "lodash";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -28,4 +29,28 @@ export function interpolateUrl(
         .split("/")
         .map((str) => (str.includes(prefix) ? parameters[str.substring(1)] : str))
         .join("/");
+}
+
+export function getPaginationParams(props: unknown) {
+    const pagination = _.get(props, "pagination");
+    return _.isEmpty(pagination)
+        ? undefined
+        : {
+              size: _.get(pagination, "pageSize"),
+              page: _.get(pagination, "pageIndex"),
+          };
+}
+
+export function getFilterParams(props: unknown) {
+    const columnFilters = _.get(props, "columnFilters");
+    return _.isEmpty(columnFilters)
+        ? undefined
+        : _.mapValues(_.keyBy(columnFilters, "id"), "value");
+}
+
+export function getSortingParams(props: unknown) {
+    const sorting = _.get(props, "sorting[0]") as { id: string; desc: boolean };
+    return _.isEmpty(sorting)
+        ? undefined
+        : { [_.get(sorting, "id")]: _.get(sorting, "desc") ? "DESC" : "ASC" };
 }

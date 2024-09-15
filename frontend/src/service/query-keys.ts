@@ -1,6 +1,7 @@
 export const locationKeys = {
     all: [{ scope: "location" }] as const,
-    list: ({ pagination }: any) => [{ scope: "location", entity: "list" }, pagination] as const,
+    list: ({ pagination, filters, sorting }: any) =>
+        [{ scope: "location", entity: "list" }, pagination, filters, sorting] as const,
     item: (id: string) => [{ scope: "location", entity: "item" }, id] as const,
 };
 

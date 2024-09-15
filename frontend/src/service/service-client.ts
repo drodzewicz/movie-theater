@@ -22,7 +22,12 @@ class ServiceClient {
     }
 
     public initialize() {
-        this.client = axios.create({ withCredentials: true });
+        this.client = axios.create({
+            withCredentials: true,
+            paramsSerializer: {
+                indexes: null,
+            },
+        });
     }
 
     fetch({ url, variables, ...options }: FetchOptions) {

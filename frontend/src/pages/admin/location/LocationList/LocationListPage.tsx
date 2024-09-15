@@ -15,7 +15,11 @@ function LocationListPage() {
     const { columnFilters, onColumnFiltersChange } = useTableFilters();
     const { sorting, onSortingChange } = useTableSorting();
 
-    const { data: { data: locations, itemsCount } = {} } = useLocationList({ pagination });
+    const { data: { data: locations, itemsCount } = {} } = useLocationList({
+        pagination,
+        columnFilters,
+        sorting,
+    });
 
     const { table } = useTable({
         data: locations,

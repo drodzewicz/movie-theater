@@ -1,8 +1,9 @@
 import { AxiosError } from "axios";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import ServiceClient from "@/service/service-client";
 import { LocationResponse, ApiDataValidationError, MutationOptionsProps } from "@/types/types";
+import { locationKeys } from "@/service/query-keys";
 
 type CreateLocationPayload = {
     identifier: string;
@@ -20,6 +21,8 @@ export function useCreateLocation(
         AxiosError<ApiDataValidationError>
     >
 ) {
+    const queryClient = useQueryClient();
+
     return useMutation({
         ...options,
         mutationFn: async (data) => {
@@ -29,6 +32,10 @@ export function useCreateLocation(
                 data,
             });
             return response.data;
+        },
+        onSuccess: (_data, _var, _context) => {
+            queryClient.invalidateQueries({ queryKey: locationKeys.all });
+            options?.onSuccess?.(_data, _var, _context);
         },
     });
 }

@@ -8,6 +8,11 @@ import { PropsWithTable } from "@/components/common/Table/types";
 function LocationTableFilters<TData>({ table }: PropsWithTable<TData>) {
     return (
         <DataTableToolbar table={table}>
+            <SearchBarFilter
+                column={table.getColumn("identifier")}
+                placeholder="Search by location..."
+            />
+
             <DropdownSelectFilter
                 column={table.getColumn("country")}
                 title="Country"
@@ -42,7 +47,6 @@ function LocationTableFilters<TData>({ table }: PropsWithTable<TData>) {
                     },
                 ]}
             />
-            <SearchBarFilter column={table.getColumn("identifier")} placeholder="Search by location..." />
         </DataTableToolbar>
     );
 }
