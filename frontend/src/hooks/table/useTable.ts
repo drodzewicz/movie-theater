@@ -20,7 +20,7 @@ type TableProps<TData> = {
 };
 
 function useTable<TData>({
-    data,
+    data = [],
     columns,
     itemsCount,
     stateProperties,

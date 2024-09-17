@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { ColumnFiltersState } from "@tanstack/react-table";
 
-const useTableFilters = () => {
+export function useTableFilters() {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+    const [manualColumnFilters, setManualColumnFilters] = useState<ColumnFiltersState>([]);
 
-    return { columnFilters, onColumnFiltersChange: setColumnFilters };
-};
+    const syncManualFilterValues = useCallback(() => {
+        setManualColumnFilters(columnFilters);
+    }, [columnFilters]);
 
-export { useTableFilters };
+    return {
+        columnFilters,
+        onColumnFiltersChange: setColumnFilters,
+        manualColumnFilters,
+        syncManualFilterValues,
+    };
+}

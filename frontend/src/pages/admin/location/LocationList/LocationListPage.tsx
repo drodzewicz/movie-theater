@@ -12,12 +12,15 @@ import LinkButton from "@/components/common/LinkButton";
 
 function LocationListPage() {
     const { pagination, onPaginationChange } = useTablePagination();
-    const { columnFilters, onColumnFiltersChange } = useTableFilters();
+    const { columnFilters, manualColumnFilters, onColumnFiltersChange, syncManualFilterValues } =
+        useTableFilters();
     const { sorting, onSortingChange } = useTableSorting();
 
-    const { data: { data: locations, itemsCount } = {} } = useLocationList({
+    const {
+        data: { data: locations, itemsCount },
+    } = useLocationList({
         pagination,
-        columnFilters,
+        columnFilters: manualColumnFilters,
         sorting,
     });
 
@@ -31,12 +34,16 @@ function LocationListPage() {
         onSortingChange,
     });
 
+    const onSearch = () => {
+        syncManualFilterValues();
+    };
+
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
-            <LinkButton to="/locations/create" variant="default" className={"ml-auto mr-0"}>
+            <LinkButton to="/locations/create" variant="default" className="ml-auto mr-0">
                 Create new location
             </LinkButton>
-            <LocationTableFilters table={table} />
+            <LocationTableFilters table={table} onSearch={onSearch} />
             <Table table={table} />
             <DataTablePagination table={table} />
         </div>

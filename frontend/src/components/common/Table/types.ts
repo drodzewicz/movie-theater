@@ -7,4 +7,5 @@ export interface CommonFilter<TData, TValue> {
 
 export interface PropsWithTable<TData> {
     table: Table<TData>;
+    onSearch?: () => void;
 }

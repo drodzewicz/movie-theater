@@ -5,9 +5,9 @@ import {
 } from "@/components/common/Table/Filters";
 import { PropsWithTable } from "@/components/common/Table/types";
 
-function LocationTableFilters<TData>({ table }: PropsWithTable<TData>) {
+function LocationTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
     return (
-        <DataTableToolbar table={table}>
+        <DataTableToolbar table={table} onSearch={onSearch}>
             <SearchBarFilter
                 column={table.getColumn("identifier")}
                 placeholder="Search by location..."
