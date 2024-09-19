@@ -68,6 +68,10 @@ const routesObject: RoutesObject[] = [
                                 path: "/locations/:locationId",
                                 element: <LocationShowPage />,
                             },
+                            {
+                                path: "/locations/:locationId/create-hall",
+                                element: <CreateHallPage />,
+                            },
                         ],
                     },
                     {
@@ -120,10 +124,6 @@ const routesObject: RoutesObject[] = [
                             {
                                 path: "",
                                 element: <HallListPage />,
-                            },
-                            {
-                                path: "/halls/create",
-                                element: <CreateHallPage />,
                             },
                             {
                                 path: "/halls/:hallId",

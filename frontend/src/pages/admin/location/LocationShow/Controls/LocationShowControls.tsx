@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import DeactivateLocationButton from "./DeactivateLocationButton";
 
 function LocationShowControls() {
     return (
@@ -14,9 +15,7 @@ function LocationShowControls() {
                 <Button variant="outline" size="sm">
                     Delete
                 </Button>
-                <Button variant="outline" size="sm">
-                    Deactivate
-                </Button>
+                <DeactivateLocationButton />
             </div>
         </div>
     );

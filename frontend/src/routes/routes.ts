@@ -3,8 +3,9 @@ export const routes = [
     "/login",
     "/register",
     "/locations",
-    "/locations/:locationId",
     "/locations/create",
+    "/locations/:locationId",
+    "/locations/:locationId/create-hall",
     "/movies",
     "/movies/create",
     "/users",
@@ -13,7 +14,6 @@ export const routes = [
     "/orders/create",
     "/halls",
     "/halls/:hallId",
-    "/halls/create",
     "/screenings",
 ] as const;
 

@@ -29,6 +29,8 @@ export type CountryFilterOptionQueryKey = ReturnType<(typeof filterOptionKeys)["
 
 export const hallKeys = {
     all: [{ scope: "hall" }] as const,
+    locationHalls: ({ locationId }: any) =>
+        [{ scope: "hall", entity: "list" }, locationId] as const,
     list: ({ pagination, filters, sorting }: any) =>
         [{ scope: "hall", entity: "list" }, pagination, filters, sorting] as const,
     item: (id: string) => [{ scope: "hall", entity: "item" }, id] as const,
@@ -36,4 +38,5 @@ export const hallKeys = {
 
 export type AllHallsQueryKeys = (typeof hallKeys)["all"];
 export type HallListQueryKey = ReturnType<(typeof hallKeys)["list"]>;
+export type LocationHallListQueryKey = ReturnType<(typeof hallKeys)["locationHalls"]>;
 export type GetHallQueryKey = ReturnType<(typeof hallKeys)["item"]>;

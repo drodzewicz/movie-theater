@@ -1,13 +1,14 @@
 import StatusBadge from "@/components/common/StatusBadge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { LocationResponse } from "@/types/types";
+import { useGetParamsLocationId } from "@/hooks/useGetParamsLocationId";
+import { useGetLocation } from "@/service/locations/useGetLocation";
 import { Label } from "@radix-ui/react-label";
 
-type LocationShowHeaderProps = {
-    location: LocationResponse;
-};
+function LocationShowHeader() {
+    const locationId = useGetParamsLocationId();
 
-function LocationShowHeader({ location }: LocationShowHeaderProps) {
+    const { data: location } = useGetLocation(locationId);
+
     return (
         <div className="flex items-start mt-4 w-full gap-4">
             <Card>

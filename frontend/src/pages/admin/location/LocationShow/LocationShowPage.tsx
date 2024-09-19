@@ -1,18 +1,12 @@
-import { useParams } from "react-router-dom";
-import { useGetLocation } from "@/service/locations/useGetLocation";
-import LocationShowHeader from "./LocationShowHeader";
-import LocationShowControls from "./LocationShowControls";
-import LocationShowScreenings from "./LocationShowScreenings";
-import LocationShowHalls from "./LocationShowHalls";
+import LocationShowHeader from "@/pages/admin/location/LocationShow/LocationShowHeader";
+import LocationShowControls from "@/pages/admin/location/LocationShow/Controls/LocationShowControls";
+import LocationShowScreenings from "@/pages/admin/location/LocationShow/LocationShowScreenings";
+import LocationShowHalls from "@/pages/admin/location/LocationShow/LocationShowHalls";
 
 const LocationShowPage = () => {
-    const { locationId = "" } = useParams<{ locationId: string }>();
-
-    const { data: location } = useGetLocation(locationId);
-
     return (
         <div className="container flex-col">
-            <LocationShowHeader location={location} />
+            <LocationShowHeader />
             <LocationShowControls />
             <LocationShowHalls />
             <LocationShowScreenings />

@@ -3,13 +3,19 @@ import { useForm } from "react-hook-form";
 import schema, { CreateHallSchemaType } from "@/pages/admin/hall/CreateHall/schema";
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Label } from "@/components/ui/label";
 import HallSeatsEditor from "@/components/common/HallSeatsEditor";
 import FormWrapper from "@/components/form/FormWrapper";
+import LocationShowHeader from "@/pages/admin/location/LocationShow/LocationShowHeader";
+import { useCreateHall } from "@/service/halls/useCreateHall";
+import { useGetParamsLocationId } from "@/hooks/useGetParamsLocationId";
+import { useGoTo } from "@/hooks/useGoTo";
+import { useQueryClient } from "@tanstack/react-query";
+import { hallKeys } from "@/service/query-keys";
 
 const CreateHallPage = () => {
+    const locationId = useGetParamsLocationId();
+    const goTo = useGoTo();
+
     const form = useForm<CreateHallSchemaType>({
         resolver: zodResolver(schema),
         defaultValues: {
@@ -19,45 +25,30 @@ const CreateHallPage = () => {
         },
     });
 
+    const queryClient = useQueryClient();
+
+    const { mutate: createNewHall } = useCreateHall({
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: hallKeys.locationHalls({ locationId }) });
+
+            goTo("/locations/:locationId", { variables: { locationId } });
+        },
+    });
+
     function onSubmit(values: CreateHallSchemaType) {
-        console.log(values);
+        createNewHall({
+            locationId,
+            name: values.name,
+            rowCount: 5,
+            seatCountPerRow: 8,
+            floor: values.floor,
+            room: values.room,
+        });
     }
 
     return (
         <div className="container h-screen w-screen flex-col justify-center">
-            <div className="flex gap-3 my-3 ">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>LT-VNO-SA</CardTitle>
-                        <CardDescription>
-                            <Badge variant="outline" className="gap-1">
-                                <span className="rounded-full h-3 w-3 bg-green-600"></span>
-                                Active
-                            </Badge>
-                        </CardDescription>
-                    </CardHeader>
-                </Card>
-                <Card>
-                    <CardContent className="grid grid-cols-4 gap-4">
-                        <div>
-                            <Label>Country:</Label>
-                            <p>Lithuania</p>
-                        </div>
-                        <div>
-                            <Label>City:</Label>
-                            <p>Vilnius</p>
-                        </div>
-                        <div>
-                            <Label>Building Number:</Label>
-                            <p>44</p>
-                        </div>
-                        <div>
-                            <Label>Zip-Code:</Label>
-                            <p>00-2344</p>
-                        </div>
-                    </CardContent>
-                </Card>
-            </div>
+            <LocationShowHeader />
             <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
                 <div className="grid grid-cols-4 gap-2">
                     <InputField name="name" control={form.control} placeholder="Hall Name" />
