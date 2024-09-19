@@ -1,6 +1,12 @@
+import { Table } from "@tanstack/react-table";
 import { useState, useEffect, useCallback } from "react";
 
-export function useOnResetTableFilters(callback: () => void) {
+type OnResetTableProps<TData> = {
+    table: Table<TData>;
+    callback?: () => void;
+};
+
+export function useOnResetTableFilters<T>({ table, callback }: OnResetTableProps<T>) {
     const [areFiltersReset, setAreFiltersReset] = useState<boolean>(false);
 
     useEffect(() => {
@@ -10,7 +16,10 @@ export function useOnResetTableFilters(callback: () => void) {
         }
     }, [areFiltersReset, callback]);
 
-    const resetFilter = useCallback(() => setAreFiltersReset(true), [])
+    const resetFilters = useCallback(() => {
+        table.resetColumnFilters();
+        setAreFiltersReset(true);
+    }, [table]);
 
-    return { reset: resetFilter }
+    return { resetFilters };
 }

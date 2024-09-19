@@ -11,9 +11,7 @@ function DataTableToolbar<TData>({
 }: React.PropsWithChildren<PropsWithTable<TData>>) {
     const isFiltered = table.getState().columnFilters?.length > 0;
 
-    useOnResetTableFilters(() => onSearch());
-
-    const resetFilters = () => table.resetColumnFilters();
+    const { resetFilters } = useOnResetTableFilters({ table, callback: onSearch });
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
