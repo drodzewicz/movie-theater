@@ -52,7 +52,7 @@ export function getSortingParams(props: unknown) {
     const sorting = _.get(props, "sorting[0]") as { id: string; desc: boolean };
     return _.isEmpty(sorting)
         ? undefined
-        : { [_.get(sorting, "id")]: _.get(sorting, "desc") ? "DESC" : "ASC" };
+        : { sort: `${sorting.id},${sorting.desc ? "desc" : "asc"}` };
 }
 
 export function transformToOptions(data: string[]) {
