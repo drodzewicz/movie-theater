@@ -5,10 +5,12 @@ import java.util.*;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.drodzewicz.theater.dto.domain.HallDTO;
 import com.drodzewicz.theater.dto.request.CreateHallDTO;
+import com.drodzewicz.theater.dto.request.HallFilterDTO;
 import com.drodzewicz.theater.entity.Hall;
 import com.drodzewicz.theater.entity.Location;
 import com.drodzewicz.theater.entity.Seat;
@@ -18,6 +20,7 @@ import com.drodzewicz.theater.repository.HallRepository;
 import com.drodzewicz.theater.repository.LocationRepository;
 import com.drodzewicz.theater.repository.SeatRepository;
 import com.drodzewicz.theater.service.HallService;
+import com.drodzewicz.theater.specification.HallSpecification;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,9 +52,12 @@ public class HallServiceImpl implements HallService {
     }
 
     @Override
-    public Page<HallDTO> getHallList(Pageable pageable) {
+    public Page<HallDTO> getHallList(Pageable pageable, HallFilterDTO filters) {
         log.info("Getting halls");
-        Page<Hall> halls = hallRepository.findAll(pageable);
+        Specification<Hall> spec = Specification.where(HallSpecification.hasName(filters.getName()))
+                .and(HallSpecification.hasLocationIdentifiers(filters.getLocation()));
+
+        Page<Hall> halls = hallRepository.findAll(spec, pageable);
         return halls.map(hallMapper::toDTO);
     }
 

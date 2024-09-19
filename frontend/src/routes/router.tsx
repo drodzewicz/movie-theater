@@ -61,12 +61,12 @@ const routesObject: RoutesObject[] = [
                                 element: <LocationListPage />,
                             },
                             {
-                                path: "/locations/:locationId",
-                                element: <LocationShowPage />,
-                            },
-                            {
                                 path: "/locations/create",
                                 element: <CreateLocationPage />,
+                            },
+                            {
+                                path: "/locations/:locationId",
+                                element: <LocationShowPage />,
                             },
                         ],
                     },
@@ -122,12 +122,12 @@ const routesObject: RoutesObject[] = [
                                 element: <HallListPage />,
                             },
                             {
-                                path: "/halls/:hallId",
-                                element: <HallShowPage />,
-                            },
-                            {
                                 path: "/halls/create",
                                 element: <CreateHallPage />,
+                            },
+                            {
+                                path: "/halls/:hallId",
+                                element: <HallShowPage />,
                             },
                         ],
                     },

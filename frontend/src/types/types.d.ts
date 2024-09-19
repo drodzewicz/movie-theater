@@ -34,6 +34,13 @@ type LocationResponse = {
     zipCode: string;
 };
 
+type HallResponse = {
+    id: string;
+    name: string;
+    room?: string;
+    floor?: string;
+};
+
 interface QueryOptionsProps<R, K extends QueryKey, E = AxiosError>
     extends Omit<UseQueryOptions<R, E, R, K>, "queryKey" | "queryFn"> {}
 

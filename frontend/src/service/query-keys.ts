@@ -26,3 +26,14 @@ export const filterOptionKeys = {
 export type AllFilterOptionQueryKey = (typeof filterOptionKeys)["all"];
 export type CityFilterOptionQueryKey = ReturnType<(typeof filterOptionKeys)["city"]>;
 export type CountryFilterOptionQueryKey = ReturnType<(typeof filterOptionKeys)["country"]>;
+
+export const hallKeys = {
+    all: [{ scope: "hall" }] as const,
+    list: ({ pagination, filters, sorting }: any) =>
+        [{ scope: "hall", entity: "list" }, pagination, filters, sorting] as const,
+    item: (id: string) => [{ scope: "hall", entity: "item" }, id] as const,
+};
+
+export type AllHallsQueryKeys = (typeof hallKeys)["all"];
+export type HallListQueryKey = ReturnType<(typeof hallKeys)["list"]>;
+export type GetHallQueryKey = ReturnType<(typeof hallKeys)["item"]>;

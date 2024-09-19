@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.drodzewicz.theater.dto.domain.HallDTO;
+import com.drodzewicz.theater.dto.request.HallFilterDTO;
 import com.drodzewicz.theater.dto.util.PaginatedResponse;
 import com.drodzewicz.theater.service.HallService;
 
@@ -39,8 +41,10 @@ public class HallController {
     // locations/id/halls should be enough
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public PaginatedResponse<HallDTO> getHalls(@PageableDefault(size = 15) Pageable pageable) {
-        Page<HallDTO> halls = hallService.getHallList(pageable);
+    public PaginatedResponse<HallDTO> getHalls(
+            @PageableDefault(size = 15) Pageable pageable,
+            @ModelAttribute HallFilterDTO filters) {
+        Page<HallDTO> halls = hallService.getHallList(pageable, filters);
 
         return new PaginatedResponse<HallDTO>(halls);
     }
