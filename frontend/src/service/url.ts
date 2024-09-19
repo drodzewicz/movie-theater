@@ -7,4 +7,7 @@ export const URLS = [
     "/api/locations",
     "/api/locations/$id",
     "/api/locations/$id/status",
+    "/api/locations/$id/status",
+    "/api/filter-options/cities",
+    "/api/filter-options/countries"
 ] as const;

@@ -8,6 +8,7 @@ import com.drodzewicz.theater.dto.domain.AppManagerUserDTO;
 import com.drodzewicz.theater.dto.domain.HallDTO;
 import com.drodzewicz.theater.dto.domain.LocationDTO;
 import com.drodzewicz.theater.dto.request.CreateLocationDTO;
+import com.drodzewicz.theater.dto.request.LocationFilterDTO;
 import com.drodzewicz.theater.entity.Location;
 
 public interface LocationService {
@@ -15,12 +16,12 @@ public interface LocationService {
 
     LocationDTO getLocationById(Long locationId);
 
-    Page<LocationDTO> getLocationList(Pageable pageable);
+    Page<LocationDTO> getLocationList(Pageable pageable, LocationFilterDTO filters);
 
     LocationDTO createLocation(CreateLocationDTO locationDTO);
 
     void deleteLocation(Long locationId);
-    
+
     void updateLocationStatus(Long locationId, Boolean active);
 
     List<AppManagerUserDTO> getLocationManagers(Long locationId);
@@ -35,4 +36,7 @@ public interface LocationService {
 
     void removeHallFromLocation(Long locationId, Long hallId);
 
+    List<String> getAllDistinctCities();
+
+    List<String> getAllDistinctCountries();
 }

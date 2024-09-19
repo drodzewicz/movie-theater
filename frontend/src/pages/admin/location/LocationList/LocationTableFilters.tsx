@@ -4,8 +4,13 @@ import {
     DropdownSelectFilter,
 } from "@/components/common/Table/Filters";
 import { PropsWithTable } from "@/components/common/Table/types";
+import { useGetCityOptions } from "@/service/filter-options/useGetCityOptions";
+import { useGetCountryOptions } from "@/service/filter-options/useGetCountryOptions";
 
 function LocationTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
+    const { data: cityOptions } = useGetCityOptions();
+    const { data: countryOptions } = useGetCountryOptions();
+
     return (
         <DataTableToolbar table={table} onSearch={onSearch}>
             <SearchBarFilter
@@ -16,20 +21,12 @@ function LocationTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>)
             <DropdownSelectFilter
                 column={table.getColumn("country")}
                 title="Country"
-                options={[
-                    { label: "Lithuania", value: "Lithuania" },
-                    { label: "Poland", value: "Poland" },
-                    { label: "Germany", value: "Germany" },
-                ]}
+                options={countryOptions}
             />
             <DropdownSelectFilter
                 column={table.getColumn("city")}
                 title="City"
-                options={[
-                    { label: "Lithuania", value: "Lithuania" },
-                    { label: "Poland", value: "Poland" },
-                    { label: "Germany", value: "Germany" },
-                ]}
+                options={cityOptions}
             />
             <DropdownSelectFilter
                 column={table.getColumn("active")}
@@ -37,12 +34,12 @@ function LocationTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>)
                 options={[
                     {
                         label: "Active",
-                        value: "active",
+                        value: "true",
                         icon: () => <span className="h-3 w-3 rounded-full bg-green-600 mr-2" />,
                     },
                     {
                         label: "Disabled",
-                        value: "disabled",
+                        value: "false",
                         icon: () => <span className="h-3 w-3 rounded-full bg-gray-400 mr-2" />,
                     },
                 ]}

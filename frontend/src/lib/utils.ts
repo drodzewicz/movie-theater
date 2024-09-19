@@ -54,3 +54,7 @@ export function getSortingParams(props: unknown) {
         ? undefined
         : { [_.get(sorting, "id")]: _.get(sorting, "desc") ? "DESC" : "ASC" };
 }
+
+export function transformToOptions(data: string[]) {
+    return data.map((it: string) => ({ label: it, value: it }));
+}

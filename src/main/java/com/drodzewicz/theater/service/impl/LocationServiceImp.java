@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,7 @@ import com.drodzewicz.theater.dto.domain.AppManagerUserDTO;
 import com.drodzewicz.theater.dto.domain.HallDTO;
 import com.drodzewicz.theater.dto.domain.LocationDTO;
 import com.drodzewicz.theater.dto.request.CreateLocationDTO;
+import com.drodzewicz.theater.dto.request.LocationFilterDTO;
 import com.drodzewicz.theater.entity.Hall;
 import com.drodzewicz.theater.entity.Location;
 import com.drodzewicz.theater.entity.user.AppManagerUser;
@@ -23,6 +25,7 @@ import com.drodzewicz.theater.repository.AppManagerUserRepository;
 import com.drodzewicz.theater.repository.HallRepository;
 import com.drodzewicz.theater.repository.LocationRepository;
 import com.drodzewicz.theater.service.LocationService;
+import com.drodzewicz.theater.specification.LocationSpecification;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,9 +60,14 @@ public class LocationServiceImp implements LocationService {
     }
 
     @Override
-    public Page<LocationDTO> getLocationList(Pageable pageable) {
-        log.info("Getting locations");
-        Page<Location> locations = locationRepository.findAll(pageable);
+    public Page<LocationDTO> getLocationList(Pageable pageable, LocationFilterDTO filters) {
+        log.info("Getting locations with pagination {} and filters {}", pageable, filters);
+        Specification<Location> spec = Specification.where(LocationSpecification.hasIdentifier(filters.getIdentifier()))
+                .and(LocationSpecification.hasCities(filters.getCity()))
+                .and(LocationSpecification.hasCountry(filters.getCountry()))
+                .and(LocationSpecification.isActive(filters.getActive()));
+
+        Page<Location> locations = locationRepository.findAll(spec, pageable);
         return locations.map(locationMapper::toDTO);
     }
 
@@ -165,6 +173,16 @@ public class LocationServiceImp implements LocationService {
         location.setActive(active);
 
         locationRepository.save(location);
+    }
+
+    @Override
+    public List<String> getAllDistinctCities() {
+        return locationRepository.findAllDistinctCities();
+    }
+
+    @Override
+    public List<String> getAllDistinctCountries() {
+        return locationRepository.findAllDistinctCountries();
     }
 
 }

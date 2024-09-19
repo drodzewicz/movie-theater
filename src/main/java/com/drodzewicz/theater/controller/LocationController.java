@@ -13,6 +13,7 @@ import com.drodzewicz.theater.dto.domain.HallDTO;
 import com.drodzewicz.theater.dto.domain.LocationDTO;
 import com.drodzewicz.theater.dto.request.CreateHallDTO;
 import com.drodzewicz.theater.dto.request.CreateLocationDTO;
+import com.drodzewicz.theater.dto.request.LocationFilterDTO;
 import com.drodzewicz.theater.dto.util.PaginatedResponse;
 import com.drodzewicz.theater.service.HallService;
 import com.drodzewicz.theater.service.LocationService;
@@ -27,6 +28,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,20 +51,22 @@ public class LocationController {
         return location;
     }
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public PaginatedResponse<LocationDTO> getlocations(
+            @PageableDefault(size = 15) Pageable pageable,
+            @ModelAttribute LocationFilterDTO filters) {
+        Page<LocationDTO> locations = locationService.getLocationList(pageable, filters);
+
+        return new PaginatedResponse<LocationDTO>(locations);
+    }
+
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public LocationDTO getLocation(@PathVariable("id") Long locationId) {
         LocationDTO location = locationService.getLocationById(locationId);
 
         return location;
-    }
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public PaginatedResponse<LocationDTO> getlocations(@PageableDefault(size = 15) Pageable pageable) {
-        Page<LocationDTO> locations = locationService.getLocationList(pageable);
-
-        return new PaginatedResponse<LocationDTO>(locations);
     }
 
     @DeleteMapping("{id}")

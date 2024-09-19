@@ -16,3 +16,13 @@ export const authKeys = {
 
 export type AllAuthQueryKey = (typeof authKeys)["all"];
 export type CurrentUserQueryKey = ReturnType<(typeof authKeys)["currrentUser"]>;
+
+export const filterOptionKeys = {
+    all: [{ scope: "filter-options" }] as const,
+    city: () => [{ ...authKeys.all[0], entity: "city" }] as const,
+    country: () => [{ ...authKeys.all[0], entity: "country" }] as const,
+};
+
+export type AllFilterOptionQueryKey = (typeof filterOptionKeys)["all"];
+export type CityFilterOptionQueryKey = ReturnType<(typeof filterOptionKeys)["city"]>;
+export type CountryFilterOptionQueryKey = ReturnType<(typeof filterOptionKeys)["country"]>;

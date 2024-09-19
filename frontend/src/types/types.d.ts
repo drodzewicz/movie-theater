@@ -39,3 +39,8 @@ interface QueryOptionsProps<R, K extends QueryKey, E = AxiosError>
 
 interface MutationOptionsProps<R = unknown, P = unknown, E = AxiosError>
     extends Omit<UseMutationOptions<R, E, P>, "mutationFn"> {}
+
+type FilterOption = {
+    label: string;
+    value: string;
+};
