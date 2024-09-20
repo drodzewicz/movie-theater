@@ -8,8 +8,8 @@ import { useGetCityOptions } from "@/service/filter-options/useGetCityOptions";
 import { useGetCountryOptions } from "@/service/filter-options/useGetCountryOptions";
 
 function LocationTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
-    const { data: cityOptions } = useGetCityOptions();
     const { data: countryOptions } = useGetCountryOptions();
+    const { data: cityOptions } = useGetCityOptions();
 
     return (
         <DataTableToolbar table={table} onSearch={onSearch}>

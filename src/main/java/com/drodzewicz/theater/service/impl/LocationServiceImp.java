@@ -177,11 +177,14 @@ public class LocationServiceImp implements LocationService {
 
     @Override
     public List<String> getAllDistinctCities() {
+        log.info("Get distinct citites with params");
         return locationRepository.findAllDistinctCities();
+
     }
 
     @Override
     public List<String> getAllDistinctCountries() {
+        log.info("Get distinct countries");
         return locationRepository.findAllDistinctCountries();
     }
 

@@ -1,4 +1,4 @@
-package com.drodzewicz.theater.dto.domain;
+package com.drodzewicz.theater.dto.response;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class HallDTO implements Serializable {
+public class HallListDTO implements Serializable {
 
     private Long id;
 
@@ -23,5 +23,6 @@ public class HallDTO implements Serializable {
 
     private String floor;
 
-    private LocationDTO location;
+    private LocationSimpleDTO location;
+
 }

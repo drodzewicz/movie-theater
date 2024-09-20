@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.drodzewicz.theater.dto.domain.HallDTO;
 import com.drodzewicz.theater.dto.request.HallFilterDTO;
+import com.drodzewicz.theater.dto.response.HallListDTO;
 import com.drodzewicz.theater.dto.util.PaginatedResponse;
+import com.drodzewicz.theater.mapper.HallMapper;
 import com.drodzewicz.theater.service.HallService;
 
 import lombok.AllArgsConstructor;
@@ -28,6 +30,8 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/api/halls")
 public class HallController {
     private final HallService hallService;
+
+    private final HallMapper hallMapper;
 
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -41,12 +45,12 @@ public class HallController {
     // locations/id/halls should be enough
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public PaginatedResponse<HallDTO> getHalls(
+    public PaginatedResponse<HallListDTO> getHalls(
             @PageableDefault(size = 15) Pageable pageable,
             @ModelAttribute HallFilterDTO filters) {
         Page<HallDTO> halls = hallService.getHallList(pageable, filters);
 
-        return new PaginatedResponse<HallDTO>(halls);
+        return new PaginatedResponse<HallListDTO>(halls.map(hallMapper::toListDTO));
     }
 
     @DeleteMapping("{id}")

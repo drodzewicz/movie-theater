@@ -56,5 +56,5 @@ export function getSortingParams(props: unknown) {
 }
 
 export function transformToOptions(data: string[]) {
-    return data.map((it: string) => ({ label: it, value: it }));
+    return data?.map((it: string) => ({ label: it, value: it }));
 }

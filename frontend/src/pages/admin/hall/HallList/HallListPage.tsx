@@ -3,57 +3,42 @@ import Table, { DataTablePagination } from "@/components/common/Table";
 import { columns } from "@/pages/admin/hall/HallList/columns";
 import HallTableFilters from "@/pages/admin/hall/HallList/HallTableFilters";
 import { useTable } from "@/hooks/table/useTable";
-import LinkButton from "@/components/common/LinkButton";
-import { useGetParamsLocationId } from "@/hooks/useGetParamsLocationId";
-
-const data = [
-    {
-        id: "1",
-        location: {
-            id: "1",
-            identifier: "LT-VNO-AR",
-        },
-        name: "Hall-H",
-        floor: "2",
-        number: "11",
-    },
-    {
-        id: "1",
-        location: {
-            id: "1",
-            identifier: "LT-VNO-AR",
-        },
-        name: "Hall-H",
-        floor: "2",
-        number: "11",
-    },
-    {
-        id: "1",
-        location: {
-            id: "1",
-            identifier: "LT-VNO-AR",
-        },
-        name: "Hall-H",
-        floor: "2",
-        number: "11",
-    },
-];
+import { useGetHallList } from "@/service/halls/useGetHallList";
+import { useTableFilters } from "@/hooks/table/useTableFilters";
+import { useTablePagination } from "@/hooks/table/useTablePagination";
+import { useTableSorting } from "@/hooks/table/useTableSorting";
 
 function HallListPage() {
-    const locationId = useGetParamsLocationId();
+    const { pagination, onPaginationChange } = useTablePagination();
+    const { columnFilters, manualColumnFilters, onColumnFiltersChange, syncManualFilterValues } =
+        useTableFilters();
+    const { sorting, onSortingChange } = useTableSorting();
 
-    const { table } = useTable({ data, columns, itemsCount: 30 });
+    const {
+        data: { data: halls, itemsCount },
+    } = useGetHallList({
+        pagination,
+        columnFilters: manualColumnFilters,
+        sorting,
+    });
+
+    const { table } = useTable({
+        data: halls,
+        itemsCount,
+        columns,
+        stateProperties: { pagination, columnFilters, sorting },
+        onPaginationChange,
+        onColumnFiltersChange,
+        onSortingChange,
+    });
+
+    const onSearch = () => {
+        syncManualFilterValues();
+    };
 
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
-            <LinkButton
-                to="/locations/:locationId/create-hall"
-                variables={{ locationId }}
-                className="ml-auto mr-0"
-            >
-                Create Hall
-            </LinkButton>
-            <HallTableFilters table={table} />
+            <HallTableFilters table={table} onSearch={onSearch} />
             <Table table={table} />
             <DataTablePagination table={table} />
         </div>

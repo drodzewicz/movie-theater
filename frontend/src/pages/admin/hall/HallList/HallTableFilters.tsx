@@ -4,29 +4,24 @@ import {
     DropdownSelectFilter,
 } from "@/components/common/Table/Filters";
 import { PropsWithTable } from "@/components/common/Table/types";
+import { useLocationList } from "@/service/locations/useLocationList";
 
-function HallTableFilters<TData>({ table }: PropsWithTable<TData>) {
+function HallTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
+    const { data: locations } = useLocationList({ pagination: { pageSize: 50, pageIndex: 0 } });
+
+    const mappedLocations = locations.data?.map((it) => ({
+        label: `${it.identifier} (${it.country})`,
+        value: it.identifier,
+    }));
+
     return (
-        <DataTableToolbar table={table}>
+        <DataTableToolbar table={table} onSearch={onSearch}>
             <DropdownSelectFilter
-                column={table.getColumn("country")}
+                column={table.getColumn("location")}
                 title="Country"
-                options={[
-                    { label: "Lithuania", value: "Lithuania" },
-                    { label: "Poland", value: "Poland" },
-                    { label: "Germany", value: "Germany" },
-                ]}
+                options={mappedLocations}
             />
-            <DropdownSelectFilter
-                column={table.getColumn("city")}
-                title="City"
-                options={[
-                    { label: "Lithuania", value: "Lithuania" },
-                    { label: "Poland", value: "Poland" },
-                    { label: "Germany", value: "Germany" },
-                ]}
-            />
-            <SearchBarFilter column={table.getColumn("id")} placeholder="Search by location..." />
+            <SearchBarFilter column={table.getColumn("name")} placeholder="Search by hall..." />
         </DataTableToolbar>
     );
 }

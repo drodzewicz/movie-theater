@@ -39,6 +39,10 @@ type HallResponse = {
     name: string;
     room?: string;
     floor?: string;
+    location: {
+        id: string;
+        identifier: string;
+    };
 };
 
 interface QueryOptionsProps<R, K extends QueryKey, E = AxiosError>

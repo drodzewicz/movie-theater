@@ -1,21 +1,11 @@
 import LinkButton from "@/components/common/LinkButton";
 import { DataTableColumnHeader } from "@/components/common/Table/CustomCells";
+import { HallResponse } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 
-type Hall = {
-    id: string;
-    location: {
-        id: string;
-        identifier: string;
-    };
-    name: string;
-    floor: string;
-    number: string;
-};
-
-export const columns: ColumnDef<Hall>[] = [
+export const columns: ColumnDef<HallResponse>[] = [
     {
-        accessorKey: "locationIdentifier",
+        accessorKey: "location",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Location" />,
         cell: ({ row }) => (
             <LinkButton
