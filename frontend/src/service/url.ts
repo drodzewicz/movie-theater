@@ -15,6 +15,8 @@ export const URLS = [
     "/api/halls",
     "/api/users",
     "/api/managers",
+    "/api/movies",
+    "/api/movies/$id",
     "/api/filter-options/cities",
     "/api/filter-options/countries",
 ] as const;

@@ -6,8 +6,14 @@ import { useForm } from "react-hook-form";
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import FormWrapper from "@/components/form/FormWrapper";
+import ReactPlayer from "react-player";
+import DateField from "@/components/form/DateField";
+import { useCreateMovie } from "@/service/movies/useCreateMovie";
+import { useGoTo } from "@/hooks/useGoTo";
 
 const CreateMoviePage = () => {
+    const goTo = useGoTo();
+
     const form = useForm<CreateMovieSchemaType>({
         resolver: zodResolver(schema),
         defaultValues: {
@@ -15,14 +21,27 @@ const CreateMoviePage = () => {
             description: "",
             duration: null,
             language: "",
-            releaseDate: "",
+            releaseDate: null,
             posterUrl: "",
             trailerUrl: "",
         },
     });
 
+    const { mutate: createMovie } = useCreateMovie({
+        onSuccess: () => {
+            goTo("/movies");
+        },
+    });
+
     function onSubmit(values: CreateMovieSchemaType) {
-        console.log(values);
+        createMovie({
+            description: values.description,
+            title: values.title,
+            posterUrl: values.posterUrl,
+            trailerUrl: values.trailerUrl,
+            duration: values.duration,
+            releaseDate: values.releaseDate,
+        });
     }
 
     return (
@@ -36,13 +55,14 @@ const CreateMoviePage = () => {
                             control={form.control}
                             placeholder="Description"
                         />
-                        <InputField name="duration" control={form.control} placeholder="Duration" />
-                        <InputField name="language" control={form.control} placeholder="Language" />
                         <InputField
-                            name="releaseDate"
+                            name="duration"
                             control={form.control}
-                            placeholder="Release Date"
+                            type="number"
+                            placeholder="Duration"
                         />
+                        <InputField name="language" control={form.control} placeholder="Language" />
+                        <DateField name="releaseDate" control={form.control} />
                         <InputField
                             name="posterUrl"
                             control={form.control}
@@ -53,12 +73,8 @@ const CreateMoviePage = () => {
                             control={form.control}
                             placeholder="Trailer Url"
                         />
-                        <iframe
-                            className="video"
-                            title="Youtube player"
-                            sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-presentation"
-                            src="https://youtube.com/embed/TNgK88CeZsk?autoplay=0"
-                        ></iframe>
+                        <ReactPlayer url={form.getValues("trailerUrl")} />
+
                         <Button variant="default" className="rounded-sm shadow-sm" type="submit">
                             Create
                         </Button>

@@ -1,7 +1,6 @@
 package com.drodzewicz.theater.dto.request;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -22,8 +21,6 @@ public class CreateMovieDTO implements Serializable {
     private String title;
 
     private String description;
-
-    private BigDecimal rating;
 
     private String posterUrl;
 

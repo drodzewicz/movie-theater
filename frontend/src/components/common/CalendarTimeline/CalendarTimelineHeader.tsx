@@ -13,7 +13,7 @@ function CalendarTimelineHeader() {
                 <Button variant="outline" size="icon">
                     <ChevronLeft />
                 </Button>
-                <DatePicker />
+                {/* <DatePicker /> */}
                 <Button variant="outline" size="icon">
                     <ChevronRight />
                 </Button>

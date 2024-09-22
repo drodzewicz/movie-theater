@@ -9,6 +9,17 @@ export type AllLocationsQueryKeys = (typeof locationKeys)["all"];
 export type LocationListQueryKey = ReturnType<(typeof locationKeys)["list"]>;
 export type GetLocationQueryKey = ReturnType<(typeof locationKeys)["item"]>;
 
+export const movieKeys = {
+    all: [{ scope: "movie" }] as const,
+    list: ({ pagination, filters, sorting }: any) =>
+        [{ scope: "movie", entity: "list" }, pagination, filters, sorting] as const,
+    item: (id: string) => [{ scope: "movie", entity: "item" }, id] as const,
+};
+
+export type AllMoviesQueryKeys = (typeof movieKeys)["all"];
+export type MovieListQueryKey = ReturnType<(typeof movieKeys)["list"]>;
+export type GetMovieQueryKey = ReturnType<(typeof movieKeys)["item"]>;
+
 export const authKeys = {
     all: [{ scope: "auth" }] as const,
     currrentUser: () => [{ ...authKeys.all[0], entity: "current-user" }] as const,

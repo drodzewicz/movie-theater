@@ -45,6 +45,15 @@ type HallResponse = {
     };
 };
 
+type MovieResponse = {
+    id: string;
+    title: string;
+    description: string;
+    rating: number;
+    posterUrl: string;
+    trailerUrl: string;
+};
+
 type AppUserResponse = {
     id: string;
     username: string;
