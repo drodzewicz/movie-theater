@@ -5,40 +5,38 @@ import { columns } from "@/pages/admin/user/UserList/columns";
 import UserTableFilters from "@/pages/admin/user/UserList/UserTableFilters";
 import CreateUserDialog from "@/pages/admin/user/CreateUser/CreateUserDialog";
 import { useTable } from "@/hooks/table/useTable";
-
-const data = [
-    {
-        id: "1",
-        username: "Avengers",
-        firstName: "First",
-        lastName: "Last",
-        active: true,
-    },
-    {
-        id: "2",
-        username: "Sasor",
-        firstName: "First",
-        lastName: "Last",
-        active: true,
-    },
-    {
-        id: "3",
-        username: "Daro",
-        firstName: "First",
-        lastName: "Last",
-        active: true,
-    },
-    {
-        id: "4",
-        username: "Marunx",
-        firstName: "First",
-        lastName: "Last",
-        active: false,
-    },
-];
+import { useGetAppUsers } from "@/service/users/useGetAppUsers";
+import { useTablePagination } from "@/hooks/table/useTablePagination";
+import { useTableSorting } from "@/hooks/table/useTableSorting";
+import { useTableFilters } from "@/hooks/table/useTableFilters";
 
 function UserListPage() {
-    const { table } = useTable({ data, columns, itemsCount: 30 });
+    const { pagination, onPaginationChange } = useTablePagination();
+    const { columnFilters, manualColumnFilters, onColumnFiltersChange, syncManualFilterValues } =
+        useTableFilters();
+    const { sorting, onSortingChange } = useTableSorting();
+
+    const {
+        data: { data: users, itemsCount },
+    } = useGetAppUsers({
+        pagination,
+        columnFilters: manualColumnFilters,
+        sorting,
+    });
+
+    const { table } = useTable({
+        data: users,
+        columns,
+        itemsCount,
+        stateProperties: { pagination, columnFilters, sorting },
+        onPaginationChange,
+        onColumnFiltersChange,
+        onSortingChange,
+    });
+
+    const onSearch = () => {
+        syncManualFilterValues();
+    };
 
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
@@ -46,7 +44,7 @@ function UserListPage() {
                 <h2 className="text-2xl font-bold">Users</h2>
                 <CreateUserDialog />
             </div>
-            <UserTableFilters table={table} />
+            <UserTableFilters table={table} onSearch={onSearch} />
             <Table table={table} />
             <DataTablePagination table={table} />
         </div>

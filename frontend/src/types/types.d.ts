@@ -45,6 +45,22 @@ type HallResponse = {
     };
 };
 
+type AppUserResponse = {
+    id: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+};
+
+type AppMangerResponse = {
+    id: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+    appUserRole: string;
+};
+
+
 interface QueryOptionsProps<R, K extends QueryKey, E = AxiosError>
     extends Omit<UseQueryOptions<R, E, R, K>, "queryKey" | "queryFn"> {}
 

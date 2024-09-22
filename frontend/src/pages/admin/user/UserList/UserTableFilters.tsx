@@ -1,26 +1,10 @@
-import {
-    DataTableToolbar,
-    SearchBarFilter,
-    DropdownSelectFilter,
-} from "@/components/common/Table/Filters";
+import { DataTableToolbar, SearchBarFilter } from "@/components/common/Table/Filters";
 import { PropsWithTable } from "@/components/common/Table/types";
 
-function UserTableFilters<TData>({ table }: PropsWithTable<TData>) {
+function UserTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
     return (
-        <DataTableToolbar table={table}>
-            <DropdownSelectFilter
-                column={table.getColumn("rating")}
-                title="Country"
-                options={[
-                    { label: "Lithuania", value: "Lithuania" },
-                    { label: "Poland", value: "Poland" },
-                    { label: "Germany", value: "Germany" },
-                ]}
-            />
-            <SearchBarFilter
-                column={table.getColumn("title")}
-                placeholder="Search by movie title..."
-            />
+        <DataTableToolbar table={table} onSearch={onSearch}>
+            <SearchBarFilter column={table.getColumn("searchTerm")} placeholder="Search user..." />
         </DataTableToolbar>
     );
 }

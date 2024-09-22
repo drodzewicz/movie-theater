@@ -40,3 +40,19 @@ export type AllHallsQueryKeys = (typeof hallKeys)["all"];
 export type HallListQueryKey = ReturnType<(typeof hallKeys)["list"]>;
 export type LocationHallListQueryKey = ReturnType<(typeof hallKeys)["locationHalls"]>;
 export type GetHallQueryKey = ReturnType<(typeof hallKeys)["item"]>;
+
+export const usersKeys = {
+    all: [{ scope: "user" }] as const,
+    listAppUser: ({ pagination, filters, sorting }: any = {}) =>
+        [{ scope: "user", entity: "list", type: "regular" }, pagination, filters, sorting].filter(
+            Boolean
+        ),
+    listAppManager: ({ pagination, filters, sorting }: any = {}) =>
+        [{ scope: "user", entity: "list", type: "manager" }, pagination, filters, sorting].filter(
+            Boolean
+        ),
+};
+
+export type AllUserQueryKey = (typeof usersKeys)["all"];
+export type AppUserListQueryKey = ReturnType<(typeof usersKeys)["listAppUser"]>;
+export type AppManagerListQueryKey = ReturnType<(typeof usersKeys)["listAppManager"]>;

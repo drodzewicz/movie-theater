@@ -23,4 +23,5 @@ public class AppManagerUserDTO implements Serializable {
     @NotEmpty
     private String lastName;
 
+    private String appUserRole; 
 }
