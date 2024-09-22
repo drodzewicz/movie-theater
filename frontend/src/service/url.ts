@@ -3,6 +3,8 @@ export const URLS = [
     "/api/auth/logout",
     "/api/auth/login",
     "/api/auth/register",
+    "/api/auth/roles",
+    "/api/auth/permissions",
     "/api/auth/current-user",
     "/api/auth/admin/register",
     "/api/locations",
@@ -14,5 +16,5 @@ export const URLS = [
     "/api/users",
     "/api/managers",
     "/api/filter-options/cities",
-    "/api/filter-options/countries"
+    "/api/filter-options/countries",
 ] as const;

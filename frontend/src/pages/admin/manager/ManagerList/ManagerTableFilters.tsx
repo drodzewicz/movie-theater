@@ -4,8 +4,13 @@ import {
     DropdownSelectFilter,
 } from "@/components/common/Table/Filters";
 import { PropsWithTable } from "@/components/common/Table/types";
+import { transformToOptions } from "@/lib/utils";
+import { useGetAllRoles } from "@/service/auth/useGetAllRoles";
+import { FilterOption } from "@/types/types";
 
 function ManagerTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
+    const { data: roles } = useGetAllRoles<FilterOption[]>({ select: transformToOptions });
+
     return (
         <DataTableToolbar table={table} onSearch={onSearch}>
             <SearchBarFilter
@@ -16,11 +21,7 @@ function ManagerTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) 
             <DropdownSelectFilter
                 column={table.getColumn("appUserRole")}
                 title="Role"
-                options={[
-                    { label: "SUPER_USER", value: "SUPER_USER" },
-                    { label: "ADMIN", value: "ADMIN" },
-                    { label: "USER", value: "USER" },
-                ]}
+                options={roles}
             />
         </DataTableToolbar>
     );

@@ -1,5 +1,7 @@
 package com.drodzewicz.theater.specification;
 
+import java.util.List;
+
 import org.springframework.data.jpa.domain.Specification;
 
 import com.drodzewicz.theater.entity.user.AppManagerUser;
@@ -20,4 +22,11 @@ public class AppManagerSpecification {
             return null;
         };
     }
+
+    public static Specification<AppManagerUser> hasRoles(List<String> appUserRoles) {
+        return (root, query, builder) -> appUserRoles != null && !appUserRoles.isEmpty()
+                ? root.get("appUserRole").in(appUserRoles)
+                : null;
+    }
+
 }

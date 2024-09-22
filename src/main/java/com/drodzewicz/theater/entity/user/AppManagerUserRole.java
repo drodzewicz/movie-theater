@@ -5,6 +5,7 @@ import java.util.stream.*;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import com.drodzewicz.theater.entity.Location;
 import com.google.common.collect.Sets;
 
 public enum AppManagerUserRole {
@@ -20,7 +21,7 @@ public enum AppManagerUserRole {
         this.permissions = permissions;
     }
 
-    Set<AppManagerUserPermission> getPermissions() {
+    public Set<AppManagerUserPermission> getPermissions() {
         return this.permissions;
     }
 

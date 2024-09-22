@@ -85,7 +85,8 @@ public class UserServiceImpl implements UserService {
         log.debug("Get app managers with pagination: {} and filters", pageable, filters);
 
         Specification<AppManagerUser> spec = Specification
-                .where(AppManagerSpecification.hasSearchTerm(filters.getSearchTerm()));
+                .where(AppManagerSpecification.hasSearchTerm(filters.getSearchTerm()))
+                .and(AppManagerSpecification.hasRoles(filters.getAppUserRole()));
 
         Page<AppManagerUser> users = appManagerUserRepository.findAll(spec, pageable);
         return users.map(userMangerMapper::toDTO);

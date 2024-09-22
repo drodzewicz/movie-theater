@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.drodzewicz.theater.dto.domain.*;
 import com.drodzewicz.theater.dto.request.*;
 import com.drodzewicz.theater.entity.user.AppManagerUser;
+import com.drodzewicz.theater.entity.user.AppManagerUserPermission;
 import com.drodzewicz.theater.entity.user.AppManagerUserRole;
 import com.drodzewicz.theater.entity.user.AppUser;
 import com.drodzewicz.theater.exception.AppException;
@@ -17,6 +18,9 @@ import com.drodzewicz.theater.service.AuthService;
 import com.drodzewicz.theater.service.UserService;
 
 import java.nio.CharBuffer;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,10 +65,32 @@ public class AuthServiceImpl implements AuthService {
         AppManagerUser user = userManagerMapper.fromSignUpDTO(signUpDTO);
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(signUpDTO.getPassword())));
         user.setAppUserRole(AppManagerUserRole.ADMIN);
-        
+
         AppManagerUser savedUser = appManagerUserRepository.save(user);
         log.info("Saving user {}", signUpDTO.getUsername());
 
         return userManagerMapper.toDTO(savedUser);
+    }
+
+    @Override
+    public Set<String> getAllRoles() {
+        return Stream.of(AppManagerUserRole.values())
+                .map(AppManagerUserRole::name)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<String> getAllPermissions() {
+        return Stream.of(AppManagerUserPermission.values())
+                .map(AppManagerUserPermission::getPermission)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<String> getRolePermissions(AppManagerUserRole role) {
+        return role.getPermissions()
+                .stream()
+                .map(AppManagerUserPermission::getPermission)
+                .collect(Collectors.toSet());
     }
 }

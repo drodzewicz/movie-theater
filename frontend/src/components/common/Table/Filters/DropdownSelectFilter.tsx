@@ -28,15 +28,6 @@ export interface DropdownSelectFilterProps<TData, TValue> extends CommonFilter<T
     options: DropdownSelectFilterOption[];
 }
 
-export interface DropdownSelectFilterConfig<TData, TValue> {
-    columnName: string;
-    Filter: React.ComponentType<CommonFilter<TData, TValue>>;
-    props: {
-        title?: string;
-        options: DropdownSelectFilterOption[];
-    };
-}
-
 function DropdownSelectFilter<TData, TValue>({
     column,
     title,

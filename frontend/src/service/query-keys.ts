@@ -12,10 +12,12 @@ export type GetLocationQueryKey = ReturnType<(typeof locationKeys)["item"]>;
 export const authKeys = {
     all: [{ scope: "auth" }] as const,
     currrentUser: () => [{ ...authKeys.all[0], entity: "current-user" }] as const,
+    rolesList: () => [{ ...authKeys.all[0], entity: "list", type: "role" }] as const,
 };
 
 export type AllAuthQueryKey = (typeof authKeys)["all"];
 export type CurrentUserQueryKey = ReturnType<(typeof authKeys)["currrentUser"]>;
+export type RoleListQueryKey = ReturnType<(typeof authKeys)["rolesList"]>;
 
 export const filterOptionKeys = {
     all: [{ scope: "filter-options" }] as const,

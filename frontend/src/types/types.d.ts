@@ -60,9 +60,8 @@ type AppMangerResponse = {
     appUserRole: string;
 };
 
-
-interface QueryOptionsProps<R, K extends QueryKey, E = AxiosError>
-    extends Omit<UseQueryOptions<R, E, R, K>, "queryKey" | "queryFn"> {}
+interface QueryOptionsProps<R, K extends QueryKey, M = R, E = AxiosError>
+    extends Omit<UseQueryOptions<R, E, M, K>, "queryKey" | "queryFn"> {}
 
 interface MutationOptionsProps<R = unknown, P = unknown, E = AxiosError>
     extends Omit<UseMutationOptions<R, E, P>, "mutationFn"> {}
