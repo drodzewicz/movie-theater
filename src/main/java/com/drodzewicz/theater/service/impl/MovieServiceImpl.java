@@ -5,11 +5,13 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.drodzewicz.theater.dto.domain.MovieDTO;
 import com.drodzewicz.theater.dto.domain.MovieDetailedDTO;
 import com.drodzewicz.theater.dto.request.CreateMovieDTO;
+import com.drodzewicz.theater.dto.request.MovieFilterDTO;
 import com.drodzewicz.theater.entity.Movie;
 import com.drodzewicz.theater.entity.UserMovieRating;
 import com.drodzewicz.theater.entity.user.AppUser;
@@ -19,6 +21,7 @@ import com.drodzewicz.theater.repository.AppUserRepository;
 import com.drodzewicz.theater.repository.MovieRepository;
 import com.drodzewicz.theater.repository.UserMovieRatingRepository;
 import com.drodzewicz.theater.service.MovieService;
+import com.drodzewicz.theater.specification.MovieSpecification;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,9 +53,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Page<MovieDTO> getMovieList(Pageable pageable) {
-        log.info("Getting movies");
-        Page<Movie> movies = movieRepository.findAll(pageable);
+    public Page<MovieDTO> getMovieList(Pageable pageable, MovieFilterDTO filters) {
+        log.info("Getting movies pagination {} and filters {}", pageable, filters);
+        Specification<Movie> spec = Specification.where(MovieSpecification.hasTitle(filters.getTitle()));
+
+        Page<Movie> movies = movieRepository.findAll(spec, pageable);
         return movies.map(movieMapper::toDTO);
     }
 

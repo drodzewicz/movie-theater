@@ -5,39 +5,52 @@ import { columns } from "@/pages/admin/movie/MovieList/columns";
 import MovieTableFilters from "@/pages/admin/movie/MovieList/MovieTableFilters";
 import { useTable } from "@/hooks/table/useTable";
 import LinkButton from "@/components/common/LinkButton";
-
-const data = [
-    {
-        id: "1",
-        title: "Avengers",
-        rating: 3,
-    },
-    {
-        id: "2",
-        title: "Avengers 2",
-        rating: 4,
-    },
-    {
-        id: "3",
-        title: "The breaker",
-        rating: 4,
-    },
-    {
-        id: "4",
-        title: "Some movie",
-        rating: 4,
-    },
-];
+import { useMovieList } from "@/service/movies/useMovieList";
+import { useTablePagination } from "@/hooks/table/useTablePagination";
+import { useTableFilters } from "@/hooks/table/useTableFilters";
+import { useTableSorting } from "@/hooks/table/useTableSorting";
 
 function MovieListPage() {
-    const { table } = useTable({ data, columns, itemsCount: 30 });
+    const { pagination, onPaginationChange } = useTablePagination();
+    const {
+        globalFilter,
+        columnFilters,
+        manualColumnFilters,
+        onColumnFiltersChange,
+        syncManualFilterValues,
+        onGlobalFilterChange,
+    } = useTableFilters();
+    const { sorting, onSortingChange } = useTableSorting();
+
+    const {
+        data: { data, itemsCount },
+    } = useMovieList({
+        pagination,
+        columnFilters: manualColumnFilters,
+        sorting,
+    });
+
+    const { table } = useTable({
+        data,
+        columns,
+        itemsCount,
+        stateProperties: { pagination, columnFilters, sorting, globalFilter },
+        onPaginationChange,
+        onColumnFiltersChange,
+        onSortingChange,
+        onGlobalFilterChange,
+    });
+
+    const onSearch = () => {
+        syncManualFilterValues();
+    };
 
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
             <LinkButton to="/movies/create" className="ml-auto mr-0" variant="default">
                 Add new movie
             </LinkButton>
-            <MovieTableFilters table={table} />
+            <MovieTableFilters table={table} onSearch={onSearch} />
             <Table table={table} />
             <DataTablePagination table={table} />
         </div>

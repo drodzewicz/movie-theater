@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.drodzewicz.theater.dto.domain.MovieDTO;
 import com.drodzewicz.theater.dto.domain.MovieDetailedDTO;
 import com.drodzewicz.theater.dto.request.CreateMovieDTO;
+import com.drodzewicz.theater.dto.request.MovieFilterDTO;
 import com.drodzewicz.theater.entity.Movie;
 
 public interface MovieService {
@@ -15,7 +16,7 @@ public interface MovieService {
 
     MovieDTO getMovieById(Long movieId);
 
-    Page<MovieDTO> getMovieList(Pageable pageable);
+    Page<MovieDTO> getMovieList(Pageable pageable, MovieFilterDTO filters);
 
     MovieDetailedDTO createMovie(CreateMovieDTO movieDTO);
 

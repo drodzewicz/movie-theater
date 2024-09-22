@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,7 @@ import com.drodzewicz.theater.dto.domain.AppBaseUserDTO;
 import com.drodzewicz.theater.dto.domain.MovieDTO;
 import com.drodzewicz.theater.dto.domain.MovieDetailedDTO;
 import com.drodzewicz.theater.dto.request.CreateMovieDTO;
+import com.drodzewicz.theater.dto.request.MovieFilterDTO;
 import com.drodzewicz.theater.dto.util.PaginatedResponse;
 import com.drodzewicz.theater.service.CurrentUserService;
 import com.drodzewicz.theater.service.MovieService;
@@ -55,8 +57,9 @@ public class MovieController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public PaginatedResponse<MovieDTO> getMovies(@PageableDefault(size = 15) Pageable pageable) {
-        Page<MovieDTO> movies = movieService.getMovieList(pageable);
+    public PaginatedResponse<MovieDTO> getMovies(@PageableDefault(size = 15) Pageable pageable,
+            @ModelAttribute MovieFilterDTO filters) {
+        Page<MovieDTO> movies = movieService.getMovieList(pageable, filters);
         return new PaginatedResponse<MovieDTO>(movies);
     }
 

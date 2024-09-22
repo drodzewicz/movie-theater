@@ -1,19 +1,8 @@
 import { DataTableColumnHeader } from "@/components/common/Table/CustomCells";
+import { MovieResponse } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 
-type Movie = {
-    id: string;
-    title: string;
-    rating: number;
-};
-
-export const columns: ColumnDef<Movie>[] = [
-    {
-        accessorKey: "id",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Id" />,
-        enableSorting: false,
-        enableHiding: false,
-    },
+export const columns: ColumnDef<MovieResponse>[] = [
     {
         accessorKey: "title",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Title" />,
@@ -25,5 +14,17 @@ export const columns: ColumnDef<Movie>[] = [
         header: ({ column }) => <DataTableColumnHeader column={column} title="Rating" />,
         enableSorting: true,
         enableHiding: true,
+    },
+    {
+        accessorKey: "posterUrl",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Has Poster" />,
+        enableSorting: false,
+        enableHiding: false,
+    },
+    {
+        accessorKey: "trailerUrl",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Has Trailer" />,
+        enableSorting: false,
+        enableHiding: false,
     },
 ];
