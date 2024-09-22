@@ -14,7 +14,8 @@ function LocationTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>)
     return (
         <DataTableToolbar table={table} onSearch={onSearch}>
             <SearchBarFilter
-                column={table.getColumn("identifier")}
+                value={table.getColumn("identifier").getFilterValue() as string}
+                onChange={table.getColumn("identifier").setFilterValue}
                 placeholder="Search by location..."
             />
 

@@ -1,30 +1,30 @@
+import React from "react";
 import { Input } from "@/components/ui/input";
-import { CommonFilter } from "@/components/common/Table/types";
+import { cn } from "@/lib/utils";
 
-export interface SearchBarFilterProps<TData, TValue> extends CommonFilter<TData, TValue> {
+export interface SearchBarFilterProps {
     placeholder?: string;
+    value?: string;
+    onChange: (val: string) => void;
+    className?: string;
 }
 
-export interface SearchFilterConfig<TData, TValue> {
-    columnName: string;
-    Filter: React.ComponentType<CommonFilter<TData, TValue>>;
-    props: {
-        placeholder?: string;
-    };
-}
-
-function SearchBarFilter<TData, TValue>({
-    column,
+function SearchBarFilter({
     placeholder = "Search...",
-}: SearchBarFilterProps<TData, TValue>) {
+    onChange,
+    className,
+    value,
+}: SearchBarFilterProps) {
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onChange(e.target.value);
+    };
+
     return (
         <Input
             placeholder={placeholder}
-            value={(column?.getFilterValue() as string) ?? ""}
-            onChange={(event: { target: { value: any } }) =>
-                column?.setFilterValue(event.target.value)
-            }
-            className="h-8 w-[150px] lg:w-[250px]"
+            onChange={onChangeHandler}
+            value={value}
+            className={cn("h-8 w-[150px] lg:w-[250px]", className)}
         />
     );
 }

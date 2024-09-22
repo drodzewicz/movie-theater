@@ -18,6 +18,7 @@ export function useOnResetTableFilters<T>({ table, callback }: OnResetTableProps
 
     const resetFilters = useCallback(() => {
         table.resetColumnFilters();
+        table.resetGlobalFilter();
         setAreFiltersReset(true);
     }, [table]);
 

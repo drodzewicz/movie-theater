@@ -17,6 +17,7 @@ type TableProps<TData> = {
     onPaginationChange?: OnChangeFn<PaginationState>;
     onColumnFiltersChange?: OnChangeFn<ColumnFiltersState>;
     onSortingChange?: OnChangeFn<SortingState>;
+    onGlobalFilterChange?: OnChangeFn<any>;
 };
 
 function useTable<TData>({
@@ -27,6 +28,7 @@ function useTable<TData>({
     onPaginationChange,
     onSortingChange,
     onColumnFiltersChange,
+    onGlobalFilterChange,
 }: TableProps<TData>) {
     const table = useReactTable({
         data,
@@ -35,11 +37,13 @@ function useTable<TData>({
         manualPagination: true,
         manualFiltering: true,
         manualSorting: true,
+        enableGlobalFilter: true,
         rowCount: itemsCount,
         onPaginationChange,
         onSortingChange,
         onColumnFiltersChange,
         getCoreRowModel: getCoreRowModel(),
+        onGlobalFilterChange,
     });
 
     return { table };

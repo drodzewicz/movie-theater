@@ -12,8 +12,14 @@ import { useTableFilters } from "@/hooks/table/useTableFilters";
 
 function UserListPage() {
     const { pagination, onPaginationChange } = useTablePagination();
-    const { columnFilters, manualColumnFilters, onColumnFiltersChange, syncManualFilterValues } =
-        useTableFilters();
+    const {
+        globalFilter,
+        columnFilters,
+        manualColumnFilters,
+        onColumnFiltersChange,
+        syncManualFilterValues,
+        onGlobalFilterChange,
+    } = useTableFilters();
     const { sorting, onSortingChange } = useTableSorting();
 
     const {
@@ -28,10 +34,11 @@ function UserListPage() {
         data: users,
         columns,
         itemsCount,
-        stateProperties: { pagination, columnFilters, sorting },
+        stateProperties: { pagination, columnFilters, sorting, globalFilter },
         onPaginationChange,
         onColumnFiltersChange,
         onSortingChange,
+        onGlobalFilterChange,
     });
 
     const onSearch = () => {

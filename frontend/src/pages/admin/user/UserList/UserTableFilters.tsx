@@ -4,7 +4,11 @@ import { PropsWithTable } from "@/components/common/Table/types";
 function UserTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
     return (
         <DataTableToolbar table={table} onSearch={onSearch}>
-            <SearchBarFilter column={table.getColumn("searchTerm")} placeholder="Search user..." />
+            <SearchBarFilter
+                value={table.getState().globalFilter ?? ""}
+                onChange={table.setGlobalFilter}
+                placeholder="Search user..."
+            />
         </DataTableToolbar>
     );
 }

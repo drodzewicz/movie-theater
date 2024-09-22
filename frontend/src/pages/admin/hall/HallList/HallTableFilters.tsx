@@ -21,7 +21,11 @@ function HallTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
                 title="Country"
                 options={mappedLocations}
             />
-            <SearchBarFilter column={table.getColumn("name")} placeholder="Search by hall..." />
+            <SearchBarFilter
+                value={table.getColumn("name").getFilterValue() as string}
+                onChange={table.getColumn("name").setFilterValue}
+                placeholder="Search by hall..."
+            />
         </DataTableToolbar>
     );
 }

@@ -4,14 +4,21 @@ import { ColumnFiltersState } from "@tanstack/react-table";
 export function useTableFilters() {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [manualColumnFilters, setManualColumnFilters] = useState<ColumnFiltersState>([]);
+    const [searchTerm, setSearchTerm] = useState<string>("");
 
     const syncManualFilterValues = useCallback(() => {
-        setManualColumnFilters(columnFilters);
-    }, [columnFilters]);
+        const filters = [...columnFilters];
+        if (searchTerm) {
+            filters.push({ id: "searchTerm", value: searchTerm });
+        }
+        setManualColumnFilters(filters);
+    }, [columnFilters, searchTerm]);
 
     return {
+        globalFilter: searchTerm,
         columnFilters,
         onColumnFiltersChange: setColumnFilters,
+        onGlobalFilterChange: setSearchTerm,
         manualColumnFilters,
         syncManualFilterValues,
     };

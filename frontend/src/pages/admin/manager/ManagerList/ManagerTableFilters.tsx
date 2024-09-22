@@ -18,7 +18,8 @@ function ManagerTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) 
                 ]}
             />
             <SearchBarFilter
-                column={table.getColumn("username")}
+                value={table.getColumn("username").getFilterValue() as string}
+                onChange={table.getColumn("username").setFilterValue}
                 placeholder="Search by movie title..."
             />
         </DataTableToolbar>
