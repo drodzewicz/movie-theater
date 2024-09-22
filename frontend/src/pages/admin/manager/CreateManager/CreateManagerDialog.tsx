@@ -4,7 +4,7 @@ import schema, {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/form/InputField";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/ui/form";
 
 import {
@@ -17,35 +17,69 @@ import {
 import {
     DialogHeader,
     Dialog,
-    DialogTrigger,
     DialogContent,
     DialogTitle,
     DialogDescription,
 } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
+import { transformToOptions } from "@/lib/utils";
 import FormWrapper from "@/components/form/FormWrapper";
+import { useRegisterAppManager } from "@/service/auth/useRegisterAppManager";
+import { useGetAllRoles } from "@/service/auth/useGetAllRoles";
+import { FilterOption } from "@/types/types";
+import { useLocationList } from "@/service/locations/useLocationList";
+import { useQueryClient } from "@tanstack/react-query";
+import { usersKeys } from "@/service/query-keys";
+import useDialogState from "@/hooks/useDialogState";
 
 const CreateManagerDialog = () => {
+    const { isOpen, setIsOpen, close, open } = useDialogState();
+
     const form = useForm<CreateManagerSchemaType>({
         resolver: zodResolver(schema),
         defaultValues: {
             firstName: "",
             lastName: "",
             username: "",
+            password: "",
             role: "",
-            locations: [],
+            location: "",
         },
     });
 
+    const queryClient = useQueryClient();
+
+    const { mutate: registerManager } = useRegisterAppManager({
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: usersKeys.listAppManager() });
+            close();
+        },
+    });
+
+    const { data: roles } = useGetAllRoles<FilterOption[]>({ select: transformToOptions });
+
+    const {
+        data: { data: locations },
+    } = useLocationList({ pagination: { pageSize: 100, pageIndex: 0 } });
+
+    const transformedLocations = locations?.map((it) => ({
+        value: `${it.id}`,
+        label: `${it.identifier} (${it.country})`,
+    }));
+
     function onSubmit(values: CreateManagerSchemaType) {
-        console.log(values);
+        registerManager({
+            firstName: values?.firstName,
+            lastName: values?.lastName,
+            username: values?.username,
+            password: values?.password,
+        });
     }
 
     return (
-        <Dialog>
-            <DialogTrigger className={cn(buttonVariants({ variant: "default", size: "sm" }))}>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <Button onClick={open} variant="default" size="sm">
                 Add new Manager
-            </DialogTrigger>
+            </Button>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Add new Manager</DialogTitle>
@@ -56,6 +90,11 @@ const CreateManagerDialog = () => {
                                     name="username"
                                     control={form.control}
                                     placeholder="Username"
+                                />
+                                <InputField
+                                    name="password"
+                                    control={form.control}
+                                    placeholder="Password"
                                 />
                                 <InputField
                                     name="firstName"
@@ -79,30 +118,32 @@ const CreateManagerDialog = () => {
                                                 <SelectValue placeholder="Role" />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                <SelectItem value="SUPER_USER">
-                                                    Super User
-                                                </SelectItem>
-                                                <SelectItem value="ADMIN">Admin</SelectItem>
-                                                <SelectItem value="MANAGER">Manager</SelectItem>
+                                                {roles.map((role) => (
+                                                    <SelectItem key={role.value} value={role.value}>
+                                                        {role.label}
+                                                    </SelectItem>
+                                                ))}
                                             </SelectContent>
                                         </Select>
                                     )}
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="role"
+                                    name="location"
                                     render={({ field }) => (
                                         <Select
                                             onValueChange={field.onChange}
                                             defaultValue={field.value}
                                         >
                                             <SelectTrigger className="w-[180px]">
-                                                <SelectValue placeholder="Locations" />
+                                                <SelectValue placeholder="Location" />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                <SelectItem value="SUPER_USER">DWD23</SelectItem>
-                                                <SelectItem value="ADMIN">CNO-43</SelectItem>
-                                                <SelectItem value="MANAGER">PNR-234</SelectItem>
+                                                {transformedLocations.map((it) => (
+                                                    <SelectItem key={it.label} value={it.value}>
+                                                        {it.label}
+                                                    </SelectItem>
+                                                ))}
                                             </SelectContent>
                                         </Select>
                                     )}
