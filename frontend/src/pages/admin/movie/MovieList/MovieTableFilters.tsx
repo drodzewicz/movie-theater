@@ -1,7 +1,4 @@
-import {
-    DataTableToolbar,
-    SearchBarFilter,
-} from "@/components/common/Table/Filters";
+import { DataTableToolbar, SearchBarFilter } from "@/components/common/Table/Filters";
 import { PropsWithTable } from "@/components/common/Table/types";
 
 function MovieTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
