@@ -12,8 +12,14 @@ import { useTableSorting } from "@/hooks/table/useTableSorting";
 
 function ManagerListPage() {
     const { pagination, onPaginationChange } = useTablePagination();
-    const { columnFilters, manualColumnFilters, onColumnFiltersChange, syncManualFilterValues } =
-        useTableFilters();
+    const {
+        globalFilter,
+        columnFilters,
+        manualColumnFilters,
+        onColumnFiltersChange,
+        syncManualFilterValues,
+        onGlobalFilterChange,
+    } = useTableFilters();
     const { sorting, onSortingChange } = useTableSorting();
 
     const {
@@ -28,10 +34,11 @@ function ManagerListPage() {
         data: managers,
         columns,
         itemsCount,
-        stateProperties: { pagination, columnFilters, sorting },
+        stateProperties: { pagination, columnFilters, sorting, globalFilter },
         onPaginationChange,
         onColumnFiltersChange,
         onSortingChange,
+        onGlobalFilterChange,
     });
 
     const onSearch = () => {

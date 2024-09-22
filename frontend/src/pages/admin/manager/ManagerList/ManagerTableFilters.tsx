@@ -8,6 +8,11 @@ import { PropsWithTable } from "@/components/common/Table/types";
 function ManagerTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
     return (
         <DataTableToolbar table={table} onSearch={onSearch}>
+            <SearchBarFilter
+                value={table.getState().globalFilter ?? ""}
+                onChange={table.setGlobalFilter}
+                placeholder="Search by movie title..."
+            />
             <DropdownSelectFilter
                 column={table.getColumn("appUserRole")}
                 title="Role"
@@ -16,11 +21,6 @@ function ManagerTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) 
                     { label: "ADMIN", value: "ADMIN" },
                     { label: "USER", value: "USER" },
                 ]}
-            />
-            <SearchBarFilter
-                value={table.getColumn("username").getFilterValue() as string}
-                onChange={table.getColumn("username").setFilterValue}
-                placeholder="Search by movie title..."
             />
         </DataTableToolbar>
     );
