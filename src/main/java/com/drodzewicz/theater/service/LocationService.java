@@ -9,6 +9,7 @@ import com.drodzewicz.theater.dto.domain.HallDTO;
 import com.drodzewicz.theater.dto.domain.LocationDTO;
 import com.drodzewicz.theater.dto.request.CreateLocationDTO;
 import com.drodzewicz.theater.dto.request.LocationFilterDTO;
+import com.drodzewicz.theater.dto.response.LocationListItemDTO;
 import com.drodzewicz.theater.entity.Location;
 
 public interface LocationService {
@@ -16,7 +17,7 @@ public interface LocationService {
 
     LocationDTO getLocationById(Long locationId);
 
-    Page<LocationDTO> getLocationList(Pageable pageable, LocationFilterDTO filters);
+    Page<LocationListItemDTO> getLocationList(Pageable pageable, LocationFilterDTO filters);
 
     LocationDTO createLocation(CreateLocationDTO locationDTO);
 

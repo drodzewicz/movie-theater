@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import LocationTableRowActions from "@/pages/admin/location/location-list/table-actions/LocationTableRowActions";
 import LinkButton from "@/components/common/LinkButton";
+import DateCell from "@/components/common/table/custom-cells/DateCell";
 
 export const columns: ColumnDef<LocationResponse>[] = [
     {
@@ -59,6 +60,13 @@ export const columns: ColumnDef<LocationResponse>[] = [
         ),
         enableSorting: false,
         enableHiding: false,
+    },
+    {
+        accessorKey: "dateCreated",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Date Created" />,
+        cell: ({ row }) => <DateCell row={row} accessorKey="dateCreated" />,
+        enableSorting: true,
+        enableHiding: true,
     },
     {
         id: "actions",

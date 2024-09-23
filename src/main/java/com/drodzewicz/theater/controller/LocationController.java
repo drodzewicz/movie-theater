@@ -14,6 +14,7 @@ import com.drodzewicz.theater.dto.domain.LocationDTO;
 import com.drodzewicz.theater.dto.request.CreateHallDTO;
 import com.drodzewicz.theater.dto.request.CreateLocationDTO;
 import com.drodzewicz.theater.dto.request.LocationFilterDTO;
+import com.drodzewicz.theater.dto.response.LocationListItemDTO;
 import com.drodzewicz.theater.dto.util.PaginatedResponse;
 import com.drodzewicz.theater.service.HallService;
 import com.drodzewicz.theater.service.LocationService;
@@ -23,6 +24,7 @@ import lombok.AllArgsConstructor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -53,12 +55,13 @@ public class LocationController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public PaginatedResponse<LocationDTO> getLocations(
-            @PageableDefault(size = 15) Pageable pageable,
+    public PaginatedResponse<LocationListItemDTO> getLocations(
+            @PageableDefault(size = 15, sort = "dateCreated", direction = Sort.Direction.DESC) Pageable pageable,
             @ModelAttribute LocationFilterDTO filters) {
-        Page<LocationDTO> locations = locationService.getLocationList(pageable, filters);
 
-        return new PaginatedResponse<LocationDTO>(locations);
+        Page<LocationListItemDTO> locations = locationService.getLocationList(pageable, filters);
+
+        return new PaginatedResponse<LocationListItemDTO>(locations);
     }
 
     @GetMapping("{id}")

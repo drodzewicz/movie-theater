@@ -13,6 +13,7 @@ import com.drodzewicz.theater.dto.domain.HallDTO;
 import com.drodzewicz.theater.dto.domain.LocationDTO;
 import com.drodzewicz.theater.dto.request.CreateLocationDTO;
 import com.drodzewicz.theater.dto.request.LocationFilterDTO;
+import com.drodzewicz.theater.dto.response.LocationListItemDTO;
 import com.drodzewicz.theater.entity.Hall;
 import com.drodzewicz.theater.entity.Location;
 import com.drodzewicz.theater.entity.user.AppManagerUser;
@@ -60,7 +61,7 @@ public class LocationServiceImp implements LocationService {
     }
 
     @Override
-    public Page<LocationDTO> getLocationList(Pageable pageable, LocationFilterDTO filters) {
+    public Page<LocationListItemDTO> getLocationList(Pageable pageable, LocationFilterDTO filters) {
         log.info("Getting locations with pagination {} and filters {}", pageable, filters);
         Specification<Location> spec = Specification.where(LocationSpecification.hasIdentifier(filters.getIdentifier()))
                 .and(LocationSpecification.hasCities(filters.getCity()))
@@ -68,7 +69,7 @@ public class LocationServiceImp implements LocationService {
                 .and(LocationSpecification.isActive(filters.getActive()));
 
         Page<Location> locations = locationRepository.findAll(spec, pageable);
-        return locations.map(locationMapper::toDTO);
+        return locations.map(locationMapper::toListItemDTO);
     }
 
     @Override
