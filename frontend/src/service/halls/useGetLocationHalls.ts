@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import ServiceClient from "../service-client";
 import { hallKeys, LocationHallListQueryKey } from "@/service/query-keys";
-import { QueryOptionsProps, HallResponse } from "@/types/types";
+import { QueryOptionsProps } from "@/types/types";
 
 type LocationHallsProps = {
     locationId: string;

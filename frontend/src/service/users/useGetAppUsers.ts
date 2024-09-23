@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PaginationState, ColumnFiltersState, SortingState } from "@tanstack/react-table";
 import ServiceClient from "../service-client";
 import { usersKeys, AppUserListQueryKey } from "@/service/query-keys";
-import { PaginatedResponse, AppUserResponse, QueryOptionsProps } from "@/types/types";
+import { QueryOptionsProps } from "@/types/types";
 import { getFilterParams, getPaginationParams, getSortingParams } from "@/lib/utils";
 
 type AppUserListProps = {

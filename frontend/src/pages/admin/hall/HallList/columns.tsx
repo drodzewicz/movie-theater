@@ -1,6 +1,5 @@
 import LinkButton from "@/components/common/LinkButton";
 import { DataTableColumnHeader } from "@/components/common/Table/CustomCells";
-import { HallResponse } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<HallResponse>[] = [

@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 
 import ServiceClient from "@/service/service-client";
-import { ApiDataValidationError, MutationOptionsProps } from "@/types/types";
+import { MutationOptionsProps } from "@/types/types";
 
 type RegisterPayload = {
     username: string;

@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import ServiceClient from "@/service/service-client";
-import { LocationResponse, ApiDataValidationError, MutationOptionsProps } from "@/types/types";
+import { MutationOptionsProps } from "@/types/types";
 import { locationKeys } from "@/service/query-keys";
 
 type CreateLocationPayload = {

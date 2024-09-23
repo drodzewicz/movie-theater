@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import ServiceClient from "../service-client";
 import { hallKeys, HallListQueryKey } from "@/service/query-keys";
-import { QueryOptionsProps, HallResponse, PaginatedResponse } from "@/types/types";
+import { QueryOptionsProps } from "@/types/types";
 import { getPaginationParams, getFilterParams, getSortingParams } from "@/lib/utils";
 import { PaginationState, ColumnFiltersState, SortingState } from "@tanstack/react-table";
 

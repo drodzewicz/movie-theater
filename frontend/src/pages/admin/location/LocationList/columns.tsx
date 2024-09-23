@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import LocationTableRowActions from "@/pages/admin/location/LocationList/LocationTableRowActions";
 import LinkButton from "@/components/common/LinkButton";
-import { LocationResponse } from "@/types/types";
 
 export const columns: ColumnDef<LocationResponse>[] = [
     {

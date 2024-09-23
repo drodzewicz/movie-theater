@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import ServiceClient from "@/service/service-client";
-import { ApiDataValidationError, MutationOptionsProps, HallResponse } from "@/types/types";
+import { MutationOptionsProps } from "@/types/types";
 import { hallKeys } from "@/service/query-keys";
 
 type CreateHallPayload = {

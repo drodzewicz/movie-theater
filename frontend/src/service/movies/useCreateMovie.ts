@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import ServiceClient from "@/service/service-client";
-import { MovieResponse, ApiDataValidationError, MutationOptionsProps } from "@/types/types";
+import { MutationOptionsProps } from "@/types/types";
 import { movieKeys } from "@/service/query-keys";
 
 type CreateMoviePayload = {

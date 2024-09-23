@@ -1,5 +1,4 @@
 import { DataTableColumnHeader } from "@/components/common/Table/CustomCells";
-import { MovieResponse } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<MovieResponse>[] = [

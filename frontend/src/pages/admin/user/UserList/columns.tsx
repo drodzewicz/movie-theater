@@ -1,7 +1,6 @@
 import { DataTableColumnHeader } from "@/components/common/Table/CustomCells";
 // import { Badge } from "@/components/ui/badge";
 // import { cn } from "@/lib/utils";
-import { AppUserResponse } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<AppUserResponse>[] = [
