@@ -20,7 +20,7 @@
             <column name="movie_id" type="BIGINT" />
             <column name="hall_id" type="BIGINT" />
             <column name="published" type="BOOLEAN" />
-            <column name="date_created" type="TIMESTAMP">
+            <column name="date_created" type="TIMESTAMP" defaultValueComputed="timezone('UTC', now())">
                 <constraints nullable="false" />
             </column>
         </createTable>

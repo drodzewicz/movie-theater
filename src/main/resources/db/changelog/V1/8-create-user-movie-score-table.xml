@@ -17,7 +17,7 @@
             <column name="rating" type="DECIMAL(3, 1)" />
             <column name="user_id" type="BIGINT" />
             <column name="movie_id" type="BIGINT" />
-            <column name="date_added" type="TIMESTAMP">
+            <column name="date_added" type="TIMESTAMP" defaultValueComputed="timezone('UTC', now())">
                 <constraints nullable="false" />
             </column>
         </createTable>

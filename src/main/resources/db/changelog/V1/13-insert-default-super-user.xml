@@ -19,6 +19,7 @@
             <column name="first_name" value="super_name" />
             <column name="last_name" value="super_lastname" />
             <column name="app_user_role" value="SUPER_USER" />
+            <column name="active" value="true" />
         </insert>
     </changeSet>
 </databaseChangeLog>

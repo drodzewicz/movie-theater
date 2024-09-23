@@ -26,7 +26,7 @@
             <column name="password" type="VARCHAR(100)">
                 <constraints nullable="false" />
             </column>
-            <column name="date_created" type="TIMESTAMP">
+            <column name="date_created" type="TIMESTAMP" defaultValueComputed="timezone('UTC', now())">
                 <constraints nullable="false" />
             </column>
             <column name="active" type="BOOLEAN" defaultValue="false" />

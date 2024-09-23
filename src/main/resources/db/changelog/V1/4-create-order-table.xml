@@ -18,7 +18,7 @@
                 <constraints nullable="false" />
             </column>
             <column name="user_id" type="BIGINT" />
-            <column name="date_created" type="TIMESTAMP">
+            <column name="date_created" type="TIMESTAMP" defaultValueComputed="timezone('UTC', now())">
                 <constraints nullable="false" />
             </column>
         </createTable>

@@ -20,7 +20,7 @@
             <column name="room" type="VARCHAR(255)" />
             <column name="floor" type="VARCHAR(255)" />
             <column name="location_id" type="BIGINT" />
-            <column name="date_created" type="TIMESTAMP">
+            <column name="date_created" type="TIMESTAMP" defaultValueComputed="timezone('UTC', now())">
                 <constraints nullable="false" />
             </column>
             <column name="active" type="BOOLEAN" defaultValue="false" />
