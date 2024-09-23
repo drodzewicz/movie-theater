@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import _ from "lodash";
+import { FilterParams, PaginationParams, SortParams } from "@/types/types";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -31,7 +32,7 @@ export function interpolateUrl(
         .join("/");
 }
 
-export function getPaginationParams(props: unknown) {
+export function getPaginationParams(props: unknown): PaginationParams | undefined {
     const pagination = _.get(props, "pagination");
     return _.isEmpty(pagination)
         ? undefined
@@ -41,14 +42,14 @@ export function getPaginationParams(props: unknown) {
           };
 }
 
-export function getFilterParams(props: unknown) {
+export function getFilterParams(props: unknown): FilterParams | undefined {
     const columnFilters = _.get(props, "columnFilters");
     return _.isEmpty(columnFilters)
         ? undefined
         : _.mapValues(_.keyBy(columnFilters, "id"), "value");
 }
 
-export function getSortingParams(props: unknown) {
+export function getSortingParams(props: unknown): SortParams | undefined {
     const sorting = _.get(props, "sorting[0]") as { id: string; desc: boolean };
     return _.isEmpty(sorting)
         ? undefined

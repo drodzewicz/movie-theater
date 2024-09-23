@@ -21,7 +21,7 @@ export function useCurrentUser(
 
     return useQuery({
         ...options,
-        queryKey: authKeys.currrentUser(),
+        queryKey: authKeys.currrentUser,
         queryFn: async () => {
             const response = await ServiceClient.instance.fetch({ url: "/api/auth/current-user" });
             return response.data;

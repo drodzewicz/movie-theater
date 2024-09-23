@@ -20,3 +20,18 @@ type FilterOption = {
     label: string;
     value: string;
 };
+
+type PaginationParams = {
+    size?: number;
+    page?: number;
+};
+
+type FilterParams = Record<string, unknown>;
+
+type SortParams = { sort: string };
+
+type ListOptions = {
+    pagination?: PaginationParams;
+    filters?: FilterParams;
+    sorting?: SortParams;
+};

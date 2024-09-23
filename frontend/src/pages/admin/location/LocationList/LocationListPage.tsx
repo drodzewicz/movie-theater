@@ -13,7 +13,7 @@ import LinkButton from "@/components/common/LinkButton";
 function LocationListPage() {
     const { pagination, onPaginationChange } = useTablePagination();
     const { columnFilters, manualColumnFilters, onColumnFiltersChange, syncManualFilterValues } =
-        useTableFilters();
+        useTableFilters();  
     const { sorting, onSortingChange } = useTableSorting();
 
     const {

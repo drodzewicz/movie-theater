@@ -1,52 +1,75 @@
+import { ListOptions } from "@/types/types";
+
+// UTILITY
+export const TYPE = {
+    list: { type: "list" } as const,
+    item: { type: "item" } as const,
+    details: { type: "details" } as const,
+};
+
+export const SCOPE = {
+    location: { scope: "location" } as const,
+    movie: { scope: "movie" } as const,
+    auth: { scope: "auth" } as const,
+    filterOptions: { scope: "filter-options" } as const,
+    hall: { scope: "hall" } as const,
+    user: { scope: "user" } as const,
+};
+
+// LOCATION
 export const locationKeys = {
-    all: [{ scope: "location" }] as const,
-    list: ({ pagination, filters, sorting }: any) =>
-        [{ scope: "location", entity: "list" }, pagination, filters, sorting] as const,
-    item: (id: string) => [{ scope: "location", entity: "item" }, id] as const,
+    all: [SCOPE.location],
+    item: (locationId: string) => [{ ...SCOPE.location, ...TYPE.item, locationId }],
+    details: (locationId: string) => [{ ...SCOPE.location, ...TYPE.details, locationId }],
+    list: (listProps: ListOptions = {}) => [{ ...SCOPE.location, ...TYPE.list, ...listProps }],
 };
 
 export type AllLocationsQueryKeys = (typeof locationKeys)["all"];
 export type LocationListQueryKey = ReturnType<(typeof locationKeys)["list"]>;
 export type GetLocationQueryKey = ReturnType<(typeof locationKeys)["item"]>;
 
+// MOVIE
 export const movieKeys = {
-    all: [{ scope: "movie" }] as const,
-    list: ({ pagination, filters, sorting }: any) =>
-        [{ scope: "movie", entity: "list" }, pagination, filters, sorting] as const,
-    item: (id: string) => [{ scope: "movie", entity: "item" }, id] as const,
+    all: [SCOPE.movie],
+    item: (movieId: string) => [{ ...SCOPE.movie, ...TYPE.item, movieId }],
+    details: (movieId: string) => [{ ...SCOPE.movie, ...TYPE.details, movieId }],
+    list: (listProps: ListOptions = {}) => [{ ...SCOPE.movie, ...TYPE.list, ...listProps }],
 };
 
 export type AllMoviesQueryKeys = (typeof movieKeys)["all"];
 export type MovieListQueryKey = ReturnType<(typeof movieKeys)["list"]>;
 export type GetMovieQueryKey = ReturnType<(typeof movieKeys)["item"]>;
 
+// AUTH
 export const authKeys = {
-    all: [{ scope: "auth" }] as const,
-    currrentUser: () => [{ ...authKeys.all[0], entity: "current-user" }] as const,
-    rolesList: () => [{ ...authKeys.all[0], entity: "list", type: "role" }] as const,
+    all: [SCOPE.auth],
+    currrentUser: [{ ...SCOPE.auth, entity: "current-user" as const }],
+    rolesList: [{ ...SCOPE.auth, ...TYPE.list, entity: "role" as const }],
 };
 
 export type AllAuthQueryKey = (typeof authKeys)["all"];
-export type CurrentUserQueryKey = ReturnType<(typeof authKeys)["currrentUser"]>;
-export type RoleListQueryKey = ReturnType<(typeof authKeys)["rolesList"]>;
+export type CurrentUserQueryKey = (typeof authKeys)["currrentUser"];
+export type RoleListQueryKey = (typeof authKeys)["rolesList"];
+
+// FILTER OPTIONS
 
 export const filterOptionKeys = {
-    all: [{ scope: "filter-options" }] as const,
-    city: () => [{ ...authKeys.all[0], entity: "city" }] as const,
-    country: () => [{ ...authKeys.all[0], entity: "country" }] as const,
+    all: [SCOPE.filterOptions],
+    city: [{ ...SCOPE.filterOptions, entity: "city" }],
+    country: [{ ...SCOPE.filterOptions, entity: "country" }],
 };
 
 export type AllFilterOptionQueryKey = (typeof filterOptionKeys)["all"];
-export type CityFilterOptionQueryKey = ReturnType<(typeof filterOptionKeys)["city"]>;
-export type CountryFilterOptionQueryKey = ReturnType<(typeof filterOptionKeys)["country"]>;
+export type CityFilterOptionQueryKey = (typeof filterOptionKeys)["city"];
+export type CountryFilterOptionQueryKey = (typeof filterOptionKeys)["country"];
 
+// HALL
 export const hallKeys = {
-    all: [{ scope: "hall" }] as const,
-    locationHalls: ({ locationId }: any) =>
-        [{ scope: "hall", entity: "list" }, locationId] as const,
-    list: ({ pagination, filters, sorting }: any) =>
-        [{ scope: "hall", entity: "list" }, pagination, filters, sorting] as const,
-    item: (id: string) => [{ scope: "hall", entity: "item" }, id] as const,
+    all: [SCOPE.hall],
+    locationHalls: (locationId: string) => [{ ...SCOPE.hall, ...TYPE.list, locationId }],
+    list: (listProps: ListOptions = {}) => [{ ...SCOPE.hall, ...TYPE.list, ...listProps }],
+    item: (hallId: string) => [{ ...SCOPE.hall, ...TYPE.item, hallId }],
+    details: (hallId: string) => [{ ...SCOPE.hall, ...TYPE.details, hallId }],
 };
 
 export type AllHallsQueryKeys = (typeof hallKeys)["all"];
@@ -54,16 +77,15 @@ export type HallListQueryKey = ReturnType<(typeof hallKeys)["list"]>;
 export type LocationHallListQueryKey = ReturnType<(typeof hallKeys)["locationHalls"]>;
 export type GetHallQueryKey = ReturnType<(typeof hallKeys)["item"]>;
 
+// USER
 export const usersKeys = {
-    all: [{ scope: "user" }] as const,
-    listAppUser: ({ pagination, filters, sorting }: any = {}) =>
-        [{ scope: "user", entity: "list", type: "regular" }, pagination, filters, sorting].filter(
-            Boolean
-        ),
-    listAppManager: ({ pagination, filters, sorting }: any = {}) =>
-        [{ scope: "user", entity: "list", type: "manager" }, pagination, filters, sorting].filter(
-            Boolean
-        ),
+    all: [SCOPE.user],
+    listAppUser: (listProps: ListOptions = {}) => [
+        { ...SCOPE.user, ...TYPE.list, entity: "regular", ...listProps },
+    ],
+    listAppManager: (listProps: ListOptions = {}) => [
+        { ...SCOPE.user, ...TYPE.list, entity: "manager", ...listProps },
+    ],
 };
 
 export type AllUserQueryKey = (typeof usersKeys)["all"];

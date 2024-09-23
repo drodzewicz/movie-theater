@@ -12,10 +12,10 @@ export function useGetLocation(
     return useQuery<LocationResponse, AxiosError, LocationResponse, GetLocationQueryKey>({
         ...options,
         queryKey: locationKeys.item(locationId),
-        queryFn: async ({ queryKey: [, id] }) => {
+        queryFn: async ({ queryKey: [{ locationId }] }) => {
             const response = await ServiceClient.instance.fetch({
                 url: "/api/locations/$id",
-                variables: { id },
+                variables: { id: locationId },
             });
             return response.data;
         },

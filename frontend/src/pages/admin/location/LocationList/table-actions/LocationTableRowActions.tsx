@@ -3,6 +3,7 @@ import { DropdownMenuItem, DropdownMenuShortcut } from "@/components/ui/dropdown
 import { useGoTo } from "@/hooks/useGoTo";
 import { useUpdateLocationStatus } from "@/service/locations/useUpdateLocationStatus";
 import { Row } from "@tanstack/react-table";
+import UpdateStatusButtonAction from "@/pages/admin/location/LocationList/table-actions/UpdateStatusButtonAction";
 
 interface LocationTableRowActionsProps {
     row: Row<LocationResponse>;
@@ -22,6 +23,7 @@ function LocationTableRowActions({ row }: LocationTableRowActionsProps) {
 
     return (
         <DataTableRowActions>
+            <UpdateStatusButtonAction locationId={row.original.id} isActive={row.original.active} />
             <DropdownMenuItem onClick={toggleLocationStatus}>
                 {row.original.active ? "Deactivate" : "Activate"}
             </DropdownMenuItem>

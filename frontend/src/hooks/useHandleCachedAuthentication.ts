@@ -20,7 +20,7 @@ function useHandleCachedAuthentication() {
 
     useEffectAfterMount(() => {
         clearCachedUser();
-        queryClient.setQueryData(authKeys.currrentUser(), null);
+        queryClient.setQueryData(authKeys.currrentUser, null);
     }, [isError, queryClient]);
 }
 

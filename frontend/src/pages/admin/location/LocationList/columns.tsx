@@ -2,7 +2,7 @@ import { DataTableColumnHeader } from "@/components/common/Table/CustomCells";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import LocationTableRowActions from "@/pages/admin/location/LocationList/LocationTableRowActions";
+import LocationTableRowActions from "@/pages/admin/location/LocationList/table-actions/LocationTableRowActions";
 import LinkButton from "@/components/common/LinkButton";
 
 export const columns: ColumnDef<LocationResponse>[] = [

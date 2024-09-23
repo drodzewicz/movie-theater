@@ -29,7 +29,7 @@ const CreateHallPage = () => {
 
     const { mutate: createNewHall } = useCreateHall({
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: hallKeys.locationHalls({ locationId }) });
+            queryClient.invalidateQueries({ queryKey: hallKeys.locationHalls(locationId) });
 
             goTo("/locations/:locationId", { variables: { locationId } });
         },

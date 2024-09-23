@@ -10,7 +10,7 @@ export function useGetAllRoles<T = unknown[]>(
 ) {
     return useQuery<string[], AxiosError, T, RoleListQueryKey>({
         ...options,
-        queryKey: authKeys.rolesList(),
+        queryKey: authKeys.rolesList,
         queryFn: async () => {
             const response = await ServiceClient.instance.fetch({ url: "/api/auth/roles" });
             return response.data;

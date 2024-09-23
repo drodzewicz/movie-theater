@@ -11,7 +11,7 @@ export function useGetCountryOptions(
 ) {
     return useQuery<string[], AxiosError, FilterOption[], CountryFilterOptionQueryKey>({
         ...options,
-        queryKey: filterOptionKeys.country(),
+        queryKey: filterOptionKeys.country,
         queryFn: async () => {
             const response = await ServiceClient.instance.fetch({
                 url: "/api/filter-options/countries",

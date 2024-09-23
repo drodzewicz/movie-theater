@@ -14,14 +14,14 @@ export function useGetLocationHalls(
 ) {
     return useQuery({
         ...options,
-        queryFn: async ({ queryKey: [, id] }) => {
+        queryFn: async ({ queryKey: [{ locationId }] }) => {
             const response = await ServiceClient.instance.fetch({
                 url: "/api/locations/$id/halls",
-                variables: { id },
+                variables: { id: locationId },
             });
             return response.data;
         },
-        queryKey: hallKeys.locationHalls({ locationId }),
+        queryKey: hallKeys.locationHalls(locationId),
         placeholderData: [],
         staleTime: 1 * 60 * 1000,
     });
