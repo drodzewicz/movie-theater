@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -57,4 +58,12 @@ public class Movie {
 
     @OneToMany(mappedBy = "movie")
     private List<UserMovieRating> userRatings;
+
+    @Column(name = "date_added", nullable = false, updatable = false)
+    private LocalDateTime dateAdded;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateAdded = LocalDateTime.now();
+    }
 }

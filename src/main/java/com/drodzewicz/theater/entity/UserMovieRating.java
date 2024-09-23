@@ -1,6 +1,7 @@
 package com.drodzewicz.theater.entity;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import com.drodzewicz.theater.entity.user.AppUser;
 
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,4 +41,12 @@ public class UserMovieRating {
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Movie movie;
+
+    @Column(name = "date_added", nullable = false, updatable = false)
+    private LocalDateTime dateAdded;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateAdded = LocalDateTime.now();
+    }
 }

@@ -27,6 +27,9 @@
                 <constraints nullable="false" />
             </column>
             <column name="app_user_role" type="VARCHAR(255)" />
+            <column name="date_created" type="TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

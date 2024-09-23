@@ -33,6 +33,9 @@
                 <constraints nullable="false" />
             </column>
             <column name="active" type="BOOLEAN" defaultValue="false" />
+            <column name="date_created" type="TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

@@ -17,6 +17,9 @@
             <column name="rating" type="DECIMAL(3, 1)" />
             <column name="user_id" type="BIGINT" />
             <column name="movie_id" type="BIGINT" />
+            <column name="date_added" type="TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

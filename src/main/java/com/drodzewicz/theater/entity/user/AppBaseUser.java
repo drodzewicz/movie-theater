@@ -1,12 +1,14 @@
 package com.drodzewicz.theater.entity.user;
 
 import org.springframework.security.core.userdetails.UserDetails;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,6 +36,14 @@ public abstract class AppBaseUser implements UserDetails {
     @Column(name = "password", nullable = false)
     @Size(max = 100)
     protected String password;
+
+    @Column(name = "date_created", nullable = false, updatable = false)
+    private LocalDateTime dateCreated;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateCreated = LocalDateTime.now();
+    }
 
     @Override
     public boolean isAccountNonExpired() {

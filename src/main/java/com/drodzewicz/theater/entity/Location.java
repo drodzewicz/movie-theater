@@ -1,6 +1,7 @@
 package com.drodzewicz.theater.entity;
 
 import java.util.*;
+import java.time.LocalDateTime;
 
 import com.drodzewicz.theater.entity.user.AppManagerUser;
 
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -58,4 +60,12 @@ public class Location {
     @Builder.Default
     @ManyToMany(mappedBy = "locations")
     private Set<AppManagerUser> appManagerUsers = new HashSet<>();
+
+    @Column(name = "date_created", nullable = false, updatable = false)
+    private LocalDateTime dateCreated;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateCreated = LocalDateTime.now();
+    }
 }

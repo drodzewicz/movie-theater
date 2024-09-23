@@ -1,6 +1,7 @@
 package com.drodzewicz.theater.entity;
 
 import java.util.*;
+import java.time.LocalDateTime;
 
 import com.drodzewicz.theater.entity.user.AppUser;
 
@@ -14,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,5 +43,13 @@ public class ScreeningOrder {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private AppUser user;
+
+    @Column(name = "date_created", nullable = false, updatable = false)
+    private LocalDateTime dateCreated;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateCreated = LocalDateTime.now();
+    }
 
 }

@@ -18,6 +18,9 @@
                 <constraints nullable="false" />
             </column>
             <column name="user_id" type="BIGINT" />
+            <column name="date_created" type="TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

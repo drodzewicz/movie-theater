@@ -5,7 +5,6 @@ import java.util.stream.*;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import com.drodzewicz.theater.entity.Location;
 import com.google.common.collect.Sets;
 
 public enum AppManagerUserRole {

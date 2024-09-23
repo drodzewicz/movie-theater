@@ -53,7 +53,7 @@ public class LocationController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public PaginatedResponse<LocationDTO> getlocations(
+    public PaginatedResponse<LocationDTO> getLocations(
             @PageableDefault(size = 15) Pageable pageable,
             @ModelAttribute LocationFilterDTO filters) {
         Page<LocationDTO> locations = locationService.getLocationList(pageable, filters);
