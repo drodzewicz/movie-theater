@@ -1,13 +1,12 @@
 import HallCard from "@/components/common/HallCard";
 import LinkButton from "@/components/common/LinkButton";
 import { useGetParamsLocationId } from "@/hooks/useGetParamsLocationId";
-import { useGetLocationHalls } from "@/service/halls/useGetLocationHalls";
-import React from "react";
+import { useHallListByLocation } from "@/service/halls/useHallListByLocation";
 
 function LocationShowHalls() {
     const locationId = useGetParamsLocationId();
 
-    const { data: halls } = useGetLocationHalls({ locationId });
+    const { data: halls } = useHallListByLocation({ locationId });
 
     return (
         <div className="mt-2">

@@ -5,7 +5,7 @@ import { columns } from "@/pages/admin/user/user-list/columns";
 import UserTableFilters from "@/pages/admin/user/user-list/UserTableFilters";
 import CreateUserDialog from "@/pages/admin/user/user-create/CreateUserDialog";
 import { useTable } from "@/hooks/table/useTable";
-import { useGetAppUsers } from "@/service/users/useGetAppUsers";
+import { useAppUserList } from "@/service/users/useAppUserList";
 import { useTablePagination } from "@/hooks/table/useTablePagination";
 import { useTableSorting } from "@/hooks/table/useTableSorting";
 import { useTableFilters } from "@/hooks/table/useTableFilters";
@@ -24,7 +24,7 @@ function UserListPage() {
 
     const {
         data: { data: users, itemsCount },
-    } = useGetAppUsers({
+    } = useAppUserList({
         pagination,
         columnFilters: manualColumnFilters,
         sorting,

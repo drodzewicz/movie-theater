@@ -5,7 +5,7 @@ import ServiceClient from "@/service/service-client";
 import { QueryOptionsProps } from "@/types/types";
 import { AxiosError } from "axios";
 
-export function useGetLocation(
+export function useLocation(
     locationId: string,
     options?: QueryOptionsProps<LocationResponse, GetLocationQueryKey>
 ) {

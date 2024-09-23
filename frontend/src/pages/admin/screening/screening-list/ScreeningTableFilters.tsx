@@ -4,7 +4,7 @@ import {
     SearchBarFilter,
 } from "@/components/common/table/filters";
 import { PropsWithTable } from "@/components/common/table/types";
-import { useGetHallList } from "@/service/halls/useGetHallList";
+import { useHallList } from "@/service/halls/useHallList";
 import { useLocationList } from "@/service/locations/useLocationList";
 import { FilterOption } from "@/types/types";
 
@@ -16,7 +16,7 @@ function ScreeningTableFilters<TData>({ table }: PropsWithTable<TData>) {
                 value.data?.map((it) => ({ label: it.identifier, value: it.identifier })),
         }
     );
-    const { data: halls } = useGetHallList<FilterOption[]>(
+    const { data: halls } = useHallList<FilterOption[]>(
         { pagination: { pageSize: 50, pageIndex: 0 } },
         { select: (value) => value.data?.map((it) => ({ label: it.name, value: it.name })) }
     );

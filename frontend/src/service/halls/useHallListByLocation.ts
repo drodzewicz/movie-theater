@@ -8,7 +8,7 @@ type LocationHallsProps = {
     locationId: string;
 };
 
-export function useGetLocationHalls(
+export function useHallListByLocation(
     { locationId }: LocationHallsProps,
     options?: QueryOptionsProps<HallResponse[], LocationHallListQueryKey>
 ) {

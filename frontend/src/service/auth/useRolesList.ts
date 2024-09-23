@@ -5,7 +5,7 @@ import { RoleListQueryKey, authKeys } from "@/service/query-keys";
 import { QueryOptionsProps } from "@/types/types";
 import { AxiosError } from "axios";
 
-export function useGetAllRoles<T = unknown[]>(
+export function useRolesList<T = unknown[]>(
     options?: QueryOptionsProps<string[], RoleListQueryKey, T>
 ) {
     return useQuery<string[], AxiosError, T, RoleListQueryKey>({

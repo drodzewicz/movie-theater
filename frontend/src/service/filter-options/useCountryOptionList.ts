@@ -1,18 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { CityFilterOptionQueryKey, filterOptionKeys } from "@/service/query-keys";
+import { CountryFilterOptionQueryKey, filterOptionKeys } from "@/service/query-keys";
 import ServiceClient from "@/service/service-client";
 import { FilterOption, QueryOptionsProps } from "@/types/types";
 import { AxiosError } from "axios";
 import { transformToOptions } from "@/lib/utils";
 
-export function useGetCityOptions(options?: QueryOptionsProps<string[], CityFilterOptionQueryKey>) {
-    return useQuery<string[], AxiosError, FilterOption[], CityFilterOptionQueryKey>({
+export function useCountryOptionList(
+    options?: QueryOptionsProps<string[], CountryFilterOptionQueryKey>
+) {
+    return useQuery<string[], AxiosError, FilterOption[], CountryFilterOptionQueryKey>({
         ...options,
-        queryKey: filterOptionKeys.city,
+        queryKey: filterOptionKeys.country,
         queryFn: async () => {
             const response = await ServiceClient.instance.fetch({
-                url: "/api/filter-options/cities",
+                url: "/api/filter-options/countries",
             });
             return response.data;
         },

@@ -24,7 +24,7 @@ import {
 import { transformToOptions } from "@/lib/utils";
 import FormWrapper from "@/components/form/FormWrapper";
 import { useRegisterAppManager } from "@/service/auth/useRegisterAppManager";
-import { useGetAllRoles } from "@/service/auth/useGetAllRoles";
+import { useRolesList } from "@/service/auth/useRolesList";
 import { FilterOption } from "@/types/types";
 import { useLocationList } from "@/service/locations/useLocationList";
 import { useQueryClient } from "@tanstack/react-query";
@@ -55,7 +55,7 @@ const CreateManagerDialog = () => {
         },
     });
 
-    const { data: roles } = useGetAllRoles<FilterOption[]>({ select: transformToOptions });
+    const { data: roles } = useRolesList<FilterOption[]>({ select: transformToOptions });
 
     const {
         data: { data: locations },

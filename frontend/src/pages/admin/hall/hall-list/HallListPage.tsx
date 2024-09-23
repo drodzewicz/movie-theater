@@ -3,7 +3,7 @@ import Table, { DataTablePagination } from "@/components/common/table";
 import { columns } from "@/pages/admin/hall/hall-list/columns";
 import HallTableFilters from "@/pages/admin/hall/hall-list/HallTableFilters";
 import { useTable } from "@/hooks/table/useTable";
-import { useGetHallList } from "@/service/halls/useGetHallList";
+import { useHallList } from "@/service/halls/useHallList";
 import { useTableFilters } from "@/hooks/table/useTableFilters";
 import { useTablePagination } from "@/hooks/table/useTablePagination";
 import { useTableSorting } from "@/hooks/table/useTableSorting";
@@ -16,7 +16,7 @@ function HallListPage() {
 
     const {
         data: { data: halls, itemsCount },
-    } = useGetHallList({
+    } = useHallList({
         pagination,
         columnFilters: manualColumnFilters,
         sorting,

@@ -5,7 +5,7 @@ import { columns } from "@/pages/admin/manager/manager-list/columns";
 import ManagerTableFilters from "@/pages/admin/manager/manager-list/ManagerTableFilters";
 import CreateManagerDialog from "@/pages/admin/manager/manager-create/CreateManagerDialog";
 import { useTable } from "@/hooks/table/useTable";
-import { useGetAppManagers } from "@/service/users/useGetAppManagers";
+import { useAppManagerList } from "@/service/users/useAppManagerList";
 import { useTablePagination } from "@/hooks/table/useTablePagination";
 import { useTableFilters } from "@/hooks/table/useTableFilters";
 import { useTableSorting } from "@/hooks/table/useTableSorting";
@@ -24,7 +24,7 @@ function ManagerListPage() {
 
     const {
         data: { data: managers, itemsCount },
-    } = useGetAppManagers({
+    } = useAppManagerList({
         pagination,
         columnFilters: manualColumnFilters,
         sorting,

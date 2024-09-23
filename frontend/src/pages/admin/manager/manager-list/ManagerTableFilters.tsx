@@ -5,11 +5,11 @@ import {
 } from "@/components/common/table/filters";
 import { PropsWithTable } from "@/components/common/table/types";
 import { transformToOptions } from "@/lib/utils";
-import { useGetAllRoles } from "@/service/auth/useGetAllRoles";
+import { useRolesList } from "@/service/auth/useRolesList";
 import { FilterOption } from "@/types/types";
 
 function ManagerTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
-    const { data: roles } = useGetAllRoles<FilterOption[]>({ select: transformToOptions });
+    const { data: roles } = useRolesList<FilterOption[]>({ select: transformToOptions });
 
     return (
         <DataTableToolbar table={table} onSearch={onSearch}>

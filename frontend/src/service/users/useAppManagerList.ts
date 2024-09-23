@@ -1,20 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 
-import ServiceClient from "../service-client";
-import { hallKeys, HallListQueryKey } from "@/service/query-keys";
-import { QueryOptionsProps } from "@/types/types";
-import { getPaginationParams, getFilterParams, getSortingParams } from "@/lib/utils";
 import { PaginationState, ColumnFiltersState, SortingState } from "@tanstack/react-table";
+import ServiceClient from "@/service/service-client";
+import { usersKeys, AppManagerListQueryKey } from "@/service/query-keys";
+import { QueryOptionsProps } from "@/types/types";
+import { getFilterParams, getPaginationParams, getSortingParams } from "@/lib/utils";
 
-type HallListProps = {
+type AppUserListProps = {
     pagination?: PaginationState;
     columnFilters?: ColumnFiltersState;
     sorting?: SortingState;
 };
 
-export function useGetHallList<T = PaginatedResponse<HallResponse>>(
-    props?: HallListProps,
-    options?: QueryOptionsProps<PaginatedResponse<HallResponse>, HallListQueryKey, T>
+export function useAppManagerList(
+    props?: AppUserListProps,
+    options?: QueryOptionsProps<PaginatedResponse<AppMangerResponse>, AppManagerListQueryKey>
 ) {
     const pagination = getPaginationParams(props);
     const filters = getFilterParams(props);
@@ -24,7 +24,7 @@ export function useGetHallList<T = PaginatedResponse<HallResponse>>(
         ...options,
         queryFn: async () => {
             const response = await ServiceClient.instance.fetch({
-                url: "/api/halls",
+                url: "/api/managers",
                 params: {
                     ...pagination,
                     ...filters,
@@ -33,7 +33,7 @@ export function useGetHallList<T = PaginatedResponse<HallResponse>>(
             });
             return response.data;
         },
-        queryKey: hallKeys.list({ pagination, filters, sorting }),
+        queryKey: usersKeys.listAppManager({ pagination, filters, sorting }),
         placeholderData: (prev) => prev || { data: [], itemsCount: 0, pageCount: 0 },
         staleTime: 1 * 60 * 1000,
     });

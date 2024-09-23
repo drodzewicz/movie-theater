@@ -12,7 +12,7 @@ type AppUserListProps = {
     sorting?: SortingState;
 };
 
-export function useGetAppUsers(
+export function useAppUserList(
     props?: AppUserListProps,
     options?: QueryOptionsProps<PaginatedResponse<AppUserResponse>, AppUserListQueryKey>
 ) {

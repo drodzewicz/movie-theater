@@ -4,12 +4,12 @@ import {
     DropdownSelectFilter,
 } from "@/components/common/table/filters";
 import { PropsWithTable } from "@/components/common/table/types";
-import { useGetCityOptions } from "@/service/filter-options/useGetCityOptions";
-import { useGetCountryOptions } from "@/service/filter-options/useGetCountryOptions";
+import { useCityOptionList } from "@/service/filter-options/useCityOptionList";
+import { useCountryOptionList } from "@/service/filter-options/useCountryOptionList";
 
 function LocationTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
-    const { data: countryOptions } = useGetCountryOptions();
-    const { data: cityOptions } = useGetCityOptions();
+    const { data: countryOptions } = useCountryOptionList();
+    const { data: cityOptions } = useCityOptionList();
 
     return (
         <DataTableToolbar table={table} onSearch={onSearch}>

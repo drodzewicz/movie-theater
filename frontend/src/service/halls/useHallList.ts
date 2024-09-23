@@ -1,20 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { PaginationState, ColumnFiltersState, SortingState } from "@tanstack/react-table";
-import ServiceClient from "@/service/service-client";
-import { usersKeys, AppManagerListQueryKey } from "@/service/query-keys";
+import ServiceClient from "../service-client";
+import { hallKeys, HallListQueryKey } from "@/service/query-keys";
 import { QueryOptionsProps } from "@/types/types";
-import { getFilterParams, getPaginationParams, getSortingParams } from "@/lib/utils";
+import { getPaginationParams, getFilterParams, getSortingParams } from "@/lib/utils";
+import { PaginationState, ColumnFiltersState, SortingState } from "@tanstack/react-table";
 
-type AppUserListProps = {
+type HallListProps = {
     pagination?: PaginationState;
     columnFilters?: ColumnFiltersState;
     sorting?: SortingState;
 };
 
-export function useGetAppManagers(
-    props?: AppUserListProps,
-    options?: QueryOptionsProps<PaginatedResponse<AppMangerResponse>, AppManagerListQueryKey>
+export function useHallList<T = PaginatedResponse<HallResponse>>(
+    props?: HallListProps,
+    options?: QueryOptionsProps<PaginatedResponse<HallResponse>, HallListQueryKey, T>
 ) {
     const pagination = getPaginationParams(props);
     const filters = getFilterParams(props);
@@ -24,7 +24,7 @@ export function useGetAppManagers(
         ...options,
         queryFn: async () => {
             const response = await ServiceClient.instance.fetch({
-                url: "/api/managers",
+                url: "/api/halls",
                 params: {
                     ...pagination,
                     ...filters,
@@ -33,7 +33,7 @@ export function useGetAppManagers(
             });
             return response.data;
         },
-        queryKey: usersKeys.listAppManager({ pagination, filters, sorting }),
+        queryKey: hallKeys.list({ pagination, filters, sorting }),
         placeholderData: (prev) => prev || { data: [], itemsCount: 0, pageCount: 0 },
         staleTime: 1 * 60 * 1000,
     });

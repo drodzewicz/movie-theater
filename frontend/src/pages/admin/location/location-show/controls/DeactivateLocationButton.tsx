@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useGetParamsLocationId } from "@/hooks/useGetParamsLocationId";
-import { useGetLocation } from "@/service/locations/useGetLocation";
+import { useLocation } from "@/service/locations/useLocation";
 import { useUpdateLocationStatus } from "@/service/locations/useUpdateLocationStatus";
 import { useQueryClient } from "@tanstack/react-query";
 import { locationKeys } from "@/service/query-keys";
@@ -9,7 +9,7 @@ function DeactivateLocationButton() {
     const locationId = useGetParamsLocationId();
     const queryClient = useQueryClient();
 
-    const { data: location } = useGetLocation(locationId);
+    const { data: location } = useLocation(locationId);
     const { mutate: updateLocationStatus } = useUpdateLocationStatus(locationId, {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: locationKeys.item(locationId) });
