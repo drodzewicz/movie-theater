@@ -47,6 +47,7 @@ public class AuthServiceImpl implements AuthService {
 
         AppUser user = userMapper.fromSignUpDTO(signUpDTO);
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(signUpDTO.getPassword())));
+        user.setActive(true);
 
         AppUser savedUser = appUserRepository.save(user);
         log.info("Saving user {}", signUpDTO.getUsername());

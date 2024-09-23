@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -40,6 +41,10 @@ public abstract class AppBaseUser implements UserDetails {
     @Column(name = "date_created", nullable = false, updatable = false)
     private LocalDateTime dateCreated;
 
+    @Builder.Default
+    @Column(name = "active", nullable = false)
+    private Boolean active = false;
+
     @PrePersist
     protected void onCreate() {
         this.dateCreated = LocalDateTime.now();
@@ -62,6 +67,6 @@ public abstract class AppBaseUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.active;
     }
 }

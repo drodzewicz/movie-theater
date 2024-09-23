@@ -50,6 +50,10 @@ public class Hall {
     @OneToMany(mappedBy = "hall")
     private List<Screening> screenings;
 
+    @Builder.Default
+    @Column(name = "active", nullable = false)
+    private Boolean active = false;
+
     @Column(name = "date_created", nullable = false, updatable = false)
     private LocalDateTime dateCreated;
 
