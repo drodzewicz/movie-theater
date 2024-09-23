@@ -1,6 +1,6 @@
 import LocationSelector from "@/components/common/LocationSelector";
-import AuthenticatedUserControlls from "@/components/navigation/Navbar/AuthenticatedUserControlls";
-import UnauthenticatedUserControlls from "@/components/navigation/Navbar/UnauthenticatedUserControlls";
+import AuthenticatedUserControlls from "@/components/navigation/navbar/AuthenticatedUserControlls";
+import UnauthenticatedUserControlls from "@/components/navigation/navbar/UnauthenticatedUserControlls";
 import { useCurrentUser } from "@/service/auth/useCurrentUser";
 import { useIsAuthenticated } from "@/hooks/useIsAuthenticated";
 

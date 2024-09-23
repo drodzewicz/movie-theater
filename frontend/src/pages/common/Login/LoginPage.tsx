@@ -1,5 +1,5 @@
-import BasicAuthPage from "@/pages/common/Login/BasicAuthPage";
-import GithubAuthPage from "@/pages/common/Login/GithubAuthPage";
+import BasicAuthPage from "@/pages/common/login/BasicAuthPage";
+import GithubAuthPage from "@/pages/common/login/GithubAuthPage";
 import LinkButton from "@/components/common/LinkButton";
 
 const LoginPage = () => {

@@ -1,4 +1,4 @@
-import SideNav from "@/components/navigation/Sidebar/SideNav";
+import SideNav from "@/components/navigation/sidebar/SideNav";
 
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";

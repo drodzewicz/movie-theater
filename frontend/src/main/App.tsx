@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "@/components/navigation/Navbar";
-import Sidebar from "@/components/navigation/Sidebar";
+import Navbar from "@/components/navigation/navbar";
+import Sidebar from "@/components/navigation/sidebar";
 import { useIsAuthenticated } from "@/hooks/useIsAuthenticated";
 import { useHandleCachedAuthentication } from "@/hooks/useHandleCachedAuthentication";
 
-const App = () => {
+function App() {
     useHandleCachedAuthentication();
 
     const isAuth = useIsAuthenticated();
@@ -18,6 +18,6 @@ const App = () => {
             </div>
         </div>
     );
-};
+}
 
 export default App;

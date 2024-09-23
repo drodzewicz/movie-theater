@@ -2,7 +2,7 @@ import { flexRender, Table as TanstackTable } from "@tanstack/react-table";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
-import DataTableHeader from "@/components/common/Table/DataTableHeader";
+import DataTableHeader from "@/components/common/table/DataTableHeader";
 
 export interface TableProps<TData> {
     table: TanstackTable<TData>;

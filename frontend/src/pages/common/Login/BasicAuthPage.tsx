@@ -1,4 +1,4 @@
-import { loginFormSchema, LoginSchemaType } from "@/pages/common/Login/loginFormSchema";
+import { loginFormSchema, LoginSchemaType } from "@/pages/common/login/loginFormSchema";
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";

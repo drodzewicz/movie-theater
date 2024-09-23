@@ -1,7 +1,7 @@
 import { CrossIcon, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { PropsWithTable } from "@/components/common/Table/types";
+import { PropsWithTable } from "@/components/common/table/types";
 import { useOnResetTableFilters } from "@/hooks/table/useResetTableFilters";
 
 function DataTableToolbar<TData>({

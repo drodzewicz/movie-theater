@@ -1,3 +1,3 @@
-export { default as DataTableToolbar } from "@/components/common/Table/Filters/DataTableToolbar";
-export { default as SearchBarFilter } from "@/components/common/Table/Filters/SearchBarFilter";
-export { default as DropdownSelectFilter } from "@/components/common/Table/Filters/DropdownSelectFilter";
+export { default as DataTableToolbar } from "@/components/common/table/filters/DataTableToolbar";
+export { default as SearchBarFilter } from "@/components/common/table/filters/SearchBarFilter";
+export { default as DropdownSelectFilter } from "@/components/common/table/filters/DropdownSelectFilter";

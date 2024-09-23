@@ -1,6 +1,6 @@
 import registerFormSchema, {
     RegisterUserSchemaType,
-} from "@/pages/user/Register/registerFormSchema";
+} from "@/pages/user/register/registerFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 

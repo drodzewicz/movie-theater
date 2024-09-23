@@ -3,20 +3,20 @@ import RouterErrorPage from "@/pages/common/RouterErrorPage";
 
 import { createBrowserRouter, Outlet } from "react-router-dom";
 
-import LocationListPage from "@/pages/admin/location/LocationList";
-import CreateHallPage from "@/pages/admin/hall/CreateHall";
-import HallListPage from "@/pages/admin/hall/HallList";
-import HallShowPage from "@/pages/admin/hall/HallShow";
-import CreateLocationPage from "@/pages/admin/location/CreateLocation";
-import LocationShowPage from "@/pages/admin/location/LocationShow";
-import ManagerListPage from "@/pages/admin/manager/ManagerList";
-import CreateMoviePage from "@/pages/admin/movie/CreateMovie";
-import MovieListPage from "@/pages/admin/movie/MovieList";
-import OrderListPage from "@/pages/admin/order/OrderList";
-import ScreeningListPage from "@/pages/admin/screening/ScreeningList";
-import UserListPage from "@/pages/admin/user/UserList";
-import LoginPage from "@/pages/common/Login/LoginPage";
-import RegisterPage from "@/pages/user/Register/RegisterPage";
+import LocationListPage from "@/pages/admin/location/location-list";
+import CreateHallPage from "@/pages/admin/hall/hall-create";
+import HallListPage from "@/pages/admin/hall/hall-list";
+import HallShowPage from "@/pages/admin/hall/hall-show";
+import CreateLocationPage from "@/pages/admin/location/location-create";
+import LocationShowPage from "@/pages/admin/location/location-show";
+import ManagerListPage from "@/pages/admin/manager/manager-list";
+import CreateMoviePage from "@/pages/admin/movie/movie-create";
+import MovieListPage from "@/pages/admin/movie/movie-list";
+import OrderListPage from "@/pages/admin/order/order-list";
+import ScreeningListPage from "@/pages/admin/screening/screening-list";
+import UserListPage from "@/pages/admin/user/user-list";
+import LoginPage from "@/pages/common/login/LoginPage";
+import RegisterPage from "@/pages/user/register/RegisterPage";
 import RouteGuard from "@/components/navigation/RouterGuard";
 import { AppRoutes } from "@/routes/routes";
 
