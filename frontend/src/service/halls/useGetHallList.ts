@@ -12,9 +12,9 @@ type HallListProps = {
     sorting?: SortingState;
 };
 
-export function useGetHallList(
+export function useGetHallList<T = PaginatedResponse<HallResponse>>(
     props?: HallListProps,
-    options?: QueryOptionsProps<PaginatedResponse<HallResponse>, HallListQueryKey>
+    options?: QueryOptionsProps<PaginatedResponse<HallResponse>, HallListQueryKey, T>
 ) {
     const pagination = getPaginationParams(props);
     const filters = getFilterParams(props);

@@ -20,7 +20,7 @@ public class ScreeningDTO implements Serializable {
     @NotEmpty
     private LocalDateTime date;
 
-    private String movieId;
+    private MovieDTO movie;
 
-    private String locationId;
+    private LocationDTO location;
 }

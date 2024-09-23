@@ -1,27 +1,39 @@
 import {
     DataTableToolbar,
-    SearchBarFilter,
     DropdownSelectFilter,
+    SearchBarFilter,
 } from "@/components/common/Table/Filters";
 import { PropsWithTable } from "@/components/common/Table/types";
+import { useGetHallList } from "@/service/halls/useGetHallList";
+import { useLocationList } from "@/service/locations/useLocationList";
+import { FilterOption } from "@/types/types";
 
 function ScreeningTableFilters<TData>({ table }: PropsWithTable<TData>) {
+    const { data: locations } = useLocationList<FilterOption[]>(
+        { pagination: { pageSize: 50, pageIndex: 0 } },
+        {
+            select: (value) =>
+                value.data?.map((it) => ({ label: it.identifier, value: it.identifier })),
+        }
+    );
+    const { data: halls } = useGetHallList<FilterOption[]>(
+        { pagination: { pageSize: 50, pageIndex: 0 } },
+        { select: (value) => value.data?.map((it) => ({ label: it.name, value: it.name })) }
+    );
+
     return (
         <DataTableToolbar table={table}>
-            <DropdownSelectFilter
-                column={table.getColumn("rating")}
-                title="Country"
-                options={[
-                    { label: "Lithuania", value: "Lithuania" },
-                    { label: "Poland", value: "Poland" },
-                    { label: "Germany", value: "Germany" },
-                ]}
-            />
             <SearchBarFilter
-                value={table.getColumn("title").getFilterValue() as string}
-                onChange={table.getColumn("title").setFilterValue}
-                placeholder="Search by movie title..."
+                value={(table.getColumn("movie")?.getFilterValue() as string) ?? ""}
+                onChange={table.getColumn("movie")?.setFilterValue}
+                placeholder="Search by movie..."
             />
+            <DropdownSelectFilter
+                column={table.getColumn("id")}
+                title="Location"
+                options={locations}
+            />
+            <DropdownSelectFilter column={table.getColumn("hall")} title="Halls" options={halls} />
         </DataTableToolbar>
     );
 }

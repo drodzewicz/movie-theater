@@ -12,9 +12,9 @@ type LocationListProps = {
     sorting?: SortingState;
 };
 
-export function useLocationList(
+export function useLocationList<T = PaginatedResponse<LocationResponse>>(
     props?: LocationListProps,
-    options?: QueryOptionsProps<PaginatedResponse<LocationResponse>, LocationListQueryKey>
+    options?: QueryOptionsProps<PaginatedResponse<LocationResponse>, LocationListQueryKey, T>
 ) {
     const pagination = getPaginationParams(props);
     const filters = getFilterParams(props);
