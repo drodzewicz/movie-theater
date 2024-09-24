@@ -18,4 +18,6 @@ public class AppManagerFilterDTO implements Serializable {
 
     private List<String> appUserRole;
 
+    private Boolean active;
+
 }

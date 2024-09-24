@@ -50,6 +50,8 @@ type AppUserResponse = {
     username: string;
     firstName: string;
     lastName: string;
+    active: boolean;
+    dateCreated: Date;
 };
 
 type AppMangerResponse = {
@@ -58,4 +60,6 @@ type AppMangerResponse = {
     firstName: string;
     lastName: string;
     appUserRole: string;
+    active: boolean;
+    dateCreated: Date;
 };

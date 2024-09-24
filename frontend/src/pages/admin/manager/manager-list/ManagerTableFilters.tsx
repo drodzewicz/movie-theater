@@ -3,6 +3,7 @@ import {
     SearchBarFilter,
     DropdownSelectFilter,
 } from "@/components/common/table/filters";
+import StatusFilter from "@/components/common/table/filters/StatusFilter";
 import { PropsWithTable } from "@/components/common/table/types";
 import { transformToOptions } from "@/lib/utils";
 import { useRolesList } from "@/service/auth/useRolesList";
@@ -23,6 +24,7 @@ function ManagerTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) 
                 title="Role"
                 options={roles}
             />
+            <StatusFilter column={table.getColumn("active")} />
         </DataTableToolbar>
     );
 }

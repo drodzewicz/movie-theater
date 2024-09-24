@@ -1,7 +1,8 @@
+import StatusBadge from "@/components/common/StatusBadge";
 import { DataTableColumnHeader } from "@/components/common/table/custom-cells";
-// import { Badge } from "@/components/ui/badge";
-// import { cn } from "@/lib/utils";
+import DateCell from "@/components/common/table/custom-cells/DateCell";
 import { ColumnDef } from "@tanstack/react-table";
+import UserTableRowActions from "@/pages/admin/user/user-list/table-actions/UserTableRowActions";
 
 export const columns: ColumnDef<AppUserResponse>[] = [
     {
@@ -9,6 +10,13 @@ export const columns: ColumnDef<AppUserResponse>[] = [
         header: ({ column }) => <DataTableColumnHeader column={column} title="Username" />,
         enableSorting: true,
         enableHiding: true,
+    },
+    {
+        accessorKey: "active",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Active" />,
+        cell: ({ row }) => <StatusBadge active={row.original.active} />,
+        enableSorting: false,
+        enableHiding: false,
     },
     {
         accessorKey: "firstName",
@@ -22,21 +30,15 @@ export const columns: ColumnDef<AppUserResponse>[] = [
         enableSorting: true,
         enableHiding: true,
     },
-    // {
-    //     accessorKey: "active",
-    //     header: ({ column }) => <DataTableColumnHeader column={column} title="Active" />,
-    //     cell: ({ row }) => (
-    //         <Badge variant="outline" className="gap-1">
-    //             <span
-    //                 className={cn(
-    //                     "rounded-full h-3 w-3 ",
-    //                     row.original.active ? "bg-green-600" : "bg-gray-500"
-    //                 )}
-    //             ></span>
-    //             {row.original.active ? "Active" : "Disabled"}
-    //         </Badge>
-    //     ),
-    //     enableSorting: false,
-    //     enableHiding: false,
-    // },
+    {
+        accessorKey: "dateCreated",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Date Created" />,
+        cell: ({ row }) => <DateCell row={row} accessorKey="dateCreated" />,
+        enableSorting: true,
+        enableHiding: true,
+    },
+    {
+        id: "actions",
+        cell: ({ row }) => <UserTableRowActions row={row} />,
+    },
 ];

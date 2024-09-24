@@ -29,4 +29,8 @@ public class AppManagerSpecification {
                 : null;
     }
 
+    public static Specification<AppManagerUser> isActive(Boolean active) {
+        return (root, query, builder) -> active != null ? builder.equal(root.get("active"), active) : null;
+    }
+
 }

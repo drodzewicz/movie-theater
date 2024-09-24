@@ -6,6 +6,7 @@ import org.mapstruct.Mapping;
 import com.drodzewicz.theater.dto.domain.AppBaseUserDTO;
 import com.drodzewicz.theater.dto.domain.AppUserDTO;
 import com.drodzewicz.theater.dto.request.SignUpDTO;
+import com.drodzewicz.theater.dto.response.AppUserListItemDTO;
 import com.drodzewicz.theater.entity.user.AppBaseUser;
 import com.drodzewicz.theater.entity.user.AppUser;
 import com.drodzewicz.theater.mapper.util.DTOMapper;
@@ -19,4 +20,6 @@ public interface UserMapper extends DTOMapper<AppUser, AppUserDTO> {
     AppBaseUserDTO toBaseUserDTO(AppUser user);
 
     AppBaseUserDTO toBaseUserDTO(AppBaseUser user);
+
+    AppUserListItemDTO toListItemDTO(AppUser user);
 }

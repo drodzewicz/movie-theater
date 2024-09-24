@@ -14,4 +14,7 @@ import lombok.NoArgsConstructor;
 public class AppUserFilterDTO implements Serializable {
 
     private String searchTerm;
+
+    private Boolean active;
+
 }

@@ -10,10 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.drodzewicz.theater.dto.domain.AppManagerUserDTO;
-import com.drodzewicz.theater.dto.domain.AppUserDTO;
 import com.drodzewicz.theater.dto.request.AppManagerFilterDTO;
 import com.drodzewicz.theater.dto.request.AppUserFilterDTO;
+import com.drodzewicz.theater.dto.response.AppManagerUserListItemDTO;
+import com.drodzewicz.theater.dto.response.AppUserListItemDTO;
 import com.drodzewicz.theater.entity.user.AppBaseUser;
 import com.drodzewicz.theater.entity.user.AppManagerUser;
 import com.drodzewicz.theater.entity.user.AppUser;
@@ -40,15 +40,29 @@ public class UserServiceImpl implements UserService {
     private final UserMangerMapper userMangerMapper;
 
     @Override
+    public Optional<AppUser> findAppUserByUsername(String username) {
+        log.debug("Querying user: {}", username);
+
+        return appUserRepository.findByUsername(username);
+    }
+
+    @Override
+    public Optional<AppManagerUser> findManagerByUsername(String username) {
+        log.debug("Querying manager user: {}", username);
+
+        return appManagerUserRepository.findByUsername(username);
+    }
+
+    @Override
     public Optional<AppBaseUser> findUserByUsername(String username) {
         log.debug("Querying user: {}", username);
 
-        Optional<AppUser> regularUser = appUserRepository.findByUsername(username);
+        Optional<AppUser> regularUser = findAppUserByUsername(username);
         if (regularUser.isPresent()) {
             return regularUser.map(AppBaseUser.class::cast);
         }
 
-        Optional<AppManagerUser> managerUser = appManagerUserRepository.findByUsername(username);
+        Optional<AppManagerUser> managerUser = findManagerByUsername(username);
         return managerUser.map(AppBaseUser.class::cast);
     }
 
@@ -60,7 +74,6 @@ public class UserServiceImpl implements UserService {
             log.warn("User not found: {}", username);
             return new UsernameNotFoundException(username);
         });
-        ;
 
         return User.builder()
                 .username(user.getUsername())
@@ -70,25 +83,46 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<AppUserDTO> getAppUserList(Pageable pageable, AppUserFilterDTO filters) {
+    public Page<AppUserListItemDTO> getAppUserList(Pageable pageable, AppUserFilterDTO filters) {
         log.debug("Get app users with pagination: {} and filters", pageable, filters);
 
         Specification<AppUser> spec = Specification
-                .where(AppUserSpecification.hasSearchTerm(filters.getSearchTerm()));
+                .where(AppUserSpecification.hasSearchTerm(filters.getSearchTerm()))
+                .and(AppUserSpecification.isActive(filters.getActive()));
 
         Page<AppUser> users = appUserRepository.findAll(spec, pageable);
-        return users.map(appUserMapper::toDTO);
+        return users.map(appUserMapper::toListItemDTO);
     }
 
     @Override
-    public Page<AppManagerUserDTO> getAppManagerList(Pageable pageable, AppManagerFilterDTO filters) {
+    public Page<AppManagerUserListItemDTO> getAppManagerList(Pageable pageable, AppManagerFilterDTO filters) {
         log.debug("Get app managers with pagination: {} and filters", pageable, filters);
 
         Specification<AppManagerUser> spec = Specification
                 .where(AppManagerSpecification.hasSearchTerm(filters.getSearchTerm()))
+                .and(AppManagerSpecification.isActive(filters.getActive()))
                 .and(AppManagerSpecification.hasRoles(filters.getAppUserRole()));
 
         Page<AppManagerUser> users = appManagerUserRepository.findAll(spec, pageable);
-        return users.map(userMangerMapper::toDTO);
+        return users.map(userMangerMapper::toListItemDTO);
+    }
+
+    @Override
+    public void updateUserStatus(String username, Boolean active) {
+        log.info("Update user {} status to {}", username, active);
+
+        Optional<AppUser> regularUser = findAppUserByUsername(username);
+        if (regularUser.isPresent()) {
+            AppUser appUser = regularUser.get();
+            appUser.setActive(active);
+            appUserRepository.save(appUser);
+        }
+
+        Optional<AppManagerUser> managerUser = findManagerByUsername(username);
+        if (managerUser.isPresent()) {
+            AppManagerUser appManagerUser = managerUser.get();
+            appManagerUser.setActive(active);
+            appManagerUserRepository.save(appManagerUser);
+        }
     }
 }

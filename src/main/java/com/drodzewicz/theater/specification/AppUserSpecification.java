@@ -20,4 +20,8 @@ public class AppUserSpecification {
             return null;
         };
     }
+
+    public static Specification<AppUser> isActive(Boolean active) {
+        return (root, query, builder) -> active != null ? builder.equal(root.get("active"), active) : null;
+    }
 }
