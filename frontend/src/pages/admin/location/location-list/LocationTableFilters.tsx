@@ -3,6 +3,7 @@ import {
     SearchBarFilter,
     DropdownSelectFilter,
 } from "@/components/common/table/filters";
+import StatusFilter from "@/components/common/table/filters/StatusFilter";
 import { PropsWithTable } from "@/components/common/table/types";
 import { useCityOptionList } from "@/service/filter-options/useCityOptionList";
 import { useCountryOptionList } from "@/service/filter-options/useCountryOptionList";
@@ -29,22 +30,7 @@ function LocationTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>)
                 title="City"
                 options={cityOptions}
             />
-            <DropdownSelectFilter
-                column={table.getColumn("active")}
-                title="Status"
-                options={[
-                    {
-                        label: "Active",
-                        value: "true",
-                        icon: () => <span className="h-3 w-3 rounded-full bg-green-600 mr-2" />,
-                    },
-                    {
-                        label: "Disabled",
-                        value: "false",
-                        icon: () => <span className="h-3 w-3 rounded-full bg-gray-400 mr-2" />,
-                    },
-                ]}
-            />
+            <StatusFilter column={table.getColumn("active")} />
         </DataTableToolbar>
     );
 }

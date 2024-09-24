@@ -20,6 +20,7 @@ type LocationResponse = {
     streetName: string;
     buildingNumber: string;
     zipCode: string;
+    dateCreated: Date;
 };
 
 type HallResponse = {
@@ -31,6 +32,8 @@ type HallResponse = {
         id: string;
         identifier: string;
     };
+    dateCreated: Date;
+    active: boolean;
 };
 
 type MovieResponse = {

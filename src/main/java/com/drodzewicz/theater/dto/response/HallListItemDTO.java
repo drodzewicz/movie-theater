@@ -1,6 +1,7 @@
 package com.drodzewicz.theater.dto.response;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class HallListDTO implements Serializable {
+public class HallListItemDTO implements Serializable {
 
     private Long id;
 
@@ -25,4 +26,9 @@ public class HallListDTO implements Serializable {
 
     private LocationSimpleDTO location;
 
+    @NotEmpty
+    private Boolean active;
+
+    @NotEmpty
+    private LocalDateTime dateCreated;
 }

@@ -11,7 +11,7 @@ interface DateCellType<T> {
 function DateCell<T>({ row, accessorKey, dateFormat = "PPP" }: DateCellType<T>) {
     const value = _.get(row, `original.${accessorKey}`, null);
 
-    return <div>{format(value, dateFormat)}</div>;
+    return <div>{value ? format(value, dateFormat) : null}</div>;
 }
 
 export default DateCell;

@@ -38,5 +38,6 @@ public class LocationListItemDTO implements Serializable {
     @NotEmpty
     private Boolean active;
 
+    @NotEmpty
     private LocalDateTime dateCreated;
 }

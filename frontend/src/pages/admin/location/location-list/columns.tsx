@@ -1,10 +1,9 @@
 import { DataTableColumnHeader } from "@/components/common/table/custom-cells";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import LocationTableRowActions from "@/pages/admin/location/location-list/table-actions/LocationTableRowActions";
 import LinkButton from "@/components/common/LinkButton";
 import DateCell from "@/components/common/table/custom-cells/DateCell";
+import StatusBadge from "@/components/common/StatusBadge";
 
 export const columns: ColumnDef<LocationResponse>[] = [
     {
@@ -26,17 +25,7 @@ export const columns: ColumnDef<LocationResponse>[] = [
     {
         accessorKey: "active",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Active" />,
-        cell: ({ row }) => (
-            <Badge variant="outline" className="gap-1">
-                <span
-                    className={cn(
-                        "rounded-full h-3 w-3 ",
-                        row.original.active ? "bg-green-600" : "bg-gray-500"
-                    )}
-                ></span>
-                {row.original.active ? "Active" : "Disabled"}
-            </Badge>
-        ),
+        cell: ({ row }) => <StatusBadge active={row.original.active} />,
         enableSorting: false,
         enableHiding: false,
     },

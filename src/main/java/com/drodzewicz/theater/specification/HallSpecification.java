@@ -12,7 +12,6 @@ public class HallSpecification {
         return (root, query, builder) -> name != null ? builder.like(root.get("name"), "%" + name + "%") : null;
     }
 
-    // Filter by a list of Location identifiers
     public static Specification<Hall> hasLocationIdentifiers(List<String> locationIdentifiers) {
         return (root, query, builder) -> {
             if (locationIdentifiers != null && !locationIdentifiers.isEmpty()) {
@@ -20,5 +19,9 @@ public class HallSpecification {
             }
             return null;
         };
+    }
+
+    public static Specification<Hall> isActive(Boolean active) {
+        return (root, query, builder) -> active != null ? builder.equal(root.get("active"), active) : null;
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.drodzewicz.theater.dto.domain.HallDTO;
 import com.drodzewicz.theater.dto.request.CreateHallDTO;
 import com.drodzewicz.theater.dto.request.HallFilterDTO;
+import com.drodzewicz.theater.dto.response.HallListItemDTO;
 import com.drodzewicz.theater.entity.Hall;
 import com.drodzewicz.theater.entity.Location;
 import com.drodzewicz.theater.entity.Seat;
@@ -52,13 +53,14 @@ public class HallServiceImpl implements HallService {
     }
 
     @Override
-    public Page<HallDTO> getHallList(Pageable pageable, HallFilterDTO filters) {
+    public Page<HallListItemDTO> getHallList(Pageable pageable, HallFilterDTO filters) {
         log.info("Getting halls");
         Specification<Hall> spec = Specification.where(HallSpecification.hasName(filters.getName()))
+                .and(HallSpecification.isActive(filters.getActive()))
                 .and(HallSpecification.hasLocationIdentifiers(filters.getLocation()));
 
         Page<Hall> halls = hallRepository.findAll(spec, pageable);
-        return halls.map(hallMapper::toDTO);
+        return halls.map(hallMapper::toListDTO);
     }
 
     @Override
@@ -100,6 +102,16 @@ public class HallServiceImpl implements HallService {
         log.info("Deleting hall {}", hallId);
         Hall hall = getHallEntityById(hallId);
         hallRepository.delete(hall);
+    }
+
+    @Override
+    public void updateHallStatus(Long hallId, Boolean active) {
+        log.info("Update hall {} status to {}", hallId, active);
+
+        Hall hall = getHallEntityById(hallId);
+        hall.setActive(active);
+
+        hallRepository.save(hall);
     }
 
 }

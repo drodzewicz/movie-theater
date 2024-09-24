@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 
 import com.drodzewicz.theater.dto.domain.HallDTO;
 import com.drodzewicz.theater.dto.request.CreateHallDTO;
-import com.drodzewicz.theater.dto.response.HallListDTO;
+import com.drodzewicz.theater.dto.response.HallListItemDTO;
 import com.drodzewicz.theater.entity.Hall;
 import com.drodzewicz.theater.mapper.util.DTOMapper;
 
@@ -12,5 +12,5 @@ import com.drodzewicz.theater.mapper.util.DTOMapper;
 public interface HallMapper extends DTOMapper<Hall, HallDTO> {
     Hall fromCreateDTO(CreateHallDTO hallDTO);
 
-    HallListDTO toListDTO(HallDTO hallDTO);
+    HallListItemDTO toListDTO(Hall hallDTO);
 }
