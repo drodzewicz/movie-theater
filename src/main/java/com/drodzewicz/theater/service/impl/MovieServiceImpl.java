@@ -12,6 +12,7 @@ import com.drodzewicz.theater.dto.domain.MovieDTO;
 import com.drodzewicz.theater.dto.domain.MovieDetailedDTO;
 import com.drodzewicz.theater.dto.request.CreateMovieDTO;
 import com.drodzewicz.theater.dto.request.MovieFilterDTO;
+import com.drodzewicz.theater.dto.response.MovieListItemDTO;
 import com.drodzewicz.theater.entity.Movie;
 import com.drodzewicz.theater.entity.UserMovieRating;
 import com.drodzewicz.theater.entity.user.AppUser;
@@ -53,12 +54,12 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Page<MovieDTO> getMovieList(Pageable pageable, MovieFilterDTO filters) {
+    public Page<MovieListItemDTO> getMovieList(Pageable pageable, MovieFilterDTO filters) {
         log.info("Getting movies pagination {} and filters {}", pageable, filters);
         Specification<Movie> spec = Specification.where(MovieSpecification.hasTitle(filters.getTitle()));
 
         Page<Movie> movies = movieRepository.findAll(spec, pageable);
-        return movies.map(movieMapper::toDTO);
+        return movies.map(movieMapper::toListDTO);
     }
 
     @Override

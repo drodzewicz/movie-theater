@@ -9,6 +9,7 @@ import com.drodzewicz.theater.dto.domain.MovieDTO;
 import com.drodzewicz.theater.dto.domain.MovieDetailedDTO;
 import com.drodzewicz.theater.dto.request.CreateMovieDTO;
 import com.drodzewicz.theater.dto.request.MovieFilterDTO;
+import com.drodzewicz.theater.dto.response.MovieListItemDTO;
 import com.drodzewicz.theater.entity.Movie;
 
 public interface MovieService {
@@ -16,7 +17,7 @@ public interface MovieService {
 
     MovieDTO getMovieById(Long movieId);
 
-    Page<MovieDTO> getMovieList(Pageable pageable, MovieFilterDTO filters);
+    Page<MovieListItemDTO> getMovieList(Pageable pageable, MovieFilterDTO filters);
 
     MovieDetailedDTO createMovie(CreateMovieDTO movieDTO);
 

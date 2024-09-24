@@ -24,6 +24,7 @@ import com.drodzewicz.theater.dto.domain.MovieDTO;
 import com.drodzewicz.theater.dto.domain.MovieDetailedDTO;
 import com.drodzewicz.theater.dto.request.CreateMovieDTO;
 import com.drodzewicz.theater.dto.request.MovieFilterDTO;
+import com.drodzewicz.theater.dto.response.MovieListItemDTO;
 import com.drodzewicz.theater.dto.util.PaginatedResponse;
 import com.drodzewicz.theater.service.CurrentUserService;
 import com.drodzewicz.theater.service.MovieService;
@@ -57,10 +58,10 @@ public class MovieController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public PaginatedResponse<MovieDTO> getMovies(@PageableDefault(size = 15) Pageable pageable,
+    public PaginatedResponse<MovieListItemDTO> getMovies(@PageableDefault(size = 15) Pageable pageable,
             @ModelAttribute MovieFilterDTO filters) {
-        Page<MovieDTO> movies = movieService.getMovieList(pageable, filters);
-        return new PaginatedResponse<MovieDTO>(movies);
+        Page<MovieListItemDTO> movies = movieService.getMovieList(pageable, filters);
+        return new PaginatedResponse<MovieListItemDTO>(movies);
     }
 
     @DeleteMapping("{id}")

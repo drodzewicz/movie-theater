@@ -1,27 +1,34 @@
-package com.drodzewicz.theater.dto.domain;
+package com.drodzewicz.theater.dto.response;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MovieDTO implements Serializable {
+public class MovieListItemDTO implements Serializable {
 
     private Long id;
 
     @NotEmpty
     private String title;
 
-    private String description;
-
     @NotEmpty
     private BigDecimal rating;
+
+    private String posterUrl;
+
+    private String trailerUrl;
+
+    private LocalDateTime releaseDate;
 }
