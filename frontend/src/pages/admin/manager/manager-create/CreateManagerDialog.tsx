@@ -57,14 +57,16 @@ const CreateManagerDialog = () => {
 
     const { data: roles } = useRolesList<FilterOption[]>({ select: transformToOptions });
 
-    const {
-        data: { data: locations },
-    } = useLocationList({ pagination: { pageSize: 100, pageIndex: 0 } });
-
-    const transformedLocations = locations?.map((it) => ({
-        value: `${it.id}`,
-        label: `${it.identifier} (${it.country})`,
-    }));
+    const { data: locations } = useLocationList<FilterOption[]>(
+        { pagination: { pageSize: 100, pageIndex: 0 } },
+        {
+            select: ({ data }) =>
+                data?.map((it) => ({
+                    value: `${it.id}`,
+                    label: `${it.identifier} (${it.country})`,
+                })),
+        }
+    );
 
     function onSubmit(values: CreateManagerSchemaType) {
         registerManager({
@@ -139,7 +141,7 @@ const CreateManagerDialog = () => {
                                                 <SelectValue placeholder="Location" />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                {transformedLocations.map((it) => (
+                                                {locations.map((it) => (
                                                     <SelectItem key={it.label} value={it.value}>
                                                         {it.label}
                                                     </SelectItem>

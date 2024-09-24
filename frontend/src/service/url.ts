@@ -23,6 +23,8 @@ export const URLS = [
     "/api/managers/$username/status",
     "/api/movies",
     "/api/movies/$id",
+    "/api/screenings",
+    "/api/screenings/$id",
     "/api/filter-options/cities",
     "/api/filter-options/countries",
 ] as const;

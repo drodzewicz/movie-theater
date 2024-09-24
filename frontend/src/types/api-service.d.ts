@@ -40,9 +40,10 @@ type MovieResponse = {
     id: string;
     title: string;
     description: string;
-    rating: number;
-    posterUrl: string;
-    trailerUrl: string;
+    rating?: number;
+    posterUrl?: string;
+    trailerUrl?: string;
+    releaseDate: Date;
 };
 
 type AppUserResponse = {

@@ -14,6 +14,7 @@ export const SCOPE = {
     filterOptions: { scope: "filter-options" } as const,
     hall: { scope: "hall" } as const,
     user: { scope: "user" } as const,
+    screening: { scope: "screening" } as const,
 };
 
 // LOCATION
@@ -52,7 +53,6 @@ export type CurrentUserQueryKey = (typeof authKeys)["currrentUser"];
 export type RoleListQueryKey = (typeof authKeys)["rolesList"];
 
 // FILTER OPTIONS
-
 export const filterOptionKeys = {
     all: [SCOPE.filterOptions],
     city: [{ ...SCOPE.filterOptions, entity: "city" }],
@@ -91,3 +91,15 @@ export const usersKeys = {
 export type AllUserQueryKey = (typeof usersKeys)["all"];
 export type AppUserListQueryKey = ReturnType<(typeof usersKeys)["listAppUser"]>;
 export type AppManagerListQueryKey = ReturnType<(typeof usersKeys)["listAppManager"]>;
+
+// Screening
+export const screeningKeys = {
+    all: [SCOPE.screening],
+    item: (screeningId: string) => [{ ...SCOPE.screening, ...TYPE.item, screeningId }],
+    details: (screeningId: string) => [{ ...SCOPE.screening, ...TYPE.details, screeningId }],
+    list: (listProps: ListOptions = {}) => [{ ...SCOPE.movie, ...TYPE.list, ...listProps }],
+};
+
+export type AllScreeningsQueryKeys = (typeof screeningKeys)["all"];
+export type ScreeningListQueryKey = ReturnType<(typeof screeningKeys)["list"]>;
+export type GetScreeningQueryKey = ReturnType<(typeof screeningKeys)["item"]>;

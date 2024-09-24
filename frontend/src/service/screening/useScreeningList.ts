@@ -2,19 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 
 import { PaginationState, ColumnFiltersState, SortingState } from "@tanstack/react-table";
 import ServiceClient from "@/service/service-client";
-import { movieKeys, MovieListQueryKey } from "@/service/query-keys";
+import { screeningKeys, ScreeningListQueryKey } from "@/service/query-keys";
 import { QueryOptionsProps } from "@/types/types";
 import { getFilterParams, getPaginationParams, getSortingParams } from "@/lib/utils";
 
-type MovieListProps = {
+type ScreeningListProps = {
     pagination?: PaginationState;
     columnFilters?: ColumnFiltersState;
     sorting?: SortingState;
 };
 
-export function useMovieList<T = PaginatedResponse<MovieResponse>>(
-    props?: MovieListProps,
-    options?: QueryOptionsProps<PaginatedResponse<MovieResponse>, MovieListQueryKey, T>
+export function useScreeningList<T = PaginatedResponse<unknown>>(
+    props?: ScreeningListProps,
+    options?: QueryOptionsProps<PaginatedResponse<unknown>, ScreeningListQueryKey, T>
 ) {
     const pagination = getPaginationParams(props);
     const filters = getFilterParams(props);
@@ -24,7 +24,7 @@ export function useMovieList<T = PaginatedResponse<MovieResponse>>(
         ...options,
         queryFn: async () => {
             const response = await ServiceClient.instance.fetch({
-                url: "/api/movies",
+                url: "/api/screenings",
                 params: {
                     ...pagination,
                     ...filters,
@@ -33,7 +33,7 @@ export function useMovieList<T = PaginatedResponse<MovieResponse>>(
             });
             return response.data;
         },
-        queryKey: movieKeys.list({ pagination, filters, sorting }),
+        queryKey: screeningKeys.list({ pagination, filters, sorting }),
         placeholderData: (prev) => prev || { data: [], itemsCount: 0, pageCount: 0 },
         staleTime: 1 * 60 * 1000,
     });
