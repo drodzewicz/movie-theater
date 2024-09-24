@@ -24,12 +24,9 @@ public class CreateMovieDTO implements Serializable {
 
     private String posterUrl;
 
-    private Integer duration;
-
-    private String language;
-
-    private LocalDateTime releaseDate;
-
     private String trailerUrl;
 
+    private Integer duration;
+
+    private LocalDateTime releaseDate;
 }

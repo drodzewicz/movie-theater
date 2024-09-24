@@ -41,9 +41,6 @@ public class Movie {
     @Column(name = "duration")
     private Integer duration;
 
-    @Column(name = "language")
-    private String language;
-
     @Column(name = "release_date")
     private LocalDateTime releaseDate;
 

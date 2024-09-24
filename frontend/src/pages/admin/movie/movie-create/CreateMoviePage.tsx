@@ -20,7 +20,6 @@ const CreateMoviePage = () => {
             title: "",
             description: "",
             duration: null,
-            language: "",
             releaseDate: null,
             posterUrl: "",
             trailerUrl: "",
@@ -61,7 +60,6 @@ const CreateMoviePage = () => {
                             type="number"
                             placeholder="Duration"
                         />
-                        <InputField name="language" control={form.control} placeholder="Language" />
                         <DateField name="releaseDate" control={form.control} />
                         <InputField
                             name="posterUrl"

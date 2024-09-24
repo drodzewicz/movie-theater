@@ -18,7 +18,6 @@
             <column name="description" type="TEXT" />
             <column name="rating" type="DECIMAL(3, 1)" />
             <column name="duration" type="INT" />
-            <column name="language" type="VARCHAR(255)" />
             <column name="release_date" type="TIMESTAMP" />
             <column name="poster_url" type="VARCHAR(255)" />
             <column name="trailer_url" type="VARCHAR(255)" />

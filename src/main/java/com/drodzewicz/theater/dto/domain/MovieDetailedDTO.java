@@ -32,8 +32,6 @@ public class MovieDetailedDTO implements Serializable {
 
     private Integer duration;
 
-    private String language;
-
     private LocalDateTime releaseDate;
 
     private String trailerUrl;
