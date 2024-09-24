@@ -21,7 +21,6 @@ import com.drodzewicz.theater.dto.domain.HallDTO;
 import com.drodzewicz.theater.dto.request.HallFilterDTO;
 import com.drodzewicz.theater.dto.response.HallListItemDTO;
 import com.drodzewicz.theater.dto.util.PaginatedResponse;
-import com.drodzewicz.theater.mapper.HallMapper;
 import com.drodzewicz.theater.service.HallService;
 
 import lombok.AllArgsConstructor;

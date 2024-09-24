@@ -13,6 +13,8 @@ export const URLS = [
     "/api/locations/$id/status",
     "/api/locations/$id/halls",
     "/api/halls",
+    "/api/halls/$id",
+    "/api/halls/$id/status",
     "/api/users",
     "/api/managers",
     "/api/movies",

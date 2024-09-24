@@ -3,6 +3,7 @@ import StatusBadge from "@/components/common/StatusBadge";
 import { DataTableColumnHeader } from "@/components/common/table/custom-cells";
 import DateCell from "@/components/common/table/custom-cells/DateCell";
 import { ColumnDef } from "@tanstack/react-table";
+import HallTableRowActions from "@/pages/admin/hall/hall-list/table-actions/HallTableRowActions";
 
 export const columns: ColumnDef<HallResponse>[] = [
     {
@@ -62,5 +63,9 @@ export const columns: ColumnDef<HallResponse>[] = [
         cell: ({ row }) => <DateCell row={row} accessorKey="dateCreated" />,
         enableSorting: true,
         enableHiding: true,
+    },
+    {
+        id: "actions",
+        cell: ({ row }) => <HallTableRowActions row={row} />,
     },
 ];
