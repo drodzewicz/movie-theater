@@ -1,22 +1,27 @@
 package com.drodzewicz.theater.controller;
 
-import java.util.*;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.drodzewicz.theater.dto.domain.ScreeningDTO;
 import com.drodzewicz.theater.dto.request.CreateScreeningDTO;
+import com.drodzewicz.theater.dto.request.ScreeningFilterDTO;
+import com.drodzewicz.theater.dto.response.ScreeningListItemDTO;
+import com.drodzewicz.theater.dto.util.PaginatedResponse;
 import com.drodzewicz.theater.service.ScreeningService;
 
 import jakarta.validation.Valid;
@@ -41,9 +46,11 @@ public class ScreeningController {
     // pagination
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ScreeningDTO> getScreenings(@RequestParam("movie") Long movieId) {
-        List<ScreeningDTO> screenings = screeningService.getMovieScreeningList(movieId);
-        return screenings;
+    public PaginatedResponse<ScreeningListItemDTO> getScreenings(
+            @PageableDefault(size = 15, sort = "dateCreated", direction = Sort.Direction.DESC) Pageable pageable,
+            @ModelAttribute ScreeningFilterDTO filters) {
+        Page<ScreeningListItemDTO> screenings = screeningService.getScreeningList(pageable, filters);
+        return new PaginatedResponse<ScreeningListItemDTO>(screenings);
     }
 
     @GetMapping("{id}")

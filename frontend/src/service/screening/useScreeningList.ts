@@ -12,9 +12,9 @@ type ScreeningListProps = {
     sorting?: SortingState;
 };
 
-export function useScreeningList<T = PaginatedResponse<unknown>>(
+export function useScreeningList<T = PaginatedResponse<ScreeningResponse>>(
     props?: ScreeningListProps,
-    options?: QueryOptionsProps<PaginatedResponse<unknown>, ScreeningListQueryKey, T>
+    options?: QueryOptionsProps<PaginatedResponse<ScreeningResponse>, ScreeningListQueryKey, T>
 ) {
     const pagination = getPaginationParams(props);
     const filters = getFilterParams(props);

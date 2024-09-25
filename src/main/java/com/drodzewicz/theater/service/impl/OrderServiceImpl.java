@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.drodzewicz.theater.dto.domain.ScreenigOrderDTO;
-import com.drodzewicz.theater.dto.domain.ScreeningDTO;
 import com.drodzewicz.theater.dto.request.CreateOrderDTO;
 import com.drodzewicz.theater.entity.ScreeningOrder;
 import com.drodzewicz.theater.entity.Ticket;

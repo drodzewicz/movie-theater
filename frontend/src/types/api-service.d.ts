@@ -64,3 +64,21 @@ type AppMangerResponse = {
     active: boolean;
     dateCreated: Date;
 };
+
+type ScreeningResponse = {
+    id: string;
+    date: Date;
+    published: boolean;
+    movie: {
+        id: string;
+        description: string;
+        title: string;
+    };
+    hall: {
+        id: string;
+        name: string;
+        room: string;
+        floor: string;
+        location: string;
+    };
+};

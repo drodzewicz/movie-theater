@@ -15,7 +15,7 @@ public class HallSpecification {
     public static Specification<Hall> hasLocationIdentifiers(List<String> locationIdentifiers) {
         return (root, query, builder) -> {
             if (locationIdentifiers != null && !locationIdentifiers.isEmpty()) {
-                return root.get("location").get("identifier").in(locationIdentifiers);
+                return root.get("location").get("id").in(locationIdentifiers);
             }
             return null;
         };

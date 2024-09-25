@@ -2,11 +2,16 @@ package com.drodzewicz.theater.service.impl;
 
 import java.util.*;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.drodzewicz.theater.dto.domain.ScreeningDTO;
 import com.drodzewicz.theater.dto.request.CreateScreeningDTO;
+import com.drodzewicz.theater.dto.request.ScreeningFilterDTO;
+import com.drodzewicz.theater.dto.response.ScreeningListItemDTO;
 import com.drodzewicz.theater.entity.Hall;
 import com.drodzewicz.theater.entity.Movie;
 import com.drodzewicz.theater.entity.Screening;
@@ -20,6 +25,7 @@ import com.drodzewicz.theater.repository.MovieRepository;
 import com.drodzewicz.theater.repository.ScreeningRepository;
 import com.drodzewicz.theater.repository.TicketRepository;
 import com.drodzewicz.theater.service.ScreeningService;
+import com.drodzewicz.theater.specification.ScreeningSpecification;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,10 +59,15 @@ public class ScreeningServiceImp implements ScreeningService {
     }
 
     @Override
-    public List<ScreeningDTO> getMovieScreeningList(Long movieId) {
-        log.info("Getting movie screenings");
-        List<Screening> movieScreenings = screeningRepository.findAllByMovieId(movieId);
-        return screeningMapper.toListDTO(movieScreenings);
+    public Page<ScreeningListItemDTO> getScreeningList(Pageable pageable, ScreeningFilterDTO filters) {
+        log.info("Getting screenings with pagination {} and filters {}", pageable, filters);
+        Specification<Screening> spec = Specification.where(ScreeningSpecification.hasHall(filters.getHall()))
+                .and(ScreeningSpecification.hasLocation(filters.getLocation()))
+                .and(ScreeningSpecification.hasLocation(filters.getMovie()))
+                .and(ScreeningSpecification.isPublished(filters.getPublished()));
+
+        Page<Screening> movieScreenings = screeningRepository.findAll(spec, pageable);
+        return movieScreenings.map(screeningMapper::toListItemDTO);
     }
 
     @Override

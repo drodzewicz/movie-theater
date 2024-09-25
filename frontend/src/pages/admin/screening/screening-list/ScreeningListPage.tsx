@@ -5,6 +5,7 @@ import { columns } from "@/pages/admin/screening/screening-list/columns";
 import ScreeningTableFilters from "@/pages/admin/screening/screening-list/ScreeningTableFilters";
 import CreateScreeningDialog from "@/pages/admin/screening/screening-create/CreateScreeningDialog";
 import { useTable } from "@/hooks/table/useTable";
+import { useScreeningList } from "@/service/screening/useScreeningList";
 
 const data = [
     {
@@ -46,6 +47,8 @@ const data = [
 ];
 
 function ScreeningListPage() {
+    const { data: screenings } = useScreeningList();
+
     const { table } = useTable({ data, columns, itemsCount: 30 });
 
     return (

@@ -1,8 +1,14 @@
 package com.drodzewicz.theater.service;
 
 import java.util.*;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.drodzewicz.theater.dto.domain.ScreeningDTO;
 import com.drodzewicz.theater.dto.request.CreateScreeningDTO;
+import com.drodzewicz.theater.dto.request.ScreeningFilterDTO;
+import com.drodzewicz.theater.dto.response.ScreeningListItemDTO;
 import com.drodzewicz.theater.entity.Screening;
 
 public interface ScreeningService {
@@ -10,7 +16,7 @@ public interface ScreeningService {
 
     ScreeningDTO getScreeningById(Long screeningId);
 
-    List<ScreeningDTO> getMovieScreeningList(Long movieId);
+    Page<ScreeningListItemDTO> getScreeningList(Pageable pageable, ScreeningFilterDTO filters);
 
     ScreeningDTO createScreening(CreateScreeningDTO screeningDTO);
 
