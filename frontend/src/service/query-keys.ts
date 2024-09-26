@@ -97,7 +97,7 @@ export const screeningKeys = {
     all: [SCOPE.screening],
     item: (screeningId: string) => [{ ...SCOPE.screening, ...TYPE.item, screeningId }],
     details: (screeningId: string) => [{ ...SCOPE.screening, ...TYPE.details, screeningId }],
-    list: (listProps: ListOptions = {}) => [{ ...SCOPE.movie, ...TYPE.list, ...listProps }],
+    list: (listProps: ListOptions = {}) => [{ ...SCOPE.screening, ...TYPE.list, ...listProps }],
 };
 
 export type AllScreeningsQueryKeys = (typeof screeningKeys)["all"];

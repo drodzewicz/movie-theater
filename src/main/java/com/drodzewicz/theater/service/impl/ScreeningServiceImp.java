@@ -103,6 +103,7 @@ public class ScreeningServiceImp implements ScreeningService {
             log.info("Screening {} has already been published", screeningId);
             throw new AppException("Screenign is already published");
         }
+        screening.setPublished(true);
 
         Hall hall = screening.getHall();
 
@@ -116,9 +117,11 @@ public class ScreeningServiceImp implements ScreeningService {
                     .build();
             tickets.add(ticket);
         }
+        log.info("Created {} number of tickets for a published screening {}", tickets.size(), screeningId);
 
         List<Ticket> savedTickets = ticketRepository.saveAll(tickets);
         screening.setTickets(savedTickets);
+        screeningRepository.save(screening);
     }
 
     @Override

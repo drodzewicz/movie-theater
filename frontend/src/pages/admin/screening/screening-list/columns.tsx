@@ -3,6 +3,7 @@ import StatusBadge from "@/components/common/StatusBadge";
 import { DataTableColumnHeader } from "@/components/common/table/custom-cells";
 import DateCell from "@/components/common/table/custom-cells/DateCell";
 import { ColumnDef } from "@tanstack/react-table";
+import ScreeningTableRowActions from "./table-actions/ScreeningTableRowActions";
 
 export const columns: ColumnDef<ScreeningResponse>[] = [
     {
@@ -85,5 +86,9 @@ export const columns: ColumnDef<ScreeningResponse>[] = [
         header: ({ column }) => <DataTableColumnHeader column={column} title="Available Tickets" />,
         enableSorting: true,
         enableHiding: true,
+    },
+    {
+        id: "actions",
+        cell: ({ row }) => <ScreeningTableRowActions row={row} />,
     },
 ];

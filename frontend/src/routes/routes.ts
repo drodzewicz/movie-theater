@@ -15,6 +15,7 @@ export const routes = [
     "/halls",
     "/halls/:hallId",
     "/screenings",
+    "/screenings/:screeningId",
 ] as const;
 
 export type AppRoutes = (typeof routes)[number];
