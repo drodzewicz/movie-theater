@@ -5,15 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
-import { FormField } from "@/components/ui/form";
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import {
     DialogHeader,
     Dialog,
@@ -30,6 +22,8 @@ import { useLocationList } from "@/service/locations/useLocationList";
 import { useQueryClient } from "@tanstack/react-query";
 import { usersKeys } from "@/service/query-keys";
 import useDialogState from "@/hooks/useDialogState";
+import FieldWrapper from "@/components/form/FieldWrapper";
+import DropDown from "@/components/input/DropDown";
 
 const CreateManagerDialog = () => {
     const { isOpen, setIsOpen, close, open } = useDialogState();
@@ -108,49 +102,30 @@ const CreateManagerDialog = () => {
                                     control={form.control}
                                     placeholder="Last Name"
                                 />
-                                <FormField
+                                <FieldWrapper
                                     control={form.control}
                                     name="role"
-                                    render={({ field }) => (
-                                        <Select
-                                            onValueChange={field.onChange}
-                                            defaultValue={field.value}
-                                        >
-                                            <SelectTrigger className="w-[180px]">
-                                                <SelectValue placeholder="Role" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                {roles.map((role) => (
-                                                    <SelectItem key={role.value} value={role.value}>
-                                                        {role.label}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
+                                    render={(field) => (
+                                        <DropDown
+                                            placeholder="role"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                            options={roles}
+                                        />
                                     )}
                                 />
-                                <FormField
+                                <FieldWrapper
                                     control={form.control}
                                     name="location"
-                                    render={({ field }) => (
-                                        <Select
-                                            onValueChange={field.onChange}
-                                            defaultValue={field.value}
-                                        >
-                                            <SelectTrigger className="w-[180px]">
-                                                <SelectValue placeholder="Location" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                {locations.map((it) => (
-                                                    <SelectItem key={it.label} value={it.value}>
-                                                        {it.label}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
+                                    render={(field) => (
+                                        <DropDown
+                                            placeholder="role"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                            options={locations}
+                                        />
                                     )}
                                 />
-
                                 <Button
                                     variant="default"
                                     className="rounded-sm shadow-sm"

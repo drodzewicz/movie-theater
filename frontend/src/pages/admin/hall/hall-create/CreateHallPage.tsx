@@ -54,7 +54,6 @@ const CreateHallPage = () => {
                     <InputField name="name" control={form.control} placeholder="Hall Name" />
                     <InputField name="floor" control={form.control} placeholder="Floor" />
                     <InputField name="room" control={form.control} placeholder="Room" />
-
                     <Button variant="default" className="rounded-sm shadow-sm" type="submit">
                         Create
                     </Button>
