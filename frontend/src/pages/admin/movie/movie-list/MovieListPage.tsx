@@ -22,9 +22,7 @@ function MovieListPage() {
     } = useTableFilters();
     const { sorting, onSortingChange } = useTableSorting();
 
-    const {
-        data: { data, itemsCount },
-    } = useMovieList({
+    const { data } = useMovieList({
         pagination,
         columnFilters: manualColumnFilters,
         sorting,
@@ -33,7 +31,6 @@ function MovieListPage() {
     const { table } = useTable({
         data,
         columns,
-        itemsCount,
         stateProperties: { pagination, columnFilters, sorting, globalFilter },
         onPaginationChange,
         onColumnFiltersChange,

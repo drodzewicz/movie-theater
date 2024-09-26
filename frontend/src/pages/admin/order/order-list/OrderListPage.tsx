@@ -33,7 +33,7 @@ const data = [
 ];
 
 function OrderListPage() {
-    const { table } = useTable({ data, columns, itemsCount: 30 });
+    const { table } = useTable({ data: { data, itemsCount: 30 }, columns });
 
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">

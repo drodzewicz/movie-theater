@@ -14,17 +14,14 @@ function HallListPage() {
         useTableFilters();
     const { sorting, onSortingChange } = useTableSorting();
 
-    const {
-        data: { data: halls, itemsCount },
-    } = useHallList({
+    const { data } = useHallList({
         pagination,
         columnFilters: manualColumnFilters,
         sorting,
     });
 
     const { table } = useTable({
-        data: halls,
-        itemsCount,
+        data,
         columns,
         stateProperties: { pagination, columnFilters, sorting },
         onPaginationChange,

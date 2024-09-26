@@ -13,13 +13,12 @@ function ScreeningTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>
     const { data: locations } = useLocationList<FilterOption[]>(
         { pagination: { pageSize: 50, pageIndex: 0 } },
         {
-            select: (value) =>
-                value.data?.map((it) => ({ label: it.identifier, value: it.id })),
+            select: (value) => value.data?.map((it) => ({ label: it.identifier, value: it.id })),
         }
     );
     const { data: halls } = useHallList<FilterOption[]>(
         { pagination: { pageSize: 50, pageIndex: 0 } },
-        { select: (value) => value.data?.map((it) => ({ label: it.name, value: it.name })) }
+        { select: (value) => value.data?.map((it) => ({ label: it.name, value: it.id })) }
     );
 
     return (

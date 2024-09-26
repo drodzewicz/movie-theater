@@ -10,9 +10,8 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 
 type TableProps<TData> = {
-    data: TData[];
+    data: { data: TData[]; itemsCount: number };
     columns: ColumnDef<TData>[];
-    itemsCount: number;
     stateProperties?: Partial<TableState>;
     onPaginationChange?: OnChangeFn<PaginationState>;
     onColumnFiltersChange?: OnChangeFn<ColumnFiltersState>;
@@ -21,9 +20,8 @@ type TableProps<TData> = {
 };
 
 function useTable<TData>({
-    data = [],
+    data = { data: [], itemsCount: 0 },
     columns,
-    itemsCount,
     stateProperties,
     onPaginationChange,
     onSortingChange,
@@ -31,14 +29,14 @@ function useTable<TData>({
     onGlobalFilterChange,
 }: TableProps<TData>) {
     const table = useReactTable({
-        data,
+        data: data.data,
+        rowCount: data.itemsCount,
         columns,
         state: stateProperties,
         manualPagination: true,
         manualFiltering: true,
         manualSorting: true,
         enableGlobalFilter: true,
-        rowCount: itemsCount,
         onPaginationChange,
         onSortingChange,
         onColumnFiltersChange,

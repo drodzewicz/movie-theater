@@ -15,17 +15,14 @@ function ScreeningListPage() {
     const { columnFilters, manualColumnFilters, onColumnFiltersChange, syncManualFilterValues } =
         useTableFilters();
     const { sorting, onSortingChange } = useTableSorting();
-    const {
-        data: { data: screenings, itemsCount },
-    } = useScreeningList({
+    const { data } = useScreeningList({
         columnFilters: manualColumnFilters,
         pagination,
         sorting,
     });
 
     const { table } = useTable({
-        data: screenings,
-        itemsCount,
+        data,
         columns,
         stateProperties: { pagination, columnFilters, sorting },
         onPaginationChange,

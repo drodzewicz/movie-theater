@@ -22,18 +22,15 @@ function ManagerListPage() {
     } = useTableFilters();
     const { sorting, onSortingChange } = useTableSorting();
 
-    const {
-        data: { data: managers, itemsCount },
-    } = useAppManagerList({
+    const { data } = useAppManagerList({
         pagination,
         columnFilters: manualColumnFilters,
         sorting,
     });
 
     const { table } = useTable({
-        data: managers,
+        data,
         columns,
-        itemsCount,
         stateProperties: { pagination, columnFilters, sorting, globalFilter },
         onPaginationChange,
         onColumnFiltersChange,

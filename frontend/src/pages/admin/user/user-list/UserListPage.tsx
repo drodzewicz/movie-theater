@@ -22,18 +22,15 @@ function UserListPage() {
     } = useTableFilters();
     const { sorting, onSortingChange } = useTableSorting();
 
-    const {
-        data: { data: users, itemsCount },
-    } = useAppUserList({
+    const { data } = useAppUserList({
         pagination,
         columnFilters: manualColumnFilters,
         sorting,
     });
 
     const { table } = useTable({
-        data: users,
+        data,
         columns,
-        itemsCount,
         stateProperties: { pagination, columnFilters, sorting, globalFilter },
         onPaginationChange,
         onColumnFiltersChange,
