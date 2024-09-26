@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -58,7 +59,7 @@ public class MovieController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public PaginatedResponse<MovieListItemDTO> getMovies(@PageableDefault(size = 15) Pageable pageable,
+    public PaginatedResponse<MovieListItemDTO> getMovies(@PageableDefault(size = 15, sort = "dateAdded", direction = Sort.Direction.DESC) Pageable pageable,
             @ModelAttribute MovieFilterDTO filters) {
         Page<MovieListItemDTO> movies = movieService.getMovieList(pageable, filters);
         return new PaginatedResponse<MovieListItemDTO>(movies);
