@@ -7,7 +7,6 @@ const createLocationFormSchema = z.object({
     street: z.string(),
     buildingNumber: z.string(),
     zipCode: z.string(),
-    logoUrl: z.string(),
 });
 
 export type CreateLocationSchemaType = z.infer<typeof createLocationFormSchema>;
