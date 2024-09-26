@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import _ from "lodash";
-import { FilterParams, PaginationParams, SortParams } from "@/types/types";
+import { FilterOption, FilterParams, PaginationParams, SortParams } from "@/types/types";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -58,4 +58,13 @@ export function getSortingParams(props: unknown): SortParams | undefined {
 
 export function transformToOptions(data: string[]) {
     return data?.map((it: string) => ({ label: it, value: it }));
+}
+
+export function transformLocationsToOptions(
+    data: { id: string; identifier: string }[]
+): FilterOption[] {
+    return data?.map((it) => ({
+        label: it.identifier,
+        value: `${it.id}`,
+    }));
 }

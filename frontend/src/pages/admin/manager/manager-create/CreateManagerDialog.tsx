@@ -1,9 +1,3 @@
-import schema, {
-    CreateManagerSchemaType,
-} from "@/pages/admin/manager/manager-create/createManagerFormSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -13,38 +7,22 @@ import {
     DialogTitle,
     DialogDescription,
 } from "@/components/ui/dialog";
-import { transformToOptions } from "@/lib/utils";
+import { transformLocationsToOptions, transformToOptions } from "@/lib/utils";
 import FormWrapper from "@/components/form/FormWrapper";
-import { useRegisterAppManager } from "@/service/auth/useRegisterAppManager";
 import { useRolesList } from "@/service/auth/useRolesList";
 import { FilterOption } from "@/types/types";
 import { useLocationList } from "@/service/locations/useLocationList";
-import { useQueryClient } from "@tanstack/react-query";
-import { usersKeys } from "@/service/query-keys";
 import useDialogState from "@/hooks/useDialogState";
 import FieldWrapper from "@/components/form/FieldWrapper";
 import DropDown from "@/components/input/DropDown";
+import { Input } from "@/components/ui/input";
+import useHandleNewManagerRegistration from "./useHandleNewManagerRegistration";
 
 const CreateManagerDialog = () => {
     const { isOpen, setIsOpen, close, open } = useDialogState();
 
-    const form = useForm<CreateManagerSchemaType>({
-        resolver: zodResolver(schema),
-        defaultValues: {
-            firstName: "",
-            lastName: "",
-            username: "",
-            password: "",
-            role: "",
-            location: "",
-        },
-    });
-
-    const queryClient = useQueryClient();
-
-    const { mutate: registerManager } = useRegisterAppManager({
+    const { form, onSubmit } = useHandleNewManagerRegistration({
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: usersKeys.listAppManager() });
             close();
         },
     });
@@ -54,22 +32,9 @@ const CreateManagerDialog = () => {
     const { data: locations } = useLocationList<FilterOption[]>(
         { pagination: { pageSize: 100, pageIndex: 0 } },
         {
-            select: ({ data }) =>
-                data?.map((it) => ({
-                    value: `${it.id}`,
-                    label: `${it.identifier} (${it.country})`,
-                })),
+            select: ({ data }) => transformLocationsToOptions(data),
         }
     );
-
-    function onSubmit(values: CreateManagerSchemaType) {
-        registerManager({
-            firstName: values?.firstName,
-            lastName: values?.lastName,
-            username: values?.username,
-            password: values?.password,
-        });
-    }
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -82,32 +47,56 @@ const CreateManagerDialog = () => {
                     <DialogDescription>
                         <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
                             <div className="grid gap-2">
-                                <InputField
+                                <FieldWrapper
+                                    control={form.control}
                                     name="username"
-                                    control={form.control}
-                                    placeholder="Username"
+                                    render={(field) => (
+                                        <Input
+                                            placeholder="Username"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                        />
+                                    )}
                                 />
-                                <InputField
+                                <FieldWrapper
+                                    control={form.control}
                                     name="password"
-                                    control={form.control}
-                                    placeholder="Password"
+                                    render={(field) => (
+                                        <Input
+                                            placeholder="Password"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                        />
+                                    )}
                                 />
-                                <InputField
+                                <FieldWrapper
+                                    control={form.control}
                                     name="firstName"
-                                    control={form.control}
-                                    placeholder="First Name"
+                                    render={(field) => (
+                                        <Input
+                                            placeholder="First Name"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                        />
+                                    )}
                                 />
-                                <InputField
-                                    name="lastName"
+                                <FieldWrapper
                                     control={form.control}
-                                    placeholder="Last Name"
+                                    name="lastName"
+                                    render={(field) => (
+                                        <Input
+                                            placeholder="Last Name"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                        />
+                                    )}
                                 />
                                 <FieldWrapper
                                     control={form.control}
                                     name="role"
                                     render={(field) => (
                                         <DropDown
-                                            placeholder="role"
+                                            placeholder="Role"
                                             value={field.value}
                                             onChange={field.onChange}
                                             options={roles}
@@ -119,7 +108,7 @@ const CreateManagerDialog = () => {
                                     name="location"
                                     render={(field) => (
                                         <DropDown
-                                            placeholder="role"
+                                            placeholder="Location"
                                             value={field.value}
                                             onChange={field.onChange}
                                             options={locations}
