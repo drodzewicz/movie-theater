@@ -1,13 +1,11 @@
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import schema, {
@@ -28,8 +26,14 @@ import { useHallList } from "@/service/halls/useHallList";
 import { useMovieList } from "@/service/movies/useMovieList";
 import DateField from "@/components/form/DateField";
 import { useCreateScreening } from "@/service/screening/useCreateScreening";
+import useDialogState from "@/hooks/useDialogState";
+import { useQueryClient } from "@tanstack/react-query";
+import { screeningKeys } from "@/service/query-keys";
 
 const CreateScreeningDialog = () => {
+    const { isOpen, setIsOpen, close, open } = useDialogState();
+    const queryClient = useQueryClient();
+
     const form = useForm<CreateScreeningSchemaType>({
         resolver: zodResolver(schema),
         defaultValues: {
@@ -78,23 +82,28 @@ const CreateScreeningDialog = () => {
         }
     );
 
-    const { mutate: createScreening } = useCreateScreening();
+    const { mutate: createScreening } = useCreateScreening({
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: screeningKeys.list() });
+            close();
+        },
+    });
 
     function onSubmit(values: CreateScreeningSchemaType) {
         console.log(values);
         createScreening({
             movieId: values.movie,
             locationId: values.location,
-            hallId: "1",
+            hallId: values.hall,
             date: values.date,
         });
     }
 
     return (
-        <Dialog>
-            <DialogTrigger className={cn(buttonVariants({ variant: "default", size: "sm" }))}>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <Button onClick={open} variant="default" size="sm">
                 Create Screening
-            </DialogTrigger>
+            </Button>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Create new screening</DialogTitle>

@@ -1,76 +1,86 @@
+import LinkButton from "@/components/common/LinkButton";
+import StatusBadge from "@/components/common/StatusBadge";
 import { DataTableColumnHeader } from "@/components/common/table/custom-cells";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import DateCell from "@/components/common/table/custom-cells/DateCell";
 import { ColumnDef } from "@tanstack/react-table";
 
-type Screening = {
-    id: string;
-    movie: {
-        id: string;
-        title: string;
-    };
-    date: Date;
-    location: {
-        id: string;
-        identifier: string;
-    };
-    hall: {
-        id: string;
-        identifier: string;
-    };
-    published: boolean;
-    availableTickets: number;
-};
-
-export const columns: ColumnDef<Screening>[] = [
+export const columns: ColumnDef<ScreeningResponse>[] = [
     {
+        id: "id",
         accessorKey: "id",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Id" />,
         enableSorting: false,
         enableHiding: false,
     },
     {
-        accessorKey: "active",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Active" />,
-        cell: ({ row }) => (
-            <Badge variant="outline" className="gap-1">
-                <span
-                    className={cn(
-                        "rounded-full h-3 w-3 ",
-                        row.original.published ? "bg-green-600" : "bg-gray-500"
-                    )}
-                ></span>
-                {row.original.published ? "Published" : "Drafted"}
-            </Badge>
-        ),
+        id: "published",
+        accessorKey: "published",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Published" />,
+        cell: ({ row }) => <StatusBadge active={row.original.published} />,
         enableSorting: false,
         enableHiding: false,
     },
     {
+        id: "date",
         accessorKey: "date",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Date" />,
+        cell: ({ row }) => <DateCell row={row} accessorKey="date" />,
         enableSorting: true,
         enableHiding: true,
     },
     {
+        id: "movie",
         accessorKey: "movie.title",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Movie" />,
         enableSorting: true,
         enableHiding: true,
+        cell: ({ row }) => (
+            <LinkButton
+                className="p-0"
+                variant="link"
+                to="/halls/:hallId"
+                variables={{ hallId: row.original.id }}
+            >
+                {row.getValue("movie")}
+            </LinkButton>
+        ),
     },
     {
-        accessorKey: "location.identifier",
+        id: "location",
+        accessorKey: "hall.location.identifier",
+        enableSorting: true,
+        enableHiding: true,
         header: ({ column }) => <DataTableColumnHeader column={column} title="Location" />,
-        enableSorting: true,
-        enableHiding: true,
+        cell: ({ row }) => (
+            <LinkButton
+                className="p-0"
+                variant="link"
+                to="/locations/:locationId"
+                variables={{ locationId: row.original.hall.location.id }}
+            >
+                {row.getValue("location")}
+            </LinkButton>
+        ),
     },
     {
-        accessorKey: "hall.identifier",
+        id: "hall",
+        accessorKey: "hall.name",
+        enableSorting: true,
+        enableHiding: true,
         header: ({ column }) => <DataTableColumnHeader column={column} title="Hall" />,
-        enableSorting: true,
-        enableHiding: true,
+        cell: ({ row }) => (
+            <LinkButton
+                className="p-0"
+                variant="link"
+                to="/halls/:hallId"
+                variables={{ hallId: row.original.hall.id }}
+            >
+                {row.getValue("hall")}
+            </LinkButton>
+        ),
     },
     {
+        id: "ticketCount",
         accessorKey: "availableTickets",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Available Tickets" />,
         enableSorting: true,

@@ -15,7 +15,7 @@ function HallTableFilters<TData>({ table, onSearch }: PropsWithTable<TData>) {
             select: ({ data }) =>
                 data?.map((it) => ({
                     label: `${it.identifier} (${it.country})`,
-                    value: it.identifier,
+                    value: it.id,
                 })),
         }
     );

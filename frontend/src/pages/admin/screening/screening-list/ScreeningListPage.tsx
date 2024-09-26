@@ -6,50 +6,36 @@ import ScreeningTableFilters from "@/pages/admin/screening/screening-list/Screen
 import CreateScreeningDialog from "@/pages/admin/screening/screening-create/CreateScreeningDialog";
 import { useTable } from "@/hooks/table/useTable";
 import { useScreeningList } from "@/service/screening/useScreeningList";
-
-const data = [
-    {
-        id: "1",
-        availableTickets: 4,
-        movie: {
-            id: "1",
-            title: "Avengers",
-        },
-        location: {
-            id: "1",
-            identifier: "DWD-23",
-        },
-        hall: {
-            id: "1",
-            identifier: "DWD-23",
-        },
-        published: true,
-        date: new Date(),
-    },
-    {
-        id: "1",
-        availableTickets: 4,
-        movie: {
-            id: "1",
-            title: "Something else",
-        },
-        location: {
-            id: "1",
-            identifier: "DWD-23",
-        },
-        hall: {
-            id: "1",
-            identifier: "DWD-23",
-        },
-        published: false,
-        date: new Date(),
-    },
-];
+import { useTablePagination } from "@/hooks/table/useTablePagination";
+import { useTableSorting } from "@/hooks/table/useTableSorting";
+import { useTableFilters } from "@/hooks/table/useTableFilters";
 
 function ScreeningListPage() {
-    const { data: screenings } = useScreeningList();
+    const { pagination, onPaginationChange } = useTablePagination();
+    const { columnFilters, manualColumnFilters, onColumnFiltersChange, syncManualFilterValues } =
+        useTableFilters();
+    const { sorting, onSortingChange } = useTableSorting();
+    const {
+        data: { data: screenings, itemsCount },
+    } = useScreeningList({
+        columnFilters: manualColumnFilters,
+        pagination,
+        sorting,
+    });
 
-    const { table } = useTable({ data, columns, itemsCount: 30 });
+    const { table } = useTable({
+        data: screenings,
+        itemsCount,
+        columns,
+        stateProperties: { pagination, columnFilters, sorting },
+        onPaginationChange,
+        onColumnFiltersChange,
+        onSortingChange,
+    });
+
+    const onSearch = () => {
+        syncManualFilterValues();
+    };
 
     return (
         <div className="container mx-auto py-10 flex flex-col gap-3">
@@ -57,7 +43,7 @@ function ScreeningListPage() {
                 <h2 className="text-2xl font-bold">Screenings</h2>
                 <CreateScreeningDialog />
             </div>
-            <ScreeningTableFilters table={table} />
+            <ScreeningTableFilters table={table} onSearch={onSearch} />
             <Table table={table} />
             <DataTablePagination table={table} />
         </div>

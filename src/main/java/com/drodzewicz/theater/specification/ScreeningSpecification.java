@@ -20,11 +20,11 @@ public class ScreeningSpecification {
 
     public static Specification<Screening> hasLocation(List<String> locations) {
         return (root, query, builder) -> locations != null && !locations.isEmpty()
-                ? root.get("location").get("id").in(locations)
+                ? root.get("hall").get("location").get("id").in(locations)
                 : null;
     }
 
     public static Specification<Screening> isPublished(Boolean published) {
-        return (root, query, builder) -> published != null ? builder.equal(root.get(" published"), published) : null;
+        return (root, query, builder) -> published != null ? builder.equal(root.get("published"), published) : null;
     }
 }

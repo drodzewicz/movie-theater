@@ -79,6 +79,9 @@ type ScreeningResponse = {
         name: string;
         room: string;
         floor: string;
-        location: string;
+        location: {
+            id: string;
+            identifier: string;
+        };
     };
 };

@@ -3,7 +3,7 @@ package com.drodzewicz.theater.dto.request;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,15 +15,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateScreeningDTO implements Serializable {
 
-    private Long id;
-
-    @NotEmpty
+    @NotNull
     private LocalDateTime date;
 
-    @NotEmpty
+    @NotNull
     private Long movieId;
 
-    @NotEmpty
+    @NotNull
     private Long hallId;
 
     private Long locationId;
