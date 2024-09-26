@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SPAWebFilter extends OncePerRequestFilter {
 
     private static final String FORWARD_TO = "/index.html";
-    private static final String EXCLUDED_EXTENSIONS_REGEX = ".*\\.(xml|js|json|jpg|jpeg|gif|png)$";
+    private static final String EXCLUDED_EXTENSIONS_REGEX = ".*\\.(xml|js|json|jpg|jpeg|gif|png|css)$";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

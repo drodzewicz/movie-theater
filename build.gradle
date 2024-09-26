@@ -49,8 +49,15 @@ task copyUIPublic(type: Copy){
 	into file("${project.projectDir}/src/main/resources/static")
 }
 
+task cleanStatic(type: Delete) {
+    description = "Cleans the static resources folder before copying new files."
+    delete file("${project.projectDir}/src/main/resources/static")
+}
+
 // sequence of dependancies
 appNpmBuild.dependsOn appNpmInstall
+copyUIPublic.dependsOn cleanStatic
+copyUIBuild.dependsOn cleanStatic
 copyUIPublic.dependsOn appNpmBuild
 copyUIBuild.dependsOn copyUIPublic
 processResources.dependsOn copyUIBuild
