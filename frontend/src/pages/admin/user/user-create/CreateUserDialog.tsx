@@ -1,7 +1,3 @@
-import schema, { CreateUserSchemaType } from "@/pages/admin/user/user-create/createUserFormSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -12,40 +8,19 @@ import {
     DialogDescription,
 } from "@/components/ui/dialog";
 import FormWrapper from "@/components/form/FormWrapper";
-import { useRegister } from "@/service/auth/useRegisterUser";
-import { useQueryClient } from "@tanstack/react-query";
-import { usersKeys } from "@/service/query-keys";
 import useDialogState from "@/hooks/useDialogState";
+import useHandleRegisterAppUser from "./useHandleRegisterAppUser";
+import FieldWrapper from "@/components/form/FieldWrapper";
+import { Input } from "@/components/ui/input";
 
 const CreateUserDialog = () => {
     const { isOpen, setIsOpen, close, open } = useDialogState();
 
-    const form = useForm<CreateUserSchemaType>({
-        resolver: zodResolver(schema),
-        defaultValues: {
-            firstName: "",
-            lastName: "",
-            username: "",
-        },
-    });
-
-    const queryClient = useQueryClient();
-
-    const { mutate: registerUser } = useRegister({
+    const { form, onSubmit } = useHandleRegisterAppUser({
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: usersKeys.listAppUser() });
             close();
         },
     });
-
-    function onSubmit(values: CreateUserSchemaType) {
-        registerUser({
-            firstName: values.firstName,
-            lastName: values.lastName,
-            password: values.password,
-            username: values.username,
-        });
-    }
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -58,25 +33,49 @@ const CreateUserDialog = () => {
                     <DialogDescription>
                         <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
                             <div className="grid gap-2">
-                                <InputField
+                                <FieldWrapper
+                                    control={form.control}
                                     name="username"
-                                    control={form.control}
-                                    placeholder="Username"
+                                    render={(field) => (
+                                        <Input
+                                            placeholder="Username"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                        />
+                                    )}
                                 />
-                                <InputField
+                                <FieldWrapper
+                                    control={form.control}
                                     name="password"
-                                    control={form.control}
-                                    placeholder="Password"
+                                    render={(field) => (
+                                        <Input
+                                            placeholder="Password"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                        />
+                                    )}
                                 />
-                                <InputField
+                                <FieldWrapper
+                                    control={form.control}
                                     name="firstName"
-                                    control={form.control}
-                                    placeholder="First Name"
+                                    render={(field) => (
+                                        <Input
+                                            placeholder="First Name"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                        />
+                                    )}
                                 />
-                                <InputField
-                                    name="lastName"
+                                <FieldWrapper
                                     control={form.control}
-                                    placeholder="Last Name"
+                                    name="lastName"
+                                    render={(field) => (
+                                        <Input
+                                            placeholder="Last Name"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                        />
+                                    )}
                                 />
                                 <Button
                                     variant="default"
