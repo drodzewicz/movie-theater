@@ -1,78 +1,90 @@
-import schema, {
-    CreateMovieSchemaType,
-} from "@/pages/admin/movie/movie-create/createMovieFormSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import FormWrapper from "@/components/form/FormWrapper";
 import ReactPlayer from "react-player";
-import DateField from "@/components/form/DateField";
-import { useCreateMovie } from "@/service/movies/useCreateMovie";
 import { useGoTo } from "@/hooks/useGoTo";
+import useHandleCreateMovie from "./useHandleCreateMovie";
+import FieldWrapper from "@/components/form/FieldWrapper";
+import { Input } from "@/components/ui/input";
+import DatePicker from "@/components/input/DatePicker";
 
-const CreateMoviePage = () => {
+function CreateMoviePage() {
     const goTo = useGoTo();
 
-    const form = useForm<CreateMovieSchemaType>({
-        resolver: zodResolver(schema),
-        defaultValues: {
-            title: "",
-            description: "",
-            duration: null,
-            releaseDate: null,
-            posterUrl: "",
-            trailerUrl: "",
-        },
-    });
-
-    const { mutate: createMovie } = useCreateMovie({
+    const { form, onSubmit } = useHandleCreateMovie({
         onSuccess: () => {
             goTo("/movies");
         },
     });
-
-    function onSubmit(values: CreateMovieSchemaType) {
-        createMovie({
-            description: values.description,
-            title: values.title,
-            posterUrl: values.posterUrl,
-            trailerUrl: values.trailerUrl,
-            duration: values.duration,
-            releaseDate: values.releaseDate,
-        });
-    }
 
     return (
         <div className="container grid h-screen w-screen flex-col justify-center">
             <div className="w-72 mt-5">
                 <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
                     <div className="grid gap-2">
-                        <InputField name="title" control={form.control} placeholder="Title" />
-                        <InputField
+                        <FieldWrapper
+                            control={form.control}
+                            name="title"
+                            render={(field) => (
+                                <Input
+                                    placeholder="Title"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
+                        />
+                        <FieldWrapper
+                            control={form.control}
                             name="description"
-                            control={form.control}
-                            placeholder="Description"
+                            render={(field) => (
+                                <Input
+                                    placeholder="Description"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
                         />
-                        <InputField
+                        <FieldWrapper
+                            control={form.control}
                             name="duration"
-                            control={form.control}
-                            type="number"
-                            placeholder="Duration"
+                            render={(field) => (
+                                <Input
+                                    placeholder="Duration"
+                                    type="number"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
                         />
-                        <DateField name="releaseDate" control={form.control} />
-                        <InputField
+                        <FieldWrapper
+                            control={form.control}
+                            name="releaseDate"
+                            render={(field) => (
+                                <DatePicker value={field.value} onChange={field.onChange} />
+                            )}
+                        />
+                        <FieldWrapper
+                            control={form.control}
                             name="posterUrl"
-                            control={form.control}
-                            placeholder="Poster Url"
+                            render={(field) => (
+                                <Input
+                                    placeholder="Poster Url"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
                         />
-                        <InputField
-                            name="trailerUrl"
+                        <FieldWrapper
                             control={form.control}
-                            placeholder="Trailer Url"
+                            name="trailerUrl"
+                            render={(field) => (
+                                <Input
+                                    placeholder="Trailer Url"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
                         />
                         <ReactPlayer url={form.getValues("trailerUrl")} />
-
                         <Button variant="default" className="rounded-sm shadow-sm" type="submit">
                             Create
                         </Button>
@@ -81,6 +93,6 @@ const CreateMoviePage = () => {
             </div>
         </div>
     );
-};
+}
 
 export default CreateMoviePage;
