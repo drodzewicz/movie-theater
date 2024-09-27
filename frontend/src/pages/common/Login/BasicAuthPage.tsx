@@ -1,50 +1,38 @@
-import { loginFormSchema, LoginSchemaType } from "@/pages/common/login/loginFormSchema";
-import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import FormWrapper from "@/components/form/FormWrapper";
-import { useLogin } from "@/service/auth/useLogin";
-import { useLocation } from "react-router-dom";
+import FieldWrapper from "@/components/form/FieldWrapper";
+import { Input } from "@/components/ui/input";
+import useHandleBasicAuthLogin from "./useHandleBasicAuthLogin";
 
 const BasicAuthPage = () => {
-    const location = useLocation();
-
-    const form = useForm<LoginSchemaType>({
-        resolver: zodResolver(loginFormSchema),
-        defaultValues: {
-            username: location.state?.username || "",
-            password: location.state?.password || "",
-        },
-    });
-
-    const { mutate: login } = useLogin({
-        onError() {
-            form.setError("username", {
-                type: "manual",
-                message: "Bad login",
-            });
-            form.setError("password", {
-                type: "manual",
-                message: "Bad login",
-            });
-        },
-    });
-
-    function onSubmit(values: LoginSchemaType) {
-        login({ username: values.username, password: values.password });
-    }
+    const { form, onSubmit } = useHandleBasicAuthLogin();
 
     return (
         <div>
             <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
                 <div className="grid gap-2">
-                    <InputField name="username" control={form.control} placeholder="Username" />
-                    <InputField
-                        name="password"
+                    <FieldWrapper
                         control={form.control}
-                        placeholder="Password"
-                        type="password"
+                        name="username"
+                        render={(field) => (
+                            <Input
+                                placeholder="Username"
+                                value={field.value}
+                                onChange={field.onChange}
+                            />
+                        )}
+                    />
+                    <FieldWrapper
+                        control={form.control}
+                        name="password"
+                        render={(field) => (
+                            <Input
+                                placeholder="Password"
+                                type="password"
+                                value={field.value}
+                                onChange={field.onChange}
+                            />
+                        )}
                     />
                     <Button variant="default" className="rounded-sm shadow-sm" type="submit">
                         Sign In

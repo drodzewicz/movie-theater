@@ -1,31 +1,15 @@
-import registerFormSchema, {
-    RegisterUserSchemaType,
-} from "@/pages/user/register/registerFormSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-
-import InputField from "@/components/form/InputField";
 import FormWrapper from "@/components/form/FormWrapper";
 import LoadingButton from "@/components/form/LoadingButton";
-import { useRegister } from "@/service/auth/useRegisterUser";
 import { useGoTo } from "@/hooks/useGoTo";
 import { Button } from "@/components/ui/button";
+import FieldWrapper from "@/components/form/FieldWrapper";
+import { Input } from "@/components/ui/input";
+import useHandleAppUserRegistration from "./useHandleAppUserRegistration";
 
 const RegisterPage = () => {
     const goTo = useGoTo();
 
-    const form = useForm<RegisterUserSchemaType>({
-        resolver: zodResolver(registerFormSchema),
-        defaultValues: {
-            firstName: "",
-            lastName: "",
-            username: "",
-            password: "",
-            confirmPassword: "",
-        },
-    });
-
-    const { mutate: register } = useRegister({
+    const { form, onSubmit } = useHandleAppUserRegistration({
         onSuccess: () => {
             goTo("/login", {
                 state: {
@@ -34,23 +18,7 @@ const RegisterPage = () => {
                 },
             });
         },
-        onError: ({ response }) => {
-            // form.setError("password", {
-            //     type: "manual",
-            //     message: "Bad login",
-            // });
-            console.log("AA: ", response.data);
-        },
     });
-
-    function onSubmit(values: RegisterUserSchemaType) {
-        register({
-            username: values.username,
-            password: values.password,
-            firstName: values.firstName,
-            lastName: values.lastName,
-        });
-    }
 
     return (
         <div className="container grid h-screen w-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -65,31 +33,64 @@ const RegisterPage = () => {
                     </div>
                     <FormWrapper form={form} onSubmit={onSubmit} className="space-y-8">
                         <div className="grid gap-2">
-                            <InputField
+                            <FieldWrapper
+                                control={form.control}
                                 name="username"
-                                control={form.control}
-                                placeholder="Username"
+                                render={(field) => (
+                                    <Input
+                                        placeholder="Username"
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                )}
                             />
-                            <InputField
+                            <FieldWrapper
+                                control={form.control}
                                 name="firstName"
-                                control={form.control}
-                                placeholder="First Name"
+                                render={(field) => (
+                                    <Input
+                                        placeholder="First Name"
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                )}
                             />
-                            <InputField
+                            <FieldWrapper
+                                control={form.control}
                                 name="lastName"
-                                control={form.control}
-                                placeholder="Last Name"
+                                render={(field) => (
+                                    <Input
+                                        placeholder="Last Name"
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                )}
                             />
-                            <InputField
+                            <FieldWrapper
+                                control={form.control}
                                 name="password"
-                                control={form.control}
-                                placeholder="Password"
+                                render={(field) => (
+                                    <Input
+                                        placeholder="Password"
+                                        type="password"
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                )}
                             />
-                            <InputField
+                            <FieldWrapper
+                                control={form.control}
                                 name="confirmPassword"
-                                control={form.control}
-                                placeholder="Confirm Password"
+                                render={(field) => (
+                                    <Input
+                                        placeholder="Confirm Password"
+                                        type="password"
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                )}
                             />
+
                             <LoadingButton className="rounded-sm shadow-sm" type="submit">
                                 Sign Up
                             </LoadingButton>
