@@ -6,11 +6,6 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import schema, {
-    CreateScreeningSchemaType,
-} from "@/pages/admin/screening/screening-create/createScreeningFormSchema";
 import FormWrapper from "@/components/form/FormWrapper";
 import { useLocationList } from "@/service/locations/useLocationList";
 import { FilterOption } from "@/types/types";
@@ -25,22 +20,20 @@ import {
 import { useHallList } from "@/service/halls/useHallList";
 import { useMovieList } from "@/service/movies/useMovieList";
 import DateField from "@/components/form/DateField";
-import { useCreateScreening } from "@/service/screening/useCreateScreening";
 import useDialogState from "@/hooks/useDialogState";
-import { useQueryClient } from "@tanstack/react-query";
-import { screeningKeys } from "@/service/query-keys";
+import useHandleCreateScreening from "./useHandleCreateScreening";
+import {
+    transformHallsToOptions,
+    transformLocationsToOptions,
+    transformMoviesToOptions,
+} from "@/lib/utils";
 
 const CreateScreeningDialog = () => {
     const { isOpen, setIsOpen, close, open } = useDialogState();
-    const queryClient = useQueryClient();
 
-    const form = useForm<CreateScreeningSchemaType>({
-        resolver: zodResolver(schema),
-        defaultValues: {
-            movie: "",
-            hall: "",
-            location: "",
-            date: null,
+    const { form, onSubmit } = useHandleCreateScreening({
+        onSuccess: () => {
+            close();
         },
     });
 
@@ -49,22 +42,14 @@ const CreateScreeningDialog = () => {
     const { data: movies } = useMovieList<FilterOption[]>(
         { pagination: { pageSize: 100, pageIndex: 0 } },
         {
-            select: ({ data }) =>
-                data?.map((it) => ({
-                    value: `${it.id}`,
-                    label: `${it.title}`,
-                })),
+            select: ({ data }) => transformMoviesToOptions(data),
         }
     );
 
     const { data: locations } = useLocationList<FilterOption[]>(
         { pagination: { pageSize: 100, pageIndex: 0 } },
         {
-            select: ({ data }) =>
-                data?.map((it) => ({
-                    value: `${it.id}`,
-                    label: `${it.identifier}`,
-                })),
+            select: ({ data }) => transformLocationsToOptions(data),
         }
     );
 
@@ -74,31 +59,9 @@ const CreateScreeningDialog = () => {
             columnFilters: [{ id: "location", value: selectedLocation }],
         },
         {
-            select: ({ data }) =>
-                data?.map((it) => ({
-                    value: `${it.id}`,
-                    label: `${it.name}`,
-                })),
+            select: ({ data }) => transformHallsToOptions(data),
         }
     );
-
-    const { mutate: createScreening } = useCreateScreening({
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: screeningKeys.list() });
-            close();
-        },
-    });
-
-    function onSubmit(values: CreateScreeningSchemaType) {
-        console.log(values);
-        createScreening({
-            movieId: values.movie,
-            locationId: values.location,
-            hallId: values.hall,
-            date: values.date,
-        });
-    }
-
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <Button onClick={open} variant="default" size="sm">

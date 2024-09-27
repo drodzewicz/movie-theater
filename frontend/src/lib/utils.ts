@@ -68,3 +68,17 @@ export function transformLocationsToOptions(
         value: `${it.id}`,
     }));
 }
+
+export function transformHallsToOptions(data: { id: string; name: string }[]): FilterOption[] {
+    return data?.map((it) => ({
+        label: it.name,
+        value: `${it.id}`,
+    }));
+}
+
+export function transformMoviesToOptions(data: { id: string; title: string }[]): FilterOption[] {
+    return data?.map((it) => ({
+        label: it.title,
+        value: `${it.id}`,
+    }));
+}
