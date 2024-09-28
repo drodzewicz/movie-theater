@@ -14,12 +14,10 @@ function StatusFilter<TData, TValue>({ column }: StatusFilterProps<TData, TValue
                 {
                     label: "Active",
                     value: "true",
-                    icon: () => <span className="h-3 w-3 rounded-full bg-green-600 mr-2" />,
                 },
                 {
                     label: "Disabled",
                     value: "false",
-                    icon: () => <span className="h-3 w-3 rounded-full bg-gray-400 mr-2" />,
                 },
             ]}
         />
