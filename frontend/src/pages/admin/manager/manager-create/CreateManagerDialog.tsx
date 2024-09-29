@@ -17,6 +17,7 @@ import FieldWrapper from "@/components/form/FieldWrapper";
 import DropDown from "@/components/input/DropDown";
 import { Input } from "@/components/ui/input";
 import useHandleNewManagerRegistration from "./useHandleNewManagerRegistration";
+import MultiSelect from "@/components/input/MultiSelect";
 
 const CreateManagerDialog = () => {
     const { isOpen, setIsOpen, close, open } = useDialogState();
@@ -26,6 +27,8 @@ const CreateManagerDialog = () => {
             close();
         },
     });
+
+    const role = form.watch("role");
 
     const { data: roles } = useRolesList<FilterOption[]>({ select: transformToOptions });
 
@@ -105,13 +108,15 @@ const CreateManagerDialog = () => {
                                 />
                                 <FieldWrapper
                                     control={form.control}
-                                    name="location"
+                                    name="locations"
                                     render={(field) => (
-                                        <DropDown
-                                            placeholder="Location"
-                                            value={field.value}
-                                            onChange={field.onChange}
+                                        <MultiSelect
+                                            title="Location"
                                             options={locations}
+                                            selectedValues={new Set(field.value)}
+                                            setFilterValue={field.onChange}
+                                            buttonClassName="w-full"
+                                            disabled={!["ADMIN", "MANAGER"].includes(role)}
                                         />
                                     )}
                                 />

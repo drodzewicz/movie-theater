@@ -22,6 +22,9 @@ type MultiSelectProps = {
     selectedValues: Set<string>;
     setFilterValue: (values: string[] | undefined) => void;
     showSelectedValuesCount?: number;
+    buttonClassName?: string;
+    dropdownClassName?: string;
+    disabled?: boolean;
 };
 
 type SelectTriggerButtonProps = {
@@ -77,6 +80,9 @@ function MultiSelect({
     options,
     setFilterValue,
     title,
+    buttonClassName,
+    dropdownClassName,
+    disabled,
     showSelectedValuesCount = 2,
 }: MultiSelectProps) {
     const selectValueHandler = (option: FilterOption, isSelected: boolean) => {
@@ -96,7 +102,12 @@ function MultiSelect({
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <Button variant="outline" size="sm" className="h-8 border">
+                <Button
+                    disabled={disabled}
+                    variant="outline"
+                    size="sm"
+                    className={cn("h-8 border", buttonClassName)}
+                >
                     <SelectTriggerButton
                         options={options}
                         selectedValues={selectedValues}
@@ -105,7 +116,7 @@ function MultiSelect({
                     />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0" align="start">
+            <PopoverContent className={cn("w-[200px] p-0", dropdownClassName)} align="start">
                 <Command>
                     <CommandInput placeholder={title} />
                     <CommandList>

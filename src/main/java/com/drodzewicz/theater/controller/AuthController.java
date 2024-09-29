@@ -22,6 +22,7 @@ import com.drodzewicz.theater.dto.domain.AppBaseUserDTO;
 import com.drodzewicz.theater.dto.domain.AppManagerUserDTO;
 import com.drodzewicz.theater.dto.domain.AppUserDTO;
 import com.drodzewicz.theater.dto.domain.CredentialsDTO;
+import com.drodzewicz.theater.dto.request.RegisterManagerDTO;
 import com.drodzewicz.theater.dto.request.SignUpDTO;
 import com.drodzewicz.theater.entity.user.AppManagerUserRole;
 import com.drodzewicz.theater.service.AuthService;
@@ -66,8 +67,8 @@ public class AuthController {
     @PreAuthorize("hasAuthority('user:create')")
     @PostMapping("/admin/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public AppManagerUserDTO registerManager(@RequestBody @Valid SignUpDTO signUpDTO) {
-        AppManagerUserDTO createdUser = authService.registerManager(signUpDTO);
+    public AppManagerUserDTO registerManager(@RequestBody @Valid RegisterManagerDTO registerManagerDTO) {
+        AppManagerUserDTO createdUser = authService.registerManager(registerManagerDTO);
         return createdUser;
     }
 

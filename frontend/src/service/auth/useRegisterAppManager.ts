@@ -9,6 +9,8 @@ type RegisterPayload = {
     password: string;
     firstName: string;
     lastName: string;
+    role: string;
+    locationIds: string[];
 };
 
 type RegisterResponse = {

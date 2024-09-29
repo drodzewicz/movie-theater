@@ -22,8 +22,8 @@ const useHandleNewManagerRegistration = (props?: HandleNewManagerRegistrationPro
             lastName: "",
             username: "",
             password: "",
-            role: "",
-            location: "",
+            role: undefined,
+            locations: [],
         },
     });
 
@@ -31,6 +31,7 @@ const useHandleNewManagerRegistration = (props?: HandleNewManagerRegistrationPro
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: usersKeys.listAppManager() });
             props?.onSuccess?.();
+            form.reset();
         },
         onError: () => {
             props?.onError?.();
@@ -43,6 +44,8 @@ const useHandleNewManagerRegistration = (props?: HandleNewManagerRegistrationPro
             lastName: values?.lastName,
             username: values?.username,
             password: values?.password,
+            role: values?.role,
+            locationIds: values?.locations?.length > 0 ? values?.locations : undefined,
         });
     };
 

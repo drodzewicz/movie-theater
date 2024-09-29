@@ -9,7 +9,7 @@ import com.drodzewicz.theater.entity.user.AppManagerUserRole;
 public interface AuthService {
     AppUserDTO registerUser(SignUpDTO signUpDTO);
 
-    AppManagerUserDTO registerManager(SignUpDTO signUpDTO);
+    AppManagerUserDTO registerManager(RegisterManagerDTO registerManagerDTO);
 
     Set<String> getAllRoles();
 

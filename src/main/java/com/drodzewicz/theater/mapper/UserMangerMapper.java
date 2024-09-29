@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 
 import com.drodzewicz.theater.dto.domain.AppBaseUserDTO;
 import com.drodzewicz.theater.dto.domain.AppManagerUserDTO;
+import com.drodzewicz.theater.dto.request.RegisterManagerDTO;
 import com.drodzewicz.theater.dto.request.SignUpDTO;
 import com.drodzewicz.theater.dto.response.AppManagerUserListItemDTO;
 import com.drodzewicz.theater.entity.user.AppBaseUser;
@@ -16,6 +17,9 @@ public interface UserMangerMapper extends DTOMapper<AppManagerUser, AppManagerUs
 
     @Mapping(target = "password", ignore = true)
     AppManagerUser fromSignUpDTO(SignUpDTO signUpDTO);
+
+    @Mapping(target = "password", ignore = true)
+    AppManagerUser fromRegisterManagerDTO(RegisterManagerDTO registerManagerDTO);
 
     AppBaseUserDTO toBaseUserDTO(AppManagerUser user);
 
